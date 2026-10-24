@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="AChat" />
+<meta name="format-detection" content="telephone=no" />
+<title data-i18n="app.title">AChat · Multi-Model Chat</title>
+<!-- PWA: inline SVG icon — used by tab favicon, iOS home-screen icon, and webmanifest icons -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjExMiIgZmlsbD0iIzYzNjZmMSIvPjxyZWN0IHg9IjEyOCIgeT0iMTQwIiB3aWR0aD0iMjU2IiBoZWlnaHQ9IjIwMCIgcng9IjQ4IiBmaWxsPSIjZmZmZmZmIi8+PHBvbHlnb24gcG9pbnRzPSIxNzgsMzQwIDIyNiwzNDAgMTg4LDQwMCIgZmlsbD0iI2ZmZmZmZiIvPjxwYXRoIGQ9Ik0yNTYgMTc1IEwyNjcgMjI5IEwzMjEgMjQwIEwyNjcgMjUxIEwyNTYgMzA1IEwyNDUgMjUxIEwxOTEgMjQwIEwyNDUgMjI5IFoiIGZpbGw9IiM2MzY2ZjEiLz48L3N2Zz4=" />
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjExMiIgZmlsbD0iIzYzNjZmMSIvPjxyZWN0IHg9IjEyOCIgeT0iMTQwIiB3aWR0aD0iMjU2IiBoZWlnaHQ9IjIwMCIgcng9IjQ4IiBmaWxsPSIjZmZmZmZmIi8+PHBvbHlnb24gcG9pbnRzPSIxNzgsMzQwIDIyNiwzNDAgMTg4LDQwMCIgZmlsbD0iI2ZmZmZmZiIvPjxwYXRoIGQ9Ik0yNTYgMTc1IEwyNjcgMjI5IEwzMjEgMjQwIEwyNjcgMjUxIEwyNTYgMzA1IEwyNDUgMjUxIEwxOTEgMjQwIEwyNDUgMjI5IFoiIGZpbGw9IiM2MzY2ZjEiLz48L3N2Zz4=" />
+<!-- PWA: real manifest file enables Chrome/Edge "Install app" (a blob: manifest is rejected by Chrome's install check).
+     Optional — if this file is absent (e.g. opened as a standalone single file), setupPWA() injects an inline blob fallback so the page still works. -->
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.10.0/styles/github-dark.min.css" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="page-loader" id="pageLoader" aria-hidden="true"></div>
+
+<div class="app">
+  <div class="mobile-mask" id="mobileMask"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="logo"><svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>AChat</span></span>
+      <button class="icon-btn pwa-only" id="reloadBtn" data-i18n-title="reload.title" title="Reload app"><svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></button>
+      <button class="icon-btn" id="themeBtn" data-i18n-title="theme.toggle.title" title="Toggle theme"><svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></button>
+    </div>
+    <button class="new-chat" id="newChatBtn" data-i18n="sidebar.newChat">＋ New chat</button>
+    <button class="new-chat scenario" id="newScenarioBtn" data-i18n="sidebar.newScenario">🎬 New scenario</button>
+    <div class="chat-list" id="chatList"></div>
+    <div class="sidebar-footer">
+      <button id="notepadBtn" data-i18n-title="sidebar.notepad" title="Notepad">
+        <svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+        <span data-i18n="sidebar.notepad">Notepad</span>
+      </button>
+      <button id="settingsBtn" data-i18n-title="sidebar.settings" title="Settings">
+        <svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span data-i18n="sidebar.settings">Settings</span>
+      </button>
+      <button id="exportBtn" data-i18n-title="sidebar.export" title="Export">
+        <svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
+        <span data-i18n="sidebar.export">Export</span>
+      </button>
+      <button id="importBtn" data-i18n-title="sidebar.import" title="Import">
+        <svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/></svg>
+        <span data-i18n="sidebar.import">Import</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <section class="chat-view" id="chatView">
+      <div class="top-bar">
+        <button class="icon-btn menu-btn" id="menuBtn"><svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
+        <span class="title" id="chatTitle">New chat</span>
+        <button class="icon-btn" id="scenarioBtn" data-i18n-title="scenario.edit.title" title="Edit scenario" style="display:none">🎬</button>
+      </div>
+      <div class="messages" id="messages"></div>
+
+      <div class="composer-wrap">
+        <button type="button" class="scroll-bottom-btn" id="scrollBottomBtn" data-i18n-title="scroll.bottom.title" data-i18n-aria="scroll.bottom.aria" title="Scroll to latest" aria-label="Scroll to latest"><svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 12-7 7-7-7"/><path d="M12 5v14"/></svg><span class="new-dot"></span></button>
+        <div class="composer">
+          <div class="attach-strip" id="attachStrip"></div>
+          <textarea id="input" rows="1" data-i18n-placeholder="composer.input.placeholder" placeholder="Type a message. Shift+Enter for newline, Enter to send. Paste/drop images and files supported…"></textarea>
+          <div class="composer-actions">
+            <button class="icon-btn" id="attachImageBtn" data-i18n-title="attach.image.title" title="Upload image"><svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></button>
+            <button class="icon-btn" id="attachFileBtn" data-i18n-title="attach.file.title" title="Upload file (PDF/Word/TXT/code)"><svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></button>
+            <input type="file" id="fileInput" multiple style="display:none" />
+            <span class="composer-sep" aria-hidden="true"></span>
+            <button class="icon-btn" id="clearCtxBtn" data-i18n-title="context.clear.title" title="Clear context (Ctrl/⌘+K)"><svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" x2="8.12" y1="4" y2="15.88"/><line x1="14.47" x2="20" y1="14.48" y2="20"/><line x1="8.12" x2="12" y1="8.12" y2="12"/></svg></button>
+            <button class="icon-btn" id="clearBtn" data-i18n-title="chat.clear.title" title="Clear current chat"><svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg></button>
+            <span class="composer-sep" aria-hidden="true"></span>
+            <select id="modelSelect" data-i18n-title="model.select.title" title="Select model"></select>
+            <button type="button" class="thinking-toggle" id="thinkingToggle" data-i18n-title="thinking.toggle.title" title="Enable/show model thinking"><svg class="thinking-brain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04"/></svg><span data-i18n="thinking.label">Thinking</span></button>
+            <button type="button" class="thinking-toggle" id="toolsModalBtn" title="View loaded MCP tools" style="display:none"><span style="font-size:13px">🛠️</span><span id="toolsBtnLabel">0 tools</span></button>
+            <span class="spacer"></span>
+            <span class="hint" id="statusHint"></span>
+            <button class="send-btn" id="sendBtn" data-i18n-title="send.title" title="Send"><svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Settings View (In-place) -->
+    <section class="settings-view hide" id="settingsView">
+      <div class="settings-topbar">
+        <button class="icon-btn" id="closeSettings" data-i18n-title="settings.back" title="Back to chat">
+          <svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <h3 class="settings-title" data-i18n="settings.title">Settings</h3>
+        <span class="spacer"></span>
+        <button class="btn ghost" id="cancelSettings" data-i18n="modal.cancel">Cancel</button>
+        <button class="btn primary" id="saveSettings" data-i18n="modal.save">Save</button>
+      </div>
+      <div class="settings-body">
+        <div class="settings-inner">
+          <div class="tabs">
+            <div class="tab active" data-tab="providers" data-i18n="settings.tab.providers">Providers</div>
+            <div class="tab" data-tab="models" data-i18n="settings.tab.models">Models &amp; Nicknames</div>
+            <div class="tab" data-tab="mcp">Agent &amp; MCP Tools</div>
+            <div class="tab" data-tab="general" data-i18n="settings.tab.general">General</div>
+            <div class="tab" data-tab="about" data-i18n="settings.tab.about">About</div>
+          </div>
+
+          <div class="tab-panel" data-panel="providers">
+            <div class="alert" data-i18n-html="settings.providers.alert">⚠️ All API keys are saved only in your browser's localStorage — do not use on public computers. Some providers (e.g., Anthropic, OpenAI) require direct browser access; the corresponding headers are added automatically. For local models (Ollama), set <code>OLLAMA_ORIGINS=*</code> before launch to allow cross-origin requests.</div>
+
+            <div class="add-provider-bar">
+              <select id="newProviderTypeSelect" class="add-provider-select">
+                <option value="" disabled selected data-i18n="providers.selectTypePlaceholder">Choose provider to add…</option>
+                <option value="openai" data-i18n="providers.type.openai">🟢 OpenAI compatible (DeepSeek / Moonshot / OpenRouter / vLLM)</option>
+                <option value="claude" data-i18n="providers.type.claude">🟣 Anthropic Claude</option>
+                <option value="gemini" data-i18n="providers.type.gemini">🔵 Google Gemini</option>
+                <option value="ollama" data-i18n="providers.type.ollama">🟠 Local models (Ollama / llama.cpp / LM Studio)</option>
+              </select>
+              <button type="button" class="btn primary" id="addProviderBtn" data-i18n="providers.addBtn">＋ Add Provider</button>
+            </div>
+
+            <div class="providers-empty hide" id="providersEmptyState">
+              <div class="providers-empty-icon">🔌</div>
+              <div class="providers-empty-text" data-i18n="providers.empty">No providers configured yet. Select a provider above and click “＋ Add Provider” to configure one.</div>
+            </div>
+
+            <div id="configuredProvidersList" class="configured-providers-list"></div>
+          </div>
+
+          <div class="tab-panel" data-panel="models" style="display:none">
+            <div class="alert" data-i18n-html="models.tab.hint">💡 Customize friendly nicknames for your models. Nicknames will be displayed in the model dropdown and message headers, while the original model ID is used for API requests.</div>
+            <div class="models-toolbar">
+              <input type="text" id="modelsSearchInput" class="models-search" data-i18n-placeholder="models.tab.searchPlaceholder" placeholder="Search models or nicknames…" />
+              <span class="models-summary" id="modelsSummaryCount"></span>
+            </div>
+            <div id="modelsSettingsContainer"></div>
+          </div>
+
+          <div class="tab-panel" data-panel="mcp" style="display:none">
+            <div class="alert">
+              🤖 <b>Agentic Mode &amp; MCP (Model Context Protocol)</b>: Configure remote or local web/SSE MCP servers. AChat will query them via JSON-RPC 2.0 (<code>tools/list</code>), pass them to compatible LLMs, and automatically run multi-step tool calling loops.
+            </div>
+            
+            <div class="row-2" style="margin-bottom:14px">
+              <div class="form-row">
+                <label><input type="checkbox" id="cfg_agent_enabled" style="width:auto;margin-right:6px" checked /> Enable Agent Tool-Calling</label>
+                <span class="hint">When enabled, any configured tools will be sent to the model for automatic invocation.</span>
+              </div>
+              <div class="form-row">
+                <label>Max Agent Turns (Safety Cap)</label>
+                <input type="number" id="cfg_agent_max_turns" min="1" max="30" value="10" />
+                <span class="hint">Prevents infinite tool calling loops. Default: 10 turns.</span>
+              </div>
+            </div>
+
+            <div class="add-provider-bar" style="margin-bottom:14px">
+              <button type="button" class="btn primary" id="addMcpServerBtn">＋ Add MCP Server</button>
+              <button type="button" class="btn ghost" id="testMcpToolsBtn">🔄 Discover &amp; Test Tools</button>
+              <span id="mcpDiscoveryStatus" style="font-size:12px;color:var(--fg-2);margin-left:auto;align-self:center"></span>
+            </div>
+
+            <div id="mcpServersList" class="configured-providers-list"></div>
+
+            <div class="mcp-tools-explorer-section" style="margin-top:24px">
+              <div class="pb-models-nick-header" style="margin-bottom:10px">
+                <span style="font-weight:600;font-size:14px">📦 Loaded Tools &amp; Descriptions</span>
+                <span class="hint" id="mcpToolsCountHint">0 tools loaded</span>
+              </div>
+              <div id="mcpToolsViewerList" class="mcp-tools-viewer-list"></div>
+            </div>
+          </div>
+
+          <div class="tab-panel" data-panel="general" style="display:none">
+            <div class="row-2">
+              <div class="form-row"><label data-i18n="general.userName.label">User name (display)</label><input id="cfg_user_name" data-i18n-placeholder="general.userName.placeholder" placeholder="Me / Hen / Alex" /><span class="hint" data-i18n="general.userName.hint">Shown above your avatar and messages. The avatar uses the first character.</span></div>
+              <div class="form-row"><label data-i18n="general.aiName.label">AI name (display)</label><input id="cfg_ai_name" data-i18n-placeholder="general.aiName.placeholder" placeholder="AI / Claude / GPT" /><span class="hint" data-i18n="general.aiName.hint">Shown above the assistant's avatar and messages.</span></div>
+            </div>
+            <div class="form-row"><label data-i18n="general.system.label">System prompt (default)</label><textarea id="cfg_system" rows="4" placeholder="You are a helpful assistant."></textarea></div>
+            <div class="row-2">
+              <div class="form-row"><label data-i18n="general.temperature.label">Temperature</label><input id="cfg_temp" type="number" min="0" max="2" step="0.1" value="0.7" inputmode="decimal" /></div>
+              <div class="form-row"><label data-i18n="general.maxTokens.label">Max output tokens</label><input id="cfg_max_tokens" type="number" min="1" step="1" inputmode="numeric" data-i18n-placeholder="general.maxTokens.placeholder" placeholder="Leave empty to use model default" /></div>
+            </div>
+            <div class="form-row"><label data-i18n="general.historyN.label">History messages kept (context length)</label><input id="cfg_history_n" type="number" min="2" step="1" value="40" inputmode="numeric" /></div>
+            <div class="form-row"><label data-i18n="general.ctxBudget.label">Context token budget (rough estimate)</label><input id="cfg_ctx_budget" type="number" min="0" step="256" inputmode="numeric" data-i18n-placeholder="general.ctxBudget.placeholder" placeholder="Leave empty to disable" /><span class="hint" data-i18n="general.ctxBudget.hint">Second-stage trimming on top of the message count above: the oldest messages are dropped until the estimated prompt fits. Estimation is rough (CJK about 1 char/token, other text about 4 chars/token). Set it somewhat below your model real context window.</span></div>
+            <div class="form-row"><label data-i18n="general.thinkMode.label">Thinking mode (what is requested)</label>
+              <select id="cfg_think_mode">
+                <option value="auto" data-i18n="general.thinkMode.auto">Auto - leave it to the server default</option>
+                <option value="on" data-i18n="general.thinkMode.on">Force on - always request thinking</option>
+                <option value="off" data-i18n="general.thinkMode.off">Force off - actually skip thinking</option>
+              </select>
+              <span class="hint" data-i18n-html="general.thinkMode.hint">Separate from the show-thinking switch below, which only controls display. For hybrid models such as Qwen3 this sends <code>chat_template_kwargs.enable_thinking</code> (vLLM / SGLang / llama.cpp --jinja) plus Ollama <code>think</code> - without it, hiding the thinking still pays for every thinking token.</span>
+            </div>
+            <div class="form-row"><label data-i18n="general.numCtx.label">Local context window (Ollama num_ctx)</label><input id="cfg_num_ctx" type="number" min="0" step="1024" inputmode="numeric" data-i18n-placeholder="general.numCtx.placeholder" placeholder="Leave empty to use the server default (often 4096)" /><span class="hint" data-i18n="general.numCtx.hint">Ollama silently drops whatever does not fit its context window, and the first thing to go is the system prompt / scenario memory - with no error at all. Set this to the window your model actually supports (8192 / 32768 ...).</span></div>
+            <div class="row-2">
+              <div class="form-row"><label data-i18n="general.topP.label">top_p</label><input id="cfg_top_p" type="number" min="0" max="1" step="0.01" inputmode="decimal" data-i18n-placeholder="general.sampling.placeholder" placeholder="Leave empty to omit" /></div>
+              <div class="form-row"><label data-i18n="general.topK.label">top_k</label><input id="cfg_top_k" type="number" min="0" step="1" inputmode="numeric" data-i18n-placeholder="general.sampling.placeholder" placeholder="Leave empty to omit" /></div>
+            </div>
+            <div class="row-2">
+              <div class="form-row"><label data-i18n="general.minP.label">min_p</label><input id="cfg_min_p" type="number" min="0" max="1" step="0.01" inputmode="decimal" data-i18n-placeholder="general.sampling.placeholder" placeholder="Leave empty to omit" /></div>
+              <div class="form-row"><label data-i18n="general.presencePenalty.label">presence_penalty</label><input id="cfg_presence_penalty" type="number" min="-2" max="2" step="0.1" inputmode="decimal" data-i18n-placeholder="general.sampling.placeholder" placeholder="Leave empty to omit" /></div>
+            </div>
+            <div class="form-row"><span class="hint" data-i18n="general.sampling.hint">Empty fields are not sent at all. These apply to OpenAI-compatible and local models only. Qwen3 recommends thinking mode: temp 0.6 / top_p 0.95 / top_k 20 / min_p 0; non-thinking: temp 0.7 / top_p 0.8 / top_k 20. presence_penalty 0.5-1.5 is the usual cure when a small local model starts looping.</span></div>
+            <div class="form-row">
+              <label data-i18n="general.imageDetail.label">Image upload quality (input tokens)</label>
+              <select id="cfg_image_detail">
+                <option value="high" data-i18n="general.imageDetail.high">High · up to 1568px (max detail, most tokens)</option>
+                <option value="standard" data-i18n="general.imageDetail.standard">Standard · up to 1024px (near-lossless, recommended)</option>
+                <option value="low" data-i18n="general.imageDetail.low">Saver · up to 640px (fewest tokens; OpenAI low-detail = flat 85)</option>
+              </select>
+              <span class="hint" data-i18n="general.imageDetail.hint">Vision tokens depend on image resolution, not file size — downscaling is what actually saves input tokens. Standard is visually near-lossless for most photos and screenshots.</span>
+            </div>
+            <div class="form-row"><label data-i18n="general.attachKeepRecent.label">Keep attachments in context for the latest N messages</label><input id="cfg_attach_keep_recent" type="number" min="0" step="1" value="1" inputmode="numeric" /><span class="hint" data-i18n="general.attachKeepRecent.hint">Images/files are never carried forward as "memory": once a message with an attachment falls outside this many most-recent messages, only its text is resent — the attachment itself is dropped from the request. 1 = only the newest attachment is ever sent; 0 = never send attachments to the model at all.</span></div>
+            <div class="form-row"><label><input id="cfg_scenario_autocompress" type="checkbox" style="width:auto;margin-right:6px" /><span data-i18n="general.autoCompress.label">Auto-compress scenario memory</span></label><span class="hint" data-i18n="general.autoCompress.hint">For 🎬 scenario chats: when the live context exceeds the size below, older messages are automatically summarized into long-term memory.</span></div>
+            <div class="form-row"><label data-i18n="general.compressChars.label">Auto-compress threshold (characters of live context)</label><input id="cfg_scenario_compress_chars" type="number" min="500" step="100" value="4000" inputmode="numeric" /></div>
+            <div class="form-row"><label data-i18n="general.memoryMaxChars.label">Scenario memory size cap (characters)</label><input id="cfg_scenario_memory_max_chars" type="number" min="200" step="100" value="800" inputmode="numeric" /><span class="hint" data-i18n="general.memoryMaxChars.hint">Hard limit on the compressed long-term memory itself — it is hard-truncated to this length after every compression, so memory can never grow without bound. Memory only ever stores text; attachments are never included.</span></div>
+            <div class="form-row"><label><input id="cfg_show_thinking" type="checkbox" style="width:auto;margin-right:6px" /><span data-i18n="general.showThinking.label">Enable and show model thinking</span></label><span class="hint" data-i18n-html="general.showThinking.hint">When off: panel is hidden; for Gemini 2.5, <code>thinkingBudget:0</code> is requested to save tokens; DeepSeek-R1's <code>&lt;think&gt;</code> blocks are still stripped so they don't leak.</span></div>
+          </div>
+
+          <div class="tab-panel" data-panel="about" style="display:none">
+            <p style="font-size:13px;line-height:1.7;color:var(--fg-2)" data-i18n-html="about.body">
+              <b style="color:var(--fg)">AChat</b> — a single-file browser-based multi-model chat page.<br><br>
+              <b>Supports</b>: OpenAI compatible / Claude / Gemini / Ollama / LM Studio · streaming · Markdown · code highlighting · KaTeX math · image vision · file upload (PDF/DOCX/TXT/code) · MCP tools · multi-session local persistence · light/dark theme · export/import.<br><br>
+              <b>Usage</b>: open <code>index.html</code> in your browser, go to "Settings" and configure your API keys. All data is stored in localStorage and never uploaded to any remote server.<br><br>
+              <b>CORS tip</b>: browser-direct API calls are subject to same-origin policy. Official OpenAI/Claude/Gemini endpoints support CORS; if using a proxy, make sure CORS is enabled. For Ollama, set <code>OLLAMA_ORIGINS=*</code> before launch.<br><br>
+              <b>Shortcuts</b>: Enter to send / Shift+Enter for newline / Ctrl/⌘+Shift+O for new chat (Ctrl/⌘+N as fallback) / Ctrl/⌘+K to clear context.<br><br>
+              <b>Install as desktop app</b>: when this page is served over HTTPS, use Chrome/Edge's ⋮ menu → "Install AChat", or Safari's Share → "Add to Dock / Home Screen". Once installed, refresh by tapping the ↻ in the sidebar or pulling down on the message list.<br><br>
+              <b>License</b>: MIT License
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Raw Call Inspector Drawer -->
+<div class="drawer-mask hide" id="rawCallMask"></div>
+<aside class="drawer-panel hide" id="rawCallDrawer" aria-label="Call Inspector">
+  <div class="drawer-header">
+    <div class="drawer-title-wrap">
+      <svg class="drawer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <div>
+        <h3 class="drawer-title">Call Inspector</h3>
+        <span class="drawer-subtitle" id="rawCallSubtitle">Input &amp; Output</span>
+      </div>
+    </div>
+    <div class="drawer-header-actions">
+      <button type="button" class="btn ghost btn-sm" id="rawCallCopyAll">Copy JSON</button>
+      <button type="button" class="icon-btn" id="rawCallClose" title="Close"><svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    </div>
+  </div>
+  <div class="drawer-meta-bar" id="rawCallMetaBar"></div>
+  <div class="drawer-tabs">
+    <button type="button" class="drawer-tab active" data-dtab="input">Input (Request)</button>
+    <button type="button" class="drawer-tab" data-dtab="output">Output (Response)</button>
+    <button type="button" class="drawer-tab" data-dtab="full">Full JSON</button>
+  </div>
+  <div class="drawer-body">
+    <div class="drawer-tab-content" id="rawCallTabInput"></div>
+    <div class="drawer-tab-content hide" id="rawCallTabOutput"></div>
+    <div class="drawer-tab-content hide" id="rawCallTabFull"></div>
+  </div>
+</aside>
+
+<!-- Provider Configuration Modal -->
+<div class="modal-mask hide" id="providerModal">
+  <div class="modal" style="max-width:620px">
+    <div class="modal-header">
+      <h3 id="providerModalTitle" data-i18n="providers.modal.titleAdd">Add Provider</h3>
+      <button class="icon-btn" id="closeProviderModal">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="pm_id" />
+      <input type="hidden" id="pm_type" />
+
+      <div class="form-row">
+        <label data-i18n="providers.name">Provider Name (label)</label>
+        <input id="pm_name" data-i18n-placeholder="providers.name.placeholder" placeholder="e.g. OpenAI, DeepSeek, Local Ollama" />
+        <span class="hint" data-i18n="providers.name.hint">Custom display label for this provider instance and its models in chat.</span>
+      </div>
+
+      <div class="form-row">
+        <label data-i18n="providers.baseUrl">Base URL</label>
+        <input id="pm_base" type="url" inputmode="url" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="https://api.openai.com/v1" />
+      </div>
+
+      <div class="form-row">
+        <label id="pm_key_label" data-i18n="providers.apiKey">API Key</label>
+        <input id="pm_key" type="password" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="sk-..." />
+      </div>
+
+      <div id="pm_ollama_fields" style="display:none">
+        <div class="form-row"><label data-i18n="ollama.protocol">API protocol</label>
+          <select id="pm_ollama_protocol">
+            <option value="auto" data-i18n="ollama.protocol.auto">Auto-detect (recommended)</option>
+            <option value="ollama" data-i18n="ollama.protocol.native">Ollama native (/api/chat)</option>
+            <option value="openai" data-i18n="ollama.protocol.openai">OpenAI compatible (/v1/chat/completions)</option>
+          </select>
+          <span class="hint" data-i18n-html="ollama.protocol.hint">Auto-detect tries <code>/api/tags</code> first — if found, uses Ollama native; otherwise falls back to OpenAI compatible.</span>
+        </div>
+        <div class="form-row"><label data-i18n="ollama.langLock">Output language lock</label>
+          <select id="pm_ollama_langlock">
+            <option value="off" data-i18n="ollama.langLock.off">Off (default — requests are sent unchanged)</option>
+            <option value="auto" data-i18n="ollama.langLock.auto">Auto (scenario target language, otherwise UI language)</option>
+            <option value="zh" data-i18n="ollama.langLock.zh">Always Simplified Chinese</option>
+            <option value="ja" data-i18n="ollama.langLock.ja">Always Japanese</option>
+            <option value="en" data-i18n="ollama.langLock.en">Always English</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="model-label">
+          <span data-i18n="providers.modelList">Model list (one per line)</span>
+          <button type="button" class="fetch-btn" id="pm_fetch_btn" data-i18n="providers.fetch">🔄 Fetch model list</button>
+        </label>
+        <div class="model-picker" id="pm_picker" style="display:none">
+          <div class="picker-header">
+            <input class="picker-filter" data-i18n-placeholder="picker.filter.placeholder" placeholder="Search filter…" />
+            <span class="picker-count"></span>
+            <button type="button" class="btn ghost picker-toggle-all" data-i18n="picker.toggleAll">Toggle all</button>
+            <button type="button" class="btn primary picker-apply" data-i18n="picker.apply">Apply</button>
+            <button type="button" class="btn ghost picker-cancel" data-i18n="picker.cancel">Cancel</button>
+          </div>
+          <div class="picker-list"></div>
+        </div>
+        <textarea id="pm_models" rows="4" placeholder="model-name-1&#10;model-name-2"></textarea>
+        <span class="hint" data-i18n-html="providers.modelList.hint">Tip: use <code>model-id | Nickname</code> (e.g. <code>gpt-4o | Omni</code>) to set a custom display name.</span>
+        <div id="pm_models_nick_editor" class="pb-models-nick-editor" style="display:none"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn ghost" id="cancelProviderModal" data-i18n="providers.cancel">Cancel</button>
+      <button type="button" class="btn primary" id="saveProviderModal" data-i18n="providers.save">Save Provider</button>
+    </div>
+  </div>
+</div>
+
+<!-- Scenario Modal -->
+<div class="modal-mask hide" id="scenarioModal">
+  <div class="modal">
+    <div class="modal-header"><h3 id="scenarioModalTitle" data-i18n="scenario.modal.titleNew">New scenario chat</h3><button class="icon-btn" id="closeScenario">✕</button></div>
+    <div class="modal-body">
+      <div class="form-row">
+        <label data-i18n="scenario.presets.label">💡 Golden presets (click to apply)</label>
+        <div class="scenario-presets" id="scenarioPresets"></div>
+      </div>
+      <div class="form-row"><label data-i18n="scenario.title.label">Chat title</label><input id="sc_title" data-i18n-placeholder="scenario.title.placeholder" placeholder="e.g. 🎮 Discord gaming" /></div>
+      <div class="form-row">
+        <label data-i18n="scenario.lang.label">Target language (for translation scenarios)</label>
+        <select id="sc_lang">
+          <option value="">—</option>
+          <option value="English">English</option>
+          <option value="日本語 (Japanese)">日本語 (Japanese)</option>
+          <option value="한국어 (Korean)">한국어 (Korean)</option>
+          <option value="Español (Spanish)">Español (Spanish)</option>
+          <option value="Français (French)">Français (French)</option>
+          <option value="Deutsch (German)">Deutsch (German)</option>
+          <option value="Русский (Russian)">Русский (Russian)</option>
+          <option value="中文 (Chinese)">中文 (Chinese)</option>
+        </select>
+      </div>
+      <div class="form-row"><label data-i18n="scenario.desc.label">Scenario & tone instructions (the AI's persona/rules)</label><textarea id="sc_desc" rows="6" data-i18n-placeholder="scenario.desc.placeholder" placeholder="e.g. Casual Discord chat with overseas gamers; very colloquial tone, use abbreviations (lol) and emojis."></textarea></div>
+      <div class="form-row" id="sc_summaryRow" style="display:none">
+        <label data-i18n="scenario.summary.label">🧠 Compressed memory (auto-generated, editable)</label>
+        <textarea id="sc_summary" rows="4" data-i18n-placeholder="scenario.summary.placeholder" placeholder="No memory compressed yet. Use the 🧠 button in the composer to compress history."></textarea>
+        <div class="memory-history-row" id="sc_memoryHistoryRow" style="display:none">
+          <select id="sc_memory_history"></select>
+          <button type="button" class="btn ghost" id="sc_memory_restore" data-i18n="scenario.summary.restore">Restore this version</button>
+        </div>
+        <span class="hint" data-i18n="scenario.summary.history.hint">Every past memory version (from auto-compression or manual edits) is kept here so you can roll back if something important got summarized away. Restoring loads it into the box above — click Save to apply.</span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn ghost" id="cancelScenario" data-i18n="modal.cancel">Cancel</button>
+      <button class="btn primary" id="saveScenario" data-i18n="scenario.save">Create chat</button>
+    </div>
+  </div>
+</div>
+
+<!-- Notepad — full-screen overlay, fully independent of the chat -->
+<div class="notepad-overlay hide" id="notepadOverlay">
+  <div class="notepad-topbar">
+    <button type="button" class="notepad-back" id="notepadBack" data-i18n-title="notepad.back.title" title="Back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      <span data-i18n="notepad.back">Back</span>
+    </button>
+    <span class="notepad-title" data-i18n="notepad.title">📝 Notepad</span>
+    <div class="notepad-tabs" role="tablist">
+      <button type="button" class="np-tab active" data-nptab="notes" data-i18n="notepad.tab.notes">Knowledge</button>
+      <button type="button" class="np-tab" data-nptab="todos" data-i18n="notepad.tab.todos">To-do</button>
+    </div>
+    <span class="spacer"></span>
+  </div>
+  <div class="notepad-body">
+    <!-- Knowledge panel -->
+    <div class="np-panel" data-nppanel="notes">
+      <div class="np-composer">
+        <input type="text" id="npNoteTitle" data-i18n-placeholder="notepad.note.title.placeholder" placeholder="Title (optional)" />
+        <textarea id="npNoteBody" rows="3" data-i18n-placeholder="notepad.note.body.placeholder" placeholder="Paste or type anything to remember…"></textarea>
+        <div class="np-composer-actions">
+          <button type="button" class="btn primary" id="npNoteAdd" data-i18n="notepad.note.add">Add note</button>
+        </div>
+      </div>
+      <div class="np-list" id="npNoteList"></div>
+    </div>
+    <!-- To-do panel -->
+    <div class="np-panel hide" data-nppanel="todos">
+      <div class="np-composer np-todo-composer">
+        <input type="text" id="npTodoInput" style="flex:1;min-width:160px" data-i18n-placeholder="notepad.todo.placeholder" placeholder="Add a to-do and press Enter…" />
+        <input type="datetime-local" id="npTodoDue" class="np-todo-due-input" data-i18n-title="notepad.todo.due.title" title="Due time (optional)" />
+        <button type="button" class="btn primary" id="npTodoAdd" data-i18n="notepad.todo.add">Add</button>
+      </div>
+      <div class="np-list" id="npTodoList"></div>
+    </div>
+  </div>
+</div>
+
+<div class="drag-overlay hide" id="dragOverlay" data-i18n="drag.overlay">🗎 Drop files to add to the conversation</div>
+
+<!-- Undo Toast -->
+<div class="undo-toast hide" id="undoToast">
+  <span id="undoToastText">Chat moved to trash</span>
+  <button type="button" class="undo-btn" id="undoToastBtn">Undo</button>
+  <button type="button" class="undo-close" id="undoToastClose">✕</button>
+</div>
+
+<!-- Trash Modal -->
+<div class="modal-mask hide" id="trashModal">
+  <div class="modal trash-modal" style="max-width:540px">
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;gap:8px">
+        <svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;color:var(--danger)"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+        <h3 id="trashModalTitle" style="margin:0;font-size:15px;font-weight:600">Trash</h3>
+      </div>
+      <button class="icon-btn" id="closeTrashBtn">✕</button>
+    </div>
+    <div class="modal-body" style="padding:16px 20px">
+      <div class="trash-toolbar" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <span id="trashCountDesc" style="font-size:12.5px;color:var(--fg-2)"></span>
+        <button type="button" class="btn ghost btn-sm" id="emptyTrashBtn" style="color:var(--danger)">Empty Trash</button>
+      </div>
+      <div class="trash-items-list" id="trashItemsList" style="max-height:380px;overflow-y:auto;display:flex;flex-direction:column;gap:8px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MCP Tools Explorer Modal -->
+<div class="modal-mask hide" id="toolsModal">
+  <div class="modal" style="max-width:680px">
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:18px">🛠️</span>
+        <h3 id="toolsModalTitle" style="margin:0;font-size:16px;font-weight:600">Loaded MCP Tools</h3>
+      </div>
+      <button class="icon-btn" id="closeToolsModalBtn">✕</button>
+    </div>
+    <div class="modal-body" style="padding:16px 20px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <span id="toolsModalCountDesc" style="font-size:12.5px;color:var(--fg-2)"></span>
+        <button type="button" class="btn ghost btn-sm" id="refreshToolsModalBtn">🔄 Refresh Tools</button>
+      </div>
+      <div class="mcp-tools-viewer-list" id="toolsModalList" style="max-height:420px;overflow-y:auto"></div>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="importFileInput" accept="application/json" style="display:none" />
+
+<!-- Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/marked@14.1.3/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.7.76/build/pdf.min.mjs" type="module"></script>
+
+<script type="module">
+import * as pdfjsLib from "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.7.76/build/pdf.min.mjs";
+pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.7.76/build/pdf.worker.min.mjs";
+window.__pdfjsLib = pdfjsLib;
+</script>
+
+  <script src="js/state.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/welcome.js"></script>
+  <script src="js/provider-helpers.js"></script>
+  <script src="js/persistence.js"></script>
+  <script src="js/agent/mcp-client.js"></script>
+  <script src="js/agent/tools-registry.js"></script>
+  <script src="js/agent/loop.js"></script>
+  <script src="js/markdown-mermaid.js"></script>
+  <script src="js/chat-helpers.js"></script>
+  <script src="js/scenarios.js"></script>
+  <script src="js/models.js"></script>
+  <script src="js/rendering.js"></script>
+  <script src="js/attachments.js"></script>
+  <script src="js/send-stream.js"></script>
+  <script src="js/inspector.js"></script>
+  <script src="js/providers/openai.js"></script>
+  <script src="js/providers/ollama.js"></script>
+  <script src="js/providers/anthropic.js"></script>
+  <script src="js/providers/gemini.js"></script>
+  <script src="js/providers/sse.js"></script>
+  <script src="js/ui/wiring.js"></script>
+  <script src="js/notepad.js"></script>
+  <script src="js/pwa.js"></script>
+  <script src="js/init.js"></script>
+</body>
+</html>

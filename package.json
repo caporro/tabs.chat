@@ -1,0 +1,14 @@
+{
+  "name": "achat",
+  "version": "1.0.0",
+  "description": "Multi-provider LLM chat interface with single-file build",
+  "scripts": {
+    "start": "python3 -m http.server 3000",
+    "build": "node build.js",
+    "deploy:aws": "bash deploy/deploy.sh",
+    "watch": "node -e 'const fs=require(\"fs\"); const {execSync}=require(\"child_process\"); console.log(\"Watching src/ for changes...\"); fs.watch(\"src\", {recursive:true}, (e,f)=>{ console.log(`Changed: ${f}`); try { execSync(\"node build.js\", {stdio:\"inherit\"}); } catch(err){} });'"
+  },
+  "keywords": ["chat", "llm", "openai", "claude", "gemini", "ollama"],
+  "author": "",
+  "license": "MIT"
+}
