@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-28",
+  "measurement": "Isolated installation outside the project. CodeMirror: esbuild IIFE bundle, minified, ES2020, legal comments retained. EasyMDE: published minified JS + CSS concatenated. gzip level 9. Figures measure the additional library, excluding application UI code; actual full-HTML compression may differ.",
+  "currentEditor": {
+    "additionalLibraryBytes": 0,
+    "description": "Native textarea, custom Markdown toolbar and preview using existing marked/DOMPurify.",
+    "license": "Project MIT"
+  },
+  "codeMirrorEssential": {
+    "minifiedBytes": 315119,
+    "gzipBytes": 102895,
+    "brotliBytes": 89686,
+    "packages": {
+      "@codemirror/view": {
+        "version": "6.43.15",
+        "license": "MIT"
+      },
+      "@codemirror/state": {
+        "version": "6.7.6",
+        "license": "MIT"
+      },
+      "@codemirror/commands": {
+        "version": "6.11.1",
+        "license": "MIT"
+      },
+      "@codemirror/language": {
+        "version": "6.13.1",
+        "license": "MIT"
+      },
+      "@codemirror/lang-markdown": {
+        "version": "6.5.2",
+        "license": "MIT"
+      }
+    },
+    "features": [
+      "Markdown syntax",
+      "undo/redo and standard keyboard commands",
+      "line wrapping"
+    ],
+    "configuration": "markdownLanguage + markdownKeymap; history, defaultKeymap, historyKeymap; defaultHighlightStyle. No HTML/JS/CSS fenced-code language integration.",
+    "dependencyLicenses": "All dependencies included in the measured CodeMirror build declare MIT.",
+    "licenseSource": "https://github.com/codemirror/dev/blob/main/LICENSE"
+  },
+  "codeMirrorWithHTML": {
+    "minifiedBytes": 503478,
+    "gzipBytes": 173736,
+    "brotliBytes": 148317,
+    "configuration": "Same base configuration with markdown() LanguageSupport, which includes nested HTML/JS/CSS support."
+  },
+  "easyMDE": {
+    "minifiedBytes": 340398,
+    "gzipBytes": 109672,
+    "brotliBytes": 94175,
+    "version": "2.21.0",
+    "license": "MIT",
+    "dependencyLicenses": [
+      "MIT",
+      "BSD-3-Clause (typo-js)"
+    ],
+    "exclusions": [
+      "Font Awesome font/CSS",
+      "spell-check dictionaries loaded from a CDN by the default spell-checker"
+    ],
+    "integrationNotes": "Disable automatic Font Awesome downloads, reuse existing icons, disable spell-checker or separately vendor its dictionaries. Includes another Marked parser and CodeMirror 5.",
+    "licenseSources": [
+      "https://github.com/Ionaru/easy-markdown-editor/blob/master/LICENSE",
+      "https://github.com/cfinke/Typo.js/blob/master/license.txt"
+    ]
+  },
+  "recommendation": "Keep the current native editor for the minimal first iteration. If live syntax styling and richer editing are wanted next, choose the essential CodeMirror 6 configuration. Both options can be distributed with this MIT project when their required notices are preserved. No editor dependency has been added to the project.",
+  "buildTool": {
+    "esbuild": "0.28.2"
+  }
+}

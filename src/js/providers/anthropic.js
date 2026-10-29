@@ -53,8 +53,8 @@ async function callClaude({cfg, model, chat, signal, onContent, onReasoning, onT
     // 丢弃错误轮次后可能留下连续 user 消息，Anthropic 要求角色交替
     messages: mergeAdjacentRoles(messages, (a,b)=>{ a.content = [...a.content, ...b.content]; }),
     stream:true,
-    max_tokens: Number(state.general.maxTokens)||4096,
-    temperature: llmTemp(),
+    max_tokens: outputTokenLimit(4096),
+    ...temperatureParams(),
   };
   if(tools && tools.length) body.tools = tools;
   const sysC = effectiveSystemPrompt(chat);
@@ -65,13 +65,18 @@ async function callClaude({cfg, model, chat, signal, onContent, onReasoning, onT
     "anthropic-version":"2023-06-01",
     "anthropic-dangerous-direct-browser-access":"true"
   };
+  if(cfg.headers){
+    Object.assign(headers, parseCustomHeaders(cfg.headers));
+  }
   if(rawCall){
     rawCall.request.url = url;
     rawCall.request.method = "POST";
-    rawCall.request.headers = Object.assign({}, headers, cfg.key ? { "x-api-key": maskApiKey(cfg.key) } : {});
+    const recordedHeaders = Object.assign({}, headers);
+    if(cfg.key && recordedHeaders["x-api-key"]) recordedHeaders["x-api-key"] = maskApiKey(cfg.key);
+    rawCall.request.headers = recordedHeaders;
     rawCall.request.body = sanitizeBodyForRecord(body);
   }
-  const r = await fetch(url,{method:"POST",headers,body:JSON.stringify(body),signal});
+  const r = await connectionFetch(cfg,url,{method:"POST",headers,body:JSON.stringify(body),signal},rawCall);
   if(rawCall){
     rawCall.response.status = r.status;
     rawCall.response.statusText = r.statusText || (r.status===200?"OK":"");

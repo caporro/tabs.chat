@@ -1,16 +1,25 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: 'AChat - Static hosting on S3 with CloudFront CDN and Origin Access Control (OAC)'
+Description: 'tabs.chat - Static hosting on S3 with CloudFront CDN and Origin Access Control (OAC)'
 
 Parameters:
+  DomainName:
+    Type: String
+    Default: tabs.chat
+  CertificateArn:
+    Type: String
+    AllowedPattern: 'arn:aws:acm:us-east-1:[0-9]{12}:certificate/.*'
+    Description: Issued ACM certificate in us-east-1 covering the apex and www redirect.
   ProjectName:
     Type: String
-    Default: 'achat-web'
+    Default: 'tabs-chat-web'
     Description: 'Base name for S3 bucket and stack resources'
 
 Resources:
   # 1. S3 Private Bucket for static website assets
   AppBucket:
     Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
     Properties:
       BucketName: !Sub '${ProjectName}-${AWS::AccountId}-${AWS::Region}'
       PublicAccessBlockConfiguration:
@@ -22,6 +31,70 @@ Resources:
         ServerSideEncryptionConfiguration:
           - ServerSideEncryptionByDefault:
               SSEAlgorithm: AES256
+      VersioningConfiguration:
+        Status: Enabled
+
+  AppCachePolicy:
+    Type: AWS::CloudFront::CachePolicy
+    Properties:
+      CachePolicyConfig:
+        Name: !Sub '${ProjectName}-revalidate'
+        MinTTL: 0
+        DefaultTTL: 0
+        MaxTTL: 86400
+        ParametersInCacheKeyAndForwardedToOrigin:
+          EnableAcceptEncodingBrotli: true
+          EnableAcceptEncodingGzip: true
+          CookiesConfig:
+            CookieBehavior: none
+          HeadersConfig:
+            HeaderBehavior: none
+          QueryStringsConfig:
+            QueryStringBehavior: none
+
+  AppResponseHeaders:
+    Type: AWS::CloudFront::ResponseHeadersPolicy
+    Properties:
+      ResponseHeadersPolicyConfig:
+        Name: !Sub '${ProjectName}-headers'
+        SecurityHeadersConfig:
+          ContentTypeOptions:
+            Override: true
+          ReferrerPolicy:
+            ReferrerPolicy: no-referrer
+            Override: true
+          StrictTransportSecurity:
+            AccessControlMaxAgeSec: 31536000
+            IncludeSubdomains: false
+            Preload: false
+            Override: true
+
+  CanonicalHostRedirect:
+    Type: AWS::CloudFront::Function
+    Properties:
+      Name: !Sub '${ProjectName}-canonical-host'
+      AutoPublish: true
+      FunctionConfig:
+        Comment: Redirect www to the canonical apex, preserving path and query.
+        Runtime: cloudfront-js-2.0
+      FunctionCode: !Sub |
+        function handler(event) {
+          var request = event.request;
+          if (request.headers.host.value.toLowerCase() !== 'www.${DomainName}') return request;
+          var query = [];
+          Object.keys(request.querystring || {}).forEach(function(key) {
+            var item = request.querystring[key];
+            (item.multiValue || [item]).forEach(function(value) { query.push(key + '=' + value.value); });
+          });
+          return {
+            statusCode: 308,
+            statusDescription: 'Permanent Redirect',
+            headers: {
+              location: { value: 'https://${DomainName}' + request.uri + (query.length ? '?' + query.join('&') : '') },
+              'cache-control': { value: 'public, max-age=3600' }
+            }
+          };
+        }
 
   # 2. CloudFront Origin Access Control (OAC)
   CloudFrontOAC:
@@ -39,8 +112,16 @@ Resources:
     Properties:
       DistributionConfig:
         Enabled: true
-        Comment: 'CloudFront distribution for AChat'
+        Comment: 'CloudFront distribution for tabs.chat'
         DefaultRootObject: 'index.html'
+        Aliases:
+          - !Ref DomainName
+          - !Sub 'www.${DomainName}'
+        IPV6Enabled: true
+        ViewerCertificate:
+          AcmCertificateArn: !Ref CertificateArn
+          SslSupportMethod: sni-only
+          MinimumProtocolVersion: TLSv1.2_2021
         HttpVersion: 'http2and3'
         PriceClass: 'PriceClass_100' # US, Canada, Europe (cheapest and fastest for typical use)
         Origins:
@@ -61,17 +142,11 @@ Resources:
             - HEAD
             - OPTIONS
           Compress: true
-          # Managed-CachingOptimized Cache Policy ID
-          CachePolicyId: '658327ea-f89d-4fab-a63d-7e88639e58f6'
-        CustomErrorResponses:
-          - ErrorCode: 403
-            ResponseCode: 200
-            ResponsePagePath: '/index.html'
-            ErrorCachingMinTTL: 10
-          - ErrorCode: 404
-            ResponseCode: 200
-            ResponsePagePath: '/index.html'
-            ErrorCachingMinTTL: 10
+          CachePolicyId: !Ref AppCachePolicy
+          ResponseHeadersPolicyId: !Ref AppResponseHeaders
+          FunctionAssociations:
+            - EventType: viewer-request
+              FunctionARN: !GetAtt CanonicalHostRedirect.FunctionARN
 
   # 4. S3 Bucket Policy allowing read-only access exclusively from CloudFront OAC
   AppBucketPolicy:
@@ -89,7 +164,7 @@ Resources:
             Resource: !Sub '${AppBucket.Arn}/*'
             Condition:
               StringEquals:
-                AWS:SourceArn: !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/${CloudFrontDistribution.Id}'
+                AWS:SourceArn: !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/${CloudFrontDistribution}'
 
 Outputs:
   BucketName:
@@ -97,7 +172,10 @@ Outputs:
     Value: !Ref AppBucket
   DistributionId:
     Description: 'CloudFront Distribution ID'
-    Value: !Ref CloudFrontDistribution.Id
+    Value: !Ref CloudFrontDistribution
   DistributionURL:
-    Description: 'CloudFront Distribution Domain URL'
-    Value: !Sub 'https://${CloudFrontDistribution.DomainName}'
+    Description: Canonical application URL
+    Value: !Sub 'https://${DomainName}'
+  CloudFrontDomain:
+    Description: DNS target for the apex ALIAS and www CNAME
+    Value: !GetAtt CloudFrontDistribution.DomainName

@@ -12,9 +12,9 @@ marked.setOptions({
 function renderMarkdown(text){
   // Protect math before markdown
   const placeholders = [];
-  let safe = text
+  let safe = appHasFeature('math') ? text
     .replace(/\\\[([\s\S]+?)\\\]/g,(_,m)=>{placeholders.push(`$$${m}$$`);return `@@MATH${placeholders.length-1}@@`;})
-    .replace(/\\\(([\s\S]+?)\\\)/g,(_,m)=>{placeholders.push(`$${m}$`);return `@@MATH${placeholders.length-1}@@`;});
+    .replace(/\\\(([\s\S]+?)\\\)/g,(_,m)=>{placeholders.push(`$${m}$`);return `@@MATH${placeholders.length-1}@@`;}) : text;
   let html = marked.parse(safe);
   html = html.replace(/@@MATH(\d+)@@/g,(_,i)=>placeholders[+i]);
   // Wrap markdown tables in a horizontal scroll container so wide tables don't
@@ -30,7 +30,7 @@ let _mermaidPromise = null;
 // Custom theme palettes — aligned with Minimal Studio (Indigo / Slate)
 const MERMAID_LIGHT_VARS = {
   primaryColor:        "#e0e7ff",
-  primaryBorderColor:  "#4f46e5",
+  primaryBorderColor:  "#524ee8",
   primaryTextColor:    "#312e81",
   secondaryColor:      "#f1f5f9",
   secondaryBorderColor:"#64748b",
@@ -41,7 +41,7 @@ const MERMAID_LIGHT_VARS = {
   lineColor:           "#64748b",
   textColor:           "#09090b",
   mainBkg:             "#e0e7ff",
-  nodeBorder:          "#4f46e5",
+  nodeBorder:          "#524ee8",
   background:          "#ffffff",
   edgeLabelBackground: "#ffffff",
   clusterBkg:          "#f8fafc",
@@ -52,7 +52,7 @@ const MERMAID_LIGHT_VARS = {
 };
 const MERMAID_DARK_VARS = {
   primaryColor:        "#1e1b4b",
-  primaryBorderColor:  "#6366f1",
+  primaryBorderColor:  "#6c68ff",
   primaryTextColor:    "#e0e7ff",
   secondaryColor:      "#1e293b",
   secondaryBorderColor:"#94a3b8",
@@ -63,7 +63,7 @@ const MERMAID_DARK_VARS = {
   lineColor:           "#818cf8",
   textColor:           "#f4f4f5",
   mainBkg:             "#1e1b4b",
-  nodeBorder:          "#6366f1",
+  nodeBorder:          "#6c68ff",
   background:          "#111114",
   edgeLabelBackground: "#111114",
   clusterBkg:          "#09090b",
@@ -73,7 +73,7 @@ const MERMAID_DARK_VARS = {
   noteBorderColor:     "#a16207"
 };
 function mermaidConfig(){
-  const dark = state.theme === "dark";
+  const dark = document.documentElement.dataset.theme === "dark";
   return {
     startOnLoad: false,
     // Use "base" so themeVariables fully apply; otherwise built-in dark theme
@@ -92,8 +92,9 @@ function mermaidConfig(){
   };
 }
 function loadMermaid(){
+  if(!appHasFeature('diagrams')) return Promise.reject(new Error('Diagram rendering is available in the Normal edition.'));
   if(_mermaidPromise) return _mermaidPromise;
-  _mermaidPromise = import("https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs")
+  _mermaidPromise = vendorModuleUrl('mermaid.esm.min.mjs').then(url => import(url))
     .then(mod=>{
       const mermaid = mod.default;
       mermaid.initialize(mermaidConfig());
@@ -177,7 +178,7 @@ function isMermaidCode(text, lang){
 }
 
 async function enhanceMermaid(root){
-  if(!root) return;
+  if(!root || !appHasFeature('diagrams')) return;
   const codes = root.querySelectorAll("pre > code");
   const targets = [];
   codes.forEach(code=>{
@@ -225,8 +226,8 @@ function mountMermaidBlock(preEl, svgHTML, source){
   wrap.innerHTML =
     `<div class="mermaid-svg">${svgHTML}</div>` +
     `<div class="mermaid-actions">` +
-      `<button class="mmd-btn" data-act="enlarge" title="${escapeHtml(t("mermaid.enlarge"))}">🔍</button>` +
-      `<button class="mmd-btn" data-act="png" title="${escapeHtml(t("mermaid.download.png"))}">⬇</button>` +
+      `<button class="mmd-btn" data-act="enlarge" title="${escapeHtml(t("mermaid.enlarge"))}">${icon("maximize-2", { size: 14 })}</button>` +
+      `<button class="mmd-btn" data-act="png" title="${escapeHtml(t("mermaid.download.png"))}">${icon("download", { size: 14 })}</button>` +
     `</div>`;
   // Let CSS control width; some Mermaid SVGs have explicit width attr
   const svgEl = wrap.querySelector("svg");
@@ -259,7 +260,7 @@ function openMermaidLightbox(svgHTML){
           `<button class="mmd-btn" data-act="png">⬇ PNG</button>` +
           `<button class="mmd-btn" data-act="png-hd">⬇ PNG HD</button>` +
           `<button class="mmd-btn" data-act="svg">⬇ SVG</button>` +
-          `<button class="mmd-btn" data-act="close">✕</button>` +
+          `<button class="mmd-btn" data-act="close">${icon("x", { size: 14 })}</button>` +
         `</div>` +
         `<div class="mermaid-lightbox-content"></div>` +
       `</div>`;
@@ -321,7 +322,7 @@ function downloadMermaid(svgHTML, format, opts){
   svgEl.setAttribute("height", vbH);
   // Inject a background rect that matches the theme. Without this, opening the
   // SVG on a white-default viewer makes the light-on-dark text vanish.
-  const bgColor = state.theme === "dark" ? "#111114" : "#ffffff";
+  const bgColor = document.documentElement.dataset.theme === "dark" ? "#111114" : "#ffffff";
   if(!svgEl.querySelector(":scope > rect[data-bg]")){
     const bg = svgEl.ownerDocument.createElementNS("http://www.w3.org/2000/svg", "rect");
     bg.setAttribute("data-bg", "1");
@@ -406,6 +407,7 @@ async function reRenderAllMermaid(){
 }
 
 function renderMathIn(el){
+  if(!appHasFeature('math')) return;
   try{
     renderMathInElement(el,{
       delimiters:[

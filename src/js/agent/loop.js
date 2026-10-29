@@ -1,5 +1,5 @@
 /**
- * Agent Execution Loop for AChat
+ * Agent Execution Loop for tabs.chat
  * Orchestrates multi-turn ReAct loops:
  * 1. Calls provider with available MCP tools
  * 2. If model emits tool_calls, executes each tool via toolRegistry
@@ -7,12 +7,12 @@
  */
 
 async function runAgentLoop(chat, initialAiMsg, modelId) {
-  const maxTurns = Math.max(1, Math.min(30, Number(state.agent?.maxTurns) || 10));
+  const maxTurns = Math.max(1, Math.min(30, Number(state.toolSettings?.maxTurns) || 10));
   let turn = 0;
   let currentAiMsg = initialAiMsg;
 
   // Refresh tools registry if servers configured
-  if (state.agent?.enabled && (state.config.mcpServers || []).some(s => s.enabled !== false && s.url)) {
+  if (state.toolSettings?.enabled && (state.config.mcpServers || []).some(s => s.enabled !== false && s.url)) {
     try {
       await toolRegistry.refreshTools();
     } catch (e) {
@@ -68,6 +68,7 @@ async function runAgentLoop(chat, initialAiMsg, modelId) {
         content: toolOutput,
         time: Date.now()
       });
+      renderMessages();
     }
 
     // Create next assistant message placeholder for the model's follow-up turn

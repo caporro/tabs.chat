@@ -172,8 +172,8 @@ async function setupPWA(){
         if(res.ok){ await res.json(); return; } // real manifest works → installable, nothing to do
       }catch{ /* file missing (single-file use) → fall through to inline blob */ }
     }
-    // Reuse the same SVG icon that's already inlined in the head
-    const iconLink = document.querySelector('link[rel="icon"][type="image/svg+xml"]');
+    // Reuse the icon that's already inlined in the head
+    const iconLink = document.querySelector('link[rel="icon"]');
     const iconUrl = iconLink ? iconLink.href : "";
     if(!iconUrl) return;
     // Synthesize PNG icons — Chrome won't honor an SVG-only manifest for install
@@ -184,11 +184,11 @@ async function setupPWA(){
     if(png192) icons.push({ src: png192, sizes: "192x192", type: "image/png", purpose: "any" });
     if(png512) icons.push({ src: png512, sizes: "512x512", type: "image/png", purpose: "any" });
     if(png512) icons.push({ src: png512, sizes: "512x512", type: "image/png", purpose: "maskable" });
-    // Keep the SVG as a bonus for vector-capable browsers
-    icons.push({ src: iconUrl, sizes: "any", type: "image/svg+xml", purpose: "any" });
+    // Keep the source icon as a bonus
+    icons.push({ src: iconUrl, sizes: "any", type: iconLink.type || "image/png", purpose: "any" });
     const manifest = {
-      name: "AChat",
-      short_name: "AChat",
+      name: "tabs.chat",
+      short_name: "tabs.chat",
       description: "Single-file browser-based multi-model chat",
       // start_url must stay inside scope. Stick to the document path (no query).
       start_url: location.pathname,
@@ -196,7 +196,7 @@ async function setupPWA(){
       display: "standalone",
       orientation: "any",
       background_color: "#09090b",
-      theme_color: "#6366f1",
+      theme_color: "#5b56fc",
       lang: "en",
       icons
     };

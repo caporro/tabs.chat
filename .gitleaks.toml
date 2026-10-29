@@ -1,0 +1,12 @@
+[extend]
+useDefault = true
+
+[[rules]]
+id = "generic-api-key"
+
+  [[rules.allowlists]]
+  description = "Minified atlas counter expression in the Mermaid bundle, not a credential"
+  condition = "AND"
+  regexTarget = "match"
+  paths = ['''^src/vendor/mermaid\.esm\.min\.mjs$''']
+  regexes = ['''^g\.keyCount,v=g\.atlasCount;$''']

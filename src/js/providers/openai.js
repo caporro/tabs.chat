@@ -5,16 +5,39 @@ function normalizeBase(base, provider){
   if(provider==="ollama" && !/\/v\d+$/.test(b)) b += "/v1";
   // 本机/内网的 OpenAI 兼容服务同样挂在 /v1 下（LM Studio / llama.cpp / vLLM），
   // 用户常只填到端口就结束 → 直接 404。远端地址不猜，交给 404 兜底重试。
-  if(provider==="openai" && !/\/v\d+(\/|$)/.test(b) && isLocalHost(b)) b += "/v1";
+  if((provider==="openai" || isLocalProviderType(provider)) && !/\/v\d+(\/|$)/.test(b) && isLocalHost(b)) b += "/v1";
   return b;
 }
-/* 温度：尊重显式的 0（`Number(x)||0.7` 会把 0 误判为 0.7），
-   但把空/未设置当作默认 0.7（注意 Number("") === 0）。 */
+// Null/empty means Auto; preserve explicit values, including zero.
 function llmTemp(){
-  const raw = state.general.temperature;
-  if(raw === "" || raw === null || raw === undefined) return 0.7;
-  const v = Number(raw);
-  return Number.isFinite(v) ? v : 0.7;
+  const agent = getCurrentAgent();
+  const raw = agent?.temperature !== undefined ? agent.temperature : state.general.temperature;
+  return normalizeTemperature(raw);
+}
+function temperatureParams(){
+  const temperature = llmTemp();
+  return temperature === null ? {} : { temperature };
+}
+function outputTokenLimit(defaultValue = null){
+  const raw = state.general.maxTokens;
+  if(raw === undefined || raw === null || String(raw).trim() === "") return defaultValue;
+  const value = Number(raw);
+  if(!Number.isSafeInteger(value) || value < 1) throw new Error(t("msg.error.tokenLimit"));
+  return value;
+}
+function openAITokenLimitParams(url){
+  const value = outputTokenLimit();
+  if(value === null) return {};
+  const key = hostOf(url) === "api.openai.com" ? "max_completion_tokens" : "max_tokens";
+  return { [key]: value };
+}
+function isUnsupportedToolsError(error){
+  if(![400, 422].includes(error?.status)) return false;
+  const message = error.message || "";
+  return /(?:does not|do not|doesn't|cannot|can't) support (?:tools|tool use|tool calling|function calling)|(?:tools|tool use|tool calling|function calling) (?:is |are )?(?:not supported|unsupported|not available)|(?:unsupported|unknown|unrecognized) (?:request )?(?:parameter|field|argument)[:\s'"`]+tools\b|(?:tool calling|function calling).*requires?.*responses/i.test(message);
+}
+function hasToolHistory(chat){
+  return (chat.messages || []).some(message => message.role === "tool" || message.tool_calls?.length);
 }
 /* 思考模式：auto=不干预服务端默认 / on=强制思考 / off=强制关闭思考。
    与 showThinking（是否"展示"）分离 —— 旧版把两件事混在一个开关里，
@@ -57,24 +80,42 @@ function isContextOverflow(err){
 }
 /* 非标字段被端点拒绝时的报文特征。 */
 const UNKNOWN_ARG_RE = /unrecogni[sz]ed|unknown (field|argument|parameter)|unsupported (field|argument|parameter)|unexpected keyword|extra_forbidden|extra fields|not permitted|invalid[_ ]?(request[_ ]?)?(argument|parameter|field)/i;
-/* 发 chat/completions，并对两类常见的"端点差异"各自愈一次：
-   1) 400 + 未知参数 → 剥掉全部非标字段重发（Azure / 严格网关）；
-   2) 404 且 URL 里没有 /vN 段 → 补 /v1 重发（本地服务最常见的填法错误）。 */
-async function postChatCompletions(url, headers, core, optional, signal){
-  const send = (u, b)=>fetch(u,{method:"POST", headers, body:JSON.stringify(b), signal});
-  let r = await send(url, {...core, ...optional});
-  if(r.ok) return r;
-  if(r.status === 400 && Object.keys(optional).length){
-    const e = await httpError(r);
-    if(!UNKNOWN_ARG_RE.test(e.message)) throw e;
-    r = await send(url, core);
-    if(r.ok) return r;
+// Bounded compatibility retries: preserve the output cap and explicit settings.
+async function postChatCompletions(url, headers, core, optional, signal, connection = null, rawCall = null){
+  let requestUrl = url;
+  const body = {...core, ...optional};
+  let tokenRetried = false, optionalRetried = false, urlRetried = false;
+  while(true){
+    if(rawCall){
+      rawCall.request.url = requestUrl;
+      rawCall.request.body = sanitizeBodyForRecord(body);
+    }
+    const response = await connectionFetch(connection,requestUrl,{method:"POST", headers, body:JSON.stringify(body), signal},rawCall);
+    if(response.ok) return response;
+    const error = await httpError(response);
+    if([400, 422].includes(error.status)){
+      const tokenKey = Object.hasOwn(body, "max_completion_tokens") ? "max_completion_tokens" : "max_tokens";
+      if(!tokenRetried && Object.hasOwn(body, tokenKey) && error.message.includes(tokenKey) && /unsupported|unknown|unrecogni[sz]ed|not supported|not permitted|extra fields|extra_forbidden/i.test(error.message)){
+        const otherKey = tokenKey === "max_tokens" ? "max_completion_tokens" : "max_tokens";
+        body[otherKey] = body[tokenKey];
+        delete body[tokenKey];
+        tokenRetried = true;
+        continue;
+      }
+      const rejectedOptional = Object.keys(optional).filter(key => Object.hasOwn(body, key) && error.message.includes(key));
+      if(!optionalRetried && rejectedOptional.length && UNKNOWN_ARG_RE.test(error.message) && !isUnsupportedToolsError(error)){
+        rejectedOptional.forEach(key => { delete body[key]; });
+        optionalRetried = true;
+        continue;
+      }
+    }
+    if(!urlRetried && error.status === 404 && !/\/v\d+\/chat\/completions$/.test(requestUrl)){
+      requestUrl = requestUrl.replace(/\/chat\/completions$/, "/v1/chat/completions");
+      urlRetried = true;
+      continue;
+    }
+    throw error;
   }
-  if(r.status === 404 && !/\/v\d+\/chat\/completions$/.test(url)){
-    const r2 = await send(url.replace(/\/chat\/completions$/, "/v1/chat/completions"), {...core, ...optional});
-    if(r2.ok) return r2;
-  }
-  throw await httpError(r);
 }
 /* 统一 HTTP 错误：带上 status，供 isRetryableLLM 判定 5xx 可重试。 */
 async function httpError(r){
@@ -104,16 +145,15 @@ function networkHint(err, cfg){
 }
 async function callOpenAICompat({cfg, model, chat, signal, onContent, onReasoning, onOrphanThink, onToolCall, tools, provider, rawCall}){
   const url = normalizeBase(cfg.base, provider) + "/chat/completions";
-  // 语言锁只对本地模型开放；openai / openrouter / azure 等走同一函数但一律不加
-  const messages = buildOpenAIMessages(chat, {langLock: provider === "ollama"}, cfg);
+  const messages = buildOpenAIMessages(chat, {}, cfg);
   // 核心字段：任何 OpenAI 兼容端点都认。
   const core = {
     model, messages, stream:true,
-    temperature: llmTemp(),
+    ...temperatureParams(),
     ...samplingParams(),
+    ...openAITokenLimitParams(url),
   };
   if(tools && tools.length) core.tools = tools;
-  if(state.general.maxTokens) core.max_tokens = Number(state.general.maxTokens);
   // 可选/非标字段：严格端点（Azure、部分 vLLM/网关）会以 400 "unrecognized request
   // argument" 拒绝整个请求，所以单独存放，失败时剥掉重发一次（见 postChatCompletions）。
   const optional = {};
@@ -123,14 +163,12 @@ async function callOpenAICompat({cfg, model, chat, signal, onContent, onReasonin
     // 不发这个字段的话，"关闭思考"只是把已经生成的 CoT 丢掉，token 和时延照付。
     optional.chat_template_kwargs = { enable_thinking: think === "on" };
   }
-  if(provider === "ollama"){
-    // Ollama 的 OpenAI 兼容端点支持 think 扩展；auto 时沿用旧行为
-    optional.think = think === "auto" ? !!state.general.showThinking : think === "on";
+  if(provider === "ollama" && think !== "auto"){
+    optional.think = think === "on";
   }
-  if(/(^|\.)openrouter\.ai$/i.test(hostOf(url))){
+  if(think !== "auto" && /(^|\.)openrouter\.ai$/i.test(hostOf(url))){
     // OpenRouter 专有的统一推理参数 —— 发给别家会 400，所以只在这里发
-    optional.include_reasoning = !!state.general.showThinking;
-    optional.reasoning = think === "off" ? { exclude:true } : { effort:"medium" };
+    optional.reasoning = { enabled: think === "on" };
   }
   // llama.cpp's slot/prompt-cache reuse can get confused by multimodal chunks
   // whose token positions are not strictly one-token-per-position. Avoid the
@@ -143,13 +181,18 @@ async function callOpenAICompat({cfg, model, chat, signal, onContent, onReasonin
   }
   const headers = {"Content-Type":"application/json"};
   if(cfg.key) headers["Authorization"] = "Bearer "+cfg.key;
+  if(cfg.headers){
+    Object.assign(headers, parseCustomHeaders(cfg.headers));
+  }
   if(rawCall){
     rawCall.request.url = url;
     rawCall.request.method = "POST";
-    rawCall.request.headers = Object.assign({}, headers, cfg.key ? { "Authorization": "Bearer " + maskApiKey(cfg.key) } : {});
+    const recordedHeaders = Object.assign({}, headers);
+    if(cfg.key && recordedHeaders["Authorization"]) recordedHeaders["Authorization"] = "Bearer " + maskApiKey(cfg.key);
+    rawCall.request.headers = recordedHeaders;
     rawCall.request.body = sanitizeBodyForRecord({ ...core, ...optional });
   }
-  const r = await postChatCompletions(url, headers, core, optional, signal);
+  const r = await postChatCompletions(url, headers, core, optional, signal, cfg, rawCall);
   if(rawCall){
     rawCall.response.status = r.status;
     rawCall.response.statusText = r.statusText || (r.status===200?"OK":"");

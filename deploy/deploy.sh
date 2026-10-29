@@ -1,21 +1,23 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
 # Configuration
-STACK_NAME="achat-stack"
+STACK_NAME="${STACK_NAME:-tabs-chat-stack}"
 REGION="${AWS_REGION:-eu-west-1}"
+APP_DOMAIN="${APP_DOMAIN:-tabs.chat}"
+: "${CERTIFICATE_ARN:?Set CERTIFICATE_ARN to the issued us-east-1 ACM certificate covering tabs.chat and www.tabs.chat}"
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
-echo "🚀 AChat Deployment to AWS CloudFront + S3"
+echo "🚀 tabs.chat Deployment to AWS CloudFront + S3"
 echo "=========================================="
 echo "Region: $REGION"
 echo "Stack:  $STACK_NAME"
 echo ""
 
 # 1. Build application
-echo "📦 Step 1: Building AChat single-file distribution..."
+echo "📦 Step 1: Building tabs.chat hosted distribution..."
 cd "$PROJECT_ROOT"
-npm run build
+npm run build:hosted
 
 # 2. Deploy CloudFormation Stack
 echo ""
@@ -24,6 +26,7 @@ aws cloudformation deploy \
   --template-file "$PROJECT_ROOT/deploy/s3-cloudfront.yaml" \
   --stack-name "$STACK_NAME" \
   --region "$REGION" \
+  --parameter-overrides DomainName="$APP_DOMAIN" CertificateArn="$CERTIFICATE_ARN" \
   --no-fail-on-empty-changeset
 
 # 3. Get Outputs
@@ -53,26 +56,10 @@ echo "URL:             $DIST_URL"
 
 # 4. Sync files to S3
 echo ""
-echo "📤 Step 4: Syncing index.html to S3..."
-aws s3 cp "$PROJECT_ROOT/dist/index.html" "s3://$BUCKET_NAME/index.html" \
-  --content-type "text/html" \
-  --cache-control "public, max-age=0, must-revalidate"
+echo "📤 Step 4: Syncing static assets to S3..."
 
-# Also sync root files if any (e.g. manifest if present)
-if [ -f "$PROJECT_ROOT/manifest.webmanifest" ]; then
-  aws s3 cp "$PROJECT_ROOT/manifest.webmanifest" "s3://$BUCKET_NAME/manifest.webmanifest" \
-    --content-type "application/manifest+json"
-fi
-
-# 5. Invalidate CloudFront Cache
-echo ""
-echo "🔄 Step 5: Creating CloudFront cache invalidation..."
-aws cloudfront create-invalidation \
-  --distribution-id "$DIST_ID" \
-  --paths "/*" \
-  --query "Invalidation.Id" \
-  --output text
+AWS_DEFAULT_REGION="$REGION" bash "$PROJECT_ROOT/deploy/upload.sh" "$PROJECT_ROOT/dist-hosted" "$BUCKET_NAME" "$DIST_ID"
 
 echo ""
 echo "✅ Deployment completed successfully!"
-echo "🌐 Your AChat instance is live at: $DIST_URL"
+echo "🌐 Your tabs.chat instance is live at: $DIST_URL"

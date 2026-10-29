@@ -1,5 +1,10 @@
 /* ---------------- Raw Call Inspector (I/O) ---------------- */
 let _activeRawCall = null;
+let _inspectionReturnFocus = null;
+
+function isInspectionEnabled(){
+  return getCurrentAgent()?.config?.inspectionEnabled !== false;
+}
 
 function maskApiKey(key){
   if(!key) return "";
@@ -28,7 +33,7 @@ function getMessageRawCall(chat, msg, idx){
   const idxSep = activeModel.indexOf("::");
   const providerId = idxSep >= 0 ? activeModel.slice(0, idxSep) : "openai";
   const model = idxSep >= 0 ? activeModel.slice(idxSep + 2) : activeModel;
-  const prov = getProvider(providerId);
+  const prov = getProviderForChat(chat,providerId);
   const provider = prov ? prov.type : providerId;
   const cfg = prov || { base: "", key: "" };
   const priorChat = Object.assign({}, chat, { messages: chat.messages ? chat.messages.slice(0, Math.max(0, idx)) : [] });
@@ -41,29 +46,30 @@ function getMessageRawCall(chat, msg, idx){
     reqUrl = (cfg.base || "http://localhost:11434").replace(/\/+$/,"").replace(/\/v\d+$/,"") + "/api/chat";
     reqBody = {
       model,
-      messages: buildOpenAIMessages(priorChat, {langLock: true}, cfg),
+      messages: buildOpenAIMessages(priorChat, {}, cfg),
       stream: true,
-      options: { temperature: llmTemp(), ...samplingParams() }
+      options: { ...temperatureParams(), ...samplingParams(), ...(outputTokenLimit() === null ? {} : { num_predict: outputTokenLimit() }) }
     };
   } else if(provider === "claude"){
     reqUrl = (cfg.base || "https://api.anthropic.com/v1").replace(/\/+$/,"") + "/messages";
     reqBody = {
       model,
       stream: true,
-      max_tokens: Number(state.general.maxTokens) || 4096,
-      temperature: llmTemp()
+      max_tokens: outputTokenLimit(4096),
+      ...temperatureParams()
     };
   } else if(provider === "gemini"){
     reqUrl = `${(cfg.base || "https://generativelanguage.googleapis.com/v1beta").replace(/\/+$/,"")}/models/${encodeURIComponent(model)}:streamGenerateContent`;
     reqBody = {
-      generationConfig: { temperature: llmTemp() }
+      generationConfig: { ...temperatureParams(), ...(outputTokenLimit() === null ? {} : { maxOutputTokens: outputTokenLimit() }) }
     };
   } else {
     reqUrl = normalizeBase(cfg.base || "https://api.openai.com/v1", "openai") + "/chat/completions";
     reqBody = {
       model,
       messages: buildOpenAIMessages(priorChat, {}, cfg),
-      temperature: llmTemp(),
+      ...temperatureParams(),
+      ...openAITokenLimitParams(reqUrl),
       stream: true
     };
   }
@@ -120,7 +126,7 @@ function renderRawCallInputTab(rawCall){
   if(Object.keys(params).length){
     paramsHtml = `
       <div class="drawer-section">
-        <div class="drawer-sec-title">Request Parameters</div>
+        <div class="drawer-sec-title">Parameters</div>
         <pre class="drawer-pre">${escapeHtml(JSON.stringify(params, null, 2))}</pre>
       </div>
     `;
@@ -131,7 +137,7 @@ function renderRawCallInputTab(rawCall){
     msgsHtml = `
       <div class="drawer-section">
         <div class="drawer-sec-title">
-          <span>Prompt Messages (${msgs.length})</span>
+          <span>Messages sent (${msgs.length})</span>
           <button type="button" class="sec-btn" id="rawCallCopyMsgs">Copy Messages</button>
         </div>
         <div class="drawer-msgs-list">
@@ -141,7 +147,7 @@ function renderRawCallInputTab(rawCall){
             return `
               <div class="drawer-msg-item">
                 <div class="drawer-msg-role">${escapeHtml(role)} #${i+1}</div>
-                <div style="white-space:pre-wrap;word-break:break-word;font-size:12px;max-height:200px;overflow-y:auto">${escapeHtml(contentStr)}</div>
+                <div style="white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px">${escapeHtml(contentStr)}</div>
               </div>
             `;
           }).join("")}
@@ -158,12 +164,11 @@ function renderRawCallInputTab(rawCall){
         ${escapeHtml(req.url || "—")}
       </div>
     </div>
-    ${headersHtml}
-    ${paramsHtml}
     ${msgsHtml}
+    <details class="drawer-advanced"><summary>Connection and parameters</summary>${headersHtml}${paramsHtml}</details>
     <div class="drawer-section">
       <div class="drawer-sec-title">
-        <span>Raw Request Body</span>
+        <span>Request JSON</span>
         <button type="button" class="sec-btn" id="rawCallCopyReqBody">Copy Body</button>
       </div>
       <pre class="drawer-pre">${escapeHtml(JSON.stringify(body, null, 2))}</pre>
@@ -204,7 +209,7 @@ function renderRawCallOutputTab(rawCall){
           <span>Thinking / Reasoning (${res.reasoning.length} chars${rTime})</span>
           <button type="button" class="sec-btn" id="rawCallCopyReasoning">Copy</button>
         </div>
-        <pre class="drawer-pre" style="max-height:240px;color:var(--fg-2)">${escapeHtml(res.reasoning)}</pre>
+        <pre class="drawer-pre" style="color:var(--fg-2)">${escapeHtml(res.reasoning)}</pre>
       </div>
     `;
   }
@@ -224,22 +229,23 @@ function renderRawCallOutputTab(rawCall){
 
   el.innerHTML = `
     <div class="drawer-section">
-      <div class="drawer-sec-title">Execution Summary</div>
+      <div class="drawer-sec-title">At a glance</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px">
-        <div><b>HTTP Status:</b> ${escapeHtml(String(res.status || 200))} ${escapeHtml(res.statusText || "OK")}</div>
+        <div><b>HTTP Status:</b> ${rawCall.meta?.reconstructed ? "Not recorded" : escapeHtml(String(res.status || "—"))} ${rawCall.meta?.reconstructed ? "" : escapeHtml(res.statusText || "")}</div>
         <div><b>Total Latency:</b> ${escapeHtml(dTime)}</div>
         <div><b>Finish Reason:</b> ${escapeHtml(res.finishReason || "—")}</div>
         <div><b>Output Chars:</b> ${content.length}</div>
+        ${res.loadDurationMs ? `<div><b>Model Load:</b> ${(res.loadDurationMs/1000).toFixed(2)}s</div>` : ""}
       </div>
     </div>
     ${errorHtml}
-    ${reasoningHtml}
+    ${reasoningHtml ? `<details class="drawer-advanced"><summary>Thinking</summary>${reasoningHtml}</details>` : ""}
     <div class="drawer-section">
       <div class="drawer-sec-title">
-        <span>Generated Content (${content.length} chars)</span>
+        <span>Response (${content.length} characters)</span>
         <button type="button" class="sec-btn" id="rawCallCopyContent">Copy Content</button>
       </div>
-      <pre class="drawer-pre" style="max-height:360px">${escapeHtml(content || "(empty)")}</pre>
+      <pre class="drawer-pre">${escapeHtml(content || "(empty)")}</pre>
     </div>
   `;
 
@@ -273,7 +279,7 @@ function renderRawCallFullTab(rawCall){
         <span>Complete Call Record (JSON)</span>
         <button type="button" class="sec-btn" id="rawCallCopyFullJson">Copy JSON</button>
       </div>
-      <pre class="drawer-pre" style="max-height:500px">${escapeHtml(jsonStr)}</pre>
+      <pre class="drawer-pre">${escapeHtml(jsonStr)}</pre>
     </div>
   `;
   const copyBtn = el.querySelector("#rawCallCopyFullJson");
@@ -287,9 +293,12 @@ function renderRawCallFullTab(rawCall){
   }
 }
 
-function switchRawCallTab(tabName){
+function switchRawCallTab(panelName){
   document.querySelectorAll(".drawer-tab").forEach(t => {
-    t.classList.toggle("active", t.getAttribute("data-dtab") === tabName);
+    const selected = t.getAttribute("data-dtab") === panelName;
+    t.classList.toggle("active", selected);
+    t.setAttribute("aria-selected", String(selected));
+    t.tabIndex = selected ? 0 : -1;
   });
   const tabIds = {
     input: "rawCallTabInput",
@@ -299,7 +308,7 @@ function switchRawCallTab(tabName){
   for(const k in tabIds){
     const el = document.getElementById(tabIds[k]);
     if(el){
-      const isCur = (k === tabName);
+      const isCur = (k === panelName);
       el.classList.toggle("hide", !isCur);
       el.style.display = isCur ? "flex" : "none";
     }
@@ -307,6 +316,7 @@ function switchRawCallTab(tabName){
 }
 
 function openRawCallDrawer(m, idx){
+  if(!isInspectionEnabled()) return;
   const chat = currentChat();
   if(!chat || !m) return;
   const rawCall = getMessageRawCall(chat, m, idx);
@@ -315,6 +325,8 @@ function openRawCallDrawer(m, idx){
   const mask = document.getElementById("rawCallMask");
   if(!drawer || !mask) return;
 
+  _inspectionReturnFocus = document.activeElement;
+  document.getElementById("rawCallRecordNote").classList.toggle("hide", !rawCall.meta?.reconstructed);
   const subEl = document.getElementById("rawCallSubtitle");
   if(subEl) subEl.textContent = `${(rawCall.meta.provider||"").toUpperCase()} · ${rawCall.meta.model||""}`;
 
@@ -322,25 +334,24 @@ function openRawCallDrawer(m, idx){
   if(metaEl){
     const dMs = rawCall.response.durationMs ? `${(rawCall.response.durationMs/1000).toFixed(2)}s` : "—";
     const rMs = rawCall.response.reasoningMs ? `${(rawCall.response.reasoningMs/1000).toFixed(2)}s` : "0s";
-    const stCode = rawCall.response.status || (rawCall.response.error ? 500 : 200);
+    const stCode = rawCall.response.status;
     const badgeColor = stCode >= 200 && stCode < 300 ? "accent" : "error";
     metaEl.innerHTML = `
-      <span class="drawer-badge ${badgeColor}">${stCode} ${escapeHtml(rawCall.response.statusText || (stCode===200?"OK":"Error"))}</span>
-      <span class="drawer-badge">${escapeHtml(rawCall.meta.provider)}</span>
-      <span class="drawer-badge">${escapeHtml(rawCall.meta.model)}</span>
-      <span class="drawer-badge">⏱ ${dMs}</span>
-      <span class="drawer-badge">🧠 ${rMs}</span>
-      ${rawCall.meta.reconstructed ? '<span class="drawer-badge" style="opacity:0.75" title="Reconstructed from history">Historical</span>' : ''}
+      ${stCode && !rawCall.meta.reconstructed ? `<span class="drawer-badge ${badgeColor}">${stCode} ${escapeHtml(rawCall.response.statusText || "")}</span>` : ""}
+      <span class="drawer-badge">Time · ${dMs}</span>
+      ${rawCall.response.reasoningMs ? `<span class="drawer-badge">Thinking · ${rMs}</span>` : ""}
+      ${rawCall.response.tokens ? `<span class="drawer-badge">${rawCall.response.tokens} tokens</span>` : ""}
     `;
   }
 
   renderRawCallInputTab(rawCall);
   renderRawCallOutputTab(rawCall);
   renderRawCallFullTab(rawCall);
-  switchRawCallTab("input");
+  switchRawCallTab("output");
 
   mask.classList.remove("hide");
   drawer.classList.remove("hide");
+  drawer.querySelector("#rawCallClose").focus();
 }
 
 function closeRawCallDrawer(){
@@ -348,13 +359,15 @@ function closeRawCallDrawer(){
   const mask = document.getElementById("rawCallMask");
   if(drawer) drawer.classList.add("hide");
   if(mask) mask.classList.add("hide");
+  if(_inspectionReturnFocus?.isConnected) _inspectionReturnFocus.focus();
+  _inspectionReturnFocus = null;
 }
 
 async function streamResponse(chat, aiMsg, modelId){
   const idxSep = modelId.indexOf("::");
   const providerId = idxSep >= 0 ? modelId.slice(0, idxSep) : modelId;
   const model = idxSep >= 0 ? modelId.slice(idxSep + 2) : "";
-  const prov = getProvider(providerId);
+  const prov = getProviderForChat(chat,providerId);
   const provider = prov ? prov.type : providerId;
   const cfg = prov || { base: "", key: "" };
   const chatId = chat.id;
@@ -374,6 +387,35 @@ async function streamResponse(chat, aiMsg, modelId){
   const ctrl = new AbortController();
   streamStart(chatId, ctrl, t("status.connecting"));
 
+  let ollamaLoadTimer = null;
+  const showOllamaLoading = ()=>{
+    if(firstChunkSeen || aiMsg.content || aiMsg.thought || aiMsg.reasoning) return;
+    aiMsg._loadingStatus = true;
+    streamPhase(chatId, t("status.loadingModel"));
+    if(onActive()){
+      const msgEl = document.querySelector(".messages .msg-wrap .msg:last-child");
+      if(msgEl){
+        const contentEl = msgEl.querySelector(".content");
+        if(contentEl && !aiMsg.content && !aiMsg.thought && !aiMsg.reasoning){
+          contentEl.innerHTML = `<div class="ollama-load-status"><span class="typing-dots" aria-hidden="true"><span></span><span></span><span></span></span> <span class="load-text">${escapeHtml(t("ollama.loadingModel"))}</span></div>`;
+          maybeAutoScroll();
+        }
+      }
+    }
+  };
+
+  if(provider === "ollama"){
+    if(typeof checkOllamaLoaded === "function"){
+      checkOllamaLoaded(cfg, model).then(isLoaded => {
+        if(firstChunkSeen) return;
+        if(isLoaded === false){
+          showOllamaLoading();
+        }
+      }).catch(()=>{});
+    }
+    ollamaLoadTimer = setTimeout(showOllamaLoading, 1500);
+  }
+
   let reasoningStart = 0;
   let inReasoning = false;
   let firstChunkSeen = false;
@@ -382,6 +424,8 @@ async function streamResponse(chat, aiMsg, modelId){
   let chunkCount = 0;
 
   const markFirstChunk = ()=>{
+    if(ollamaLoadTimer){ clearTimeout(ollamaLoadTimer); ollamaLoadTimer = null; }
+    aiMsg._loadingStatus = false;
     lastActivity = Date.now();
     if(firstChunkSeen) return;
     firstChunkSeen = true; firstChunkAt = Date.now();
@@ -403,7 +447,9 @@ async function streamResponse(chat, aiMsg, modelId){
         const initLabel = state.general.showThinking ? t("thinking.streaming") : t("thinking.streaming.hidden");
         panel.innerHTML = `<summary><span class="dot"></span><span class="label">${escapeHtml(initLabel)}</span></summary><div class="thinking-content"></div>`;
         body.querySelector(".thinking-slot").appendChild(panel);
-        // 思考开始 → 清掉气泡里的"等待"占位
+        // 思考开始 → 清掉气泡里的"等待"或"加载"占位
+        const oload = body.querySelector(".content .ollama-load-status");
+        if(oload) oload.remove();
         const tdots = body.querySelector(".content .typing-dots");
         if(tdots) tdots.remove();
       }
@@ -439,7 +485,13 @@ async function streamResponse(chat, aiMsg, modelId){
     const panel = msgEl.querySelector(".thinking-panel");
     if(panel) panel.remove();
     const c = msgEl.querySelector(".content");
-    if(c) c.innerHTML = `<span class="typing-dots" aria-label="${escapeHtml(t("waiting.aria"))}"><span></span><span></span><span></span></span>`;
+    if(c){
+      if(aiMsg._loadingStatus){
+        c.innerHTML = `<div class="ollama-load-status"><span class="typing-dots" aria-hidden="true"><span></span><span></span><span></span></span> <span class="load-text">${escapeHtml(t("ollama.loadingModel"))}</span></div>`;
+      }else{
+        c.innerHTML = `<span class="typing-dots" aria-label="${escapeHtml(t("waiting.aria"))}"><span></span><span></span><span></span></span>`;
+      }
+    }
   };
 
   const onReasoning = (delta)=>{
@@ -476,10 +528,10 @@ async function streamResponse(chat, aiMsg, modelId){
 
   // Build tool list based on active provider and MCP registry
   let activeTools = null;
-  if(state.agent?.enabled && toolRegistry.hasTools()){
-    if(provider==="openai" || provider==="ollama") activeTools = toolRegistry.formatForOpenAI();
-    else if(provider==="claude") activeTools = toolRegistry.formatForClaude();
+  if(state.toolSettings?.enabled && toolRegistry.hasTools()){
+    if(provider==="claude") activeTools = toolRegistry.formatForClaude();
     else if(provider==="gemini") activeTools = toolRegistry.formatForGemini();
+    else activeTools = toolRegistry.formatForOpenAI();
   }
 
   let capturedToolCalls = null;
@@ -498,14 +550,13 @@ async function streamResponse(chat, aiMsg, modelId){
     runOnce = useNative
       ? (signal)=>callOllamaNative({cfg, model, chat, signal, onContent, onReasoning, onOrphanThink, onToolCall, tools:activeTools, rawCall})
       : (signal)=>callOpenAICompat({cfg, model, chat, signal, onContent, onReasoning, onOrphanThink, onToolCall, tools:activeTools, provider:"ollama", rawCall});
-  }else if(provider==="openai"){
-    runOnce = (signal)=>callOpenAICompat({cfg, model, chat, signal, onContent, onReasoning, onOrphanThink, onToolCall, tools:activeTools, provider, rawCall});
   }else if(provider==="claude"){
     runOnce = (signal)=>callClaude({cfg, model, chat, signal, onContent, onReasoning, onToolCall, tools:activeTools, rawCall});
   }else if(provider==="gemini"){
     runOnce = (signal)=>callGemini({cfg, model, chat, signal, onContent, onReasoning, onToolCall, tools:activeTools, rawCall});
   }else{
-    runOnce = async ()=>{};
+    // OpenAI and compatible providers (Groq, OpenRouter, DeepSeek, Mistral, xAI, LM Studio, etc.)
+    runOnce = (signal)=>callOpenAICompat({cfg, model, chat, signal, onContent, onReasoning, onOrphanThink, onToolCall, tools:activeTools, provider, rawCall});
   }
 
   // 超时看门狗：首字节前用"连接超时"，出字节后用"停顿超时"（token 间隔）。
@@ -545,7 +596,20 @@ async function streamResponse(chat, aiMsg, modelId){
     }, 1000);
 
     let err = null;
-    try{ await runOnce(attemptCtrl.signal); }
+    try{
+      try{ await runOnce(attemptCtrl.signal); }
+      catch(error){
+        // A capability rejection before any output is safe to retry once.
+        // Keep tool history intact: changing models mid-workflow needs a new chat.
+        if(activeTools?.length && !firstChunkSeen && !capturedToolCalls?.length && !hasToolHistory(chat) && isUnsupportedToolsError(error)){
+          activeTools = null;
+          rawCall.meta.toolsUnsupported = true;
+          aiMsg.notice = t("msg.toolsUnsupported");
+          if(onActive()) renderMessages();
+          await runOnce(attemptCtrl.signal);
+        } else throw error;
+      }
+    }
     catch(e){ err = e; }
     finally{ clearInterval(watch); ctrl.signal.removeEventListener("abort", onUserAbort); }
 
@@ -558,13 +622,15 @@ async function streamResponse(chat, aiMsg, modelId){
     }
     lastErr = err;
 
-    const gotSomething = aiMsg.content.trim()!=="" || aiMsg.reasoning.trim()!=="";
+    const hasToolCalls = !!((capturedToolCalls && capturedToolCalls.length) || (aiMsg.tool_calls && aiMsg.tool_calls.length));
+    const gotSomething = aiMsg.content.trim()!=="" || aiMsg.reasoning.trim()!=="" || hasToolCalls;
     if(!err && gotSomething) break;                                  // good response
     if(attempt < maxAttempts && isRetryableLLM(err)) continue;       // transient → retry
 
     // Out of attempts, or a non-retryable error: surface the outcome.
     if(err){
       let hint = networkHint(err, cfg);
+      if(isUnsupportedToolsError(err)) hint = t("msg.error.toolsUnsupported") + "\n\n" + hint;
       if(isContextOverflow(err)) hint = t("msg.error.contextMaybe") + "\n\n" + hint;
       if(err.status === 400 && sentImages) hint = t("msg.error.visionMaybe") + "\n\n" + hint;
       aiMsg.content += `\n\n> ❌ **${t("msg.error.label")}**: ${err.message}\n\n${hint}`;
@@ -574,19 +640,10 @@ async function streamResponse(chat, aiMsg, modelId){
     break;
   }
   if(inReasoning){ aiMsg.reasoningMs = Date.now() - reasoningStart; }
-  // 只有思考、没有正文：明确说明，而不是留个空气泡或误报"空响应"。
-  if(!aiMsg.content.trim() && aiMsg.reasoning.trim()) aiMsg.content = t("msg.thinkingOnly");
-  // 语言补丁兜底：尾部锁把漂移率压到 8%，剩下的这 8% 在同一上下文里补一句纠正重答。
-  // 修不好就保留原文 —— 宁可交一份夹英文的答案，也不要把用户的回答弄丢。
-  if(provider === "ollama" && !aiMsg.error && !ctrl.signal.aborted && needsLangRepair(chat, aiMsg.content, cfg)){
-    const original = aiMsg.content, originalReasoning = aiMsg.reasoning;
-    streamPhase(chatId, t("status.langRepair"));
-    try{
-      const ok = await runLangRepair({chat, aiMsg, cfg, model, useNative:useLocalNative,
-        signal: ctrl.signal, onPartial:(partial)=>{ aiMsg.content = partial; refresh(); }});
-      if(!ok){ aiMsg.content = original; aiMsg.reasoning = originalReasoning; }
-    }catch(e){ aiMsg.content = original; aiMsg.reasoning = originalReasoning; }
-  }
+  const hasToolCalls = !!((capturedToolCalls && capturedToolCalls.length) || (aiMsg.tool_calls && aiMsg.tool_calls.length));
+  // 只有思考、没有正文：明确说明，而不是留个空气泡或误报"空响应"（调用 tool 时没有 content 是正常行为）。
+  if(!aiMsg.content.trim() && aiMsg.reasoning.trim() && !hasToolCalls) aiMsg.content = t("msg.thinkingOnly");
+
   const totalText = (aiMsg.content || "") + (aiMsg.reasoning || "");
   const exactTokens = rawCall.response.tokens || 0;
   const tokens = exactTokens > 0 ? exactTokens : Math.max(chunkCount, estimateTokenCount(totalText));
@@ -596,6 +653,11 @@ async function streamResponse(chat, aiMsg, modelId){
       : Math.max(50, Date.now() - streamStartTime)
   );
   const tokPerSec = (tokens > 0 && genDurationMs > 0 && !aiMsg.error) ? Number((tokens / (genDurationMs / 1000)).toFixed(1)) : 0;
+  if(ollamaLoadTimer){ clearTimeout(ollamaLoadTimer); ollamaLoadTimer = null; }
+  delete aiMsg._loadingStatus;
+  if(rawCall.response.loadDurationMs){
+    aiMsg.loadDurationMs = rawCall.response.loadDurationMs;
+  }
   aiMsg.tokens = tokens;
   aiMsg.durationMs = genDurationMs;
   aiMsg.tokPerSec = tokPerSec;
@@ -621,13 +683,26 @@ async function streamResponse(chat, aiMsg, modelId){
       enhanceCodeBlocks(last);
       renderMathIn(last);
       enhanceMermaid(last);
+      if(hasToolCalls){
+        const existingAcc = msgEl.querySelector(".tool-calls-accordion-wrap");
+        if(existingAcc) existingAcc.remove();
+        const existingOld = msgEl.querySelector(".tool-calls-container");
+        if(existingOld) existingOld.remove();
+        const calls = capturedToolCalls || aiMsg.tool_calls || [];
+        if(typeof renderToolCallsAccordion === "function"){
+          const acc = renderToolCallsAccordion(calls, chat.messages);
+          if(acc) msgEl.querySelector(".body").insertBefore(acc, msgEl.querySelector(".attachments"));
+        }
+      }
       // 更新速度指示器
       const actBar = msgEl.querySelector(".msg-actions");
       if(actBar && !actBar.querySelector(".tok-speed") && tokPerSec > 0){
         const badge = document.createElement("span");
         badge.className = "tok-speed";
-        badge.innerHTML = `<svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span class="lbl">${tokPerSec} tok/s</span>`;
-        badge.title = `${tokens ? tokens + " tokens · " : ""}${tokPerSec} tokens/s`;
+        badge.innerHTML = `${icon("zap", { className: "mi", strokeWidth: 2.5 })}<span class="lbl">${tokPerSec} tok/s</span>`;
+        const loadMs = aiMsg.loadDurationMs || rawCall?.response?.loadDurationMs;
+        const loadInfo = (loadMs && loadMs > 100) ? ` · load: ${(loadMs/1000).toFixed(1)}s` : "";
+        badge.title = `${tokens ? tokens + " tokens · " : ""}${tokPerSec} tokens/s${loadInfo}`;
         actBar.prepend(badge);
       }
     }

@@ -1,0 +1,71 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    uses: ./.github/workflows/ci.yml
+  publish:
+    needs: verify
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: tabs-chat-standalone
+          path: release
+      - name: Publish verified release files
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(node -p 'require("./package.json").version')
+          test "$GITHUB_REF_NAME" = "v$VERSION"
+          (cd release && sha256sum tabs-chat.html tabs-chat-lite.html > SHA256SUMS)
+          if ! gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            FLAGS=()
+            if [[ "$VERSION" == *-* ]]; then FLAGS+=(--prerelease); fi
+            gh release create "$GITHUB_REF_NAME" --verify-tag --title "tabs.chat $VERSION" --notes-file docs/release-notes.md "${FLAGS[@]}"
+          fi
+          gh release upload "$GITHUB_REF_NAME" release/tabs-chat.html release/tabs-chat-lite.html release/SHA256SUMS --clobber
+  deploy:
+    needs: [verify, publish]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: tabs-chat-hosted
+          path: release
+      - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+          allowed-account-ids: ${{ vars.AWS_ACCOUNT_ID }}
+          role-session-name: tabs-chat-${{ github.run_id }}
+      - name: Deploy hosted application
+        env:
+          APP_BUCKET: ${{ vars.AWS_S3_BUCKET }}
+          APP_DISTRIBUTION: ${{ vars.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
+        run: |
+          mkdir -p dist-hosted
+          tar -xzf release/tabs-chat-hosted.tar.gz -C dist-hosted
+          bash deploy/upload.sh dist-hosted "$APP_BUCKET" "$APP_DISTRIBUTION"
+      - name: Verify canonical website and redirect
+        run: |
+          curl --fail --retry 5 --retry-all-errors --retry-delay 5 --silent --show-error https://tabs.chat/ -o /tmp/tabs-chat-live.html
+          grep -F 'tabs.chat' /tmp/tabs-chat-live.html
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' 'https://www.tabs.chat/')" = 308

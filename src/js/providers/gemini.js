@@ -51,13 +51,15 @@ async function callGemini({cfg, model, chat, signal, onContent, onReasoning, onT
     contents.push({role:"user", parts});
   }
   const genCfg = {
-    temperature: llmTemp(),
-    maxOutputTokens: Number(state.general.maxTokens)||undefined
+    ...temperatureParams(),
   };
-  // 思考模式优先；auto 时沿用旧行为（跟随"显示思考"开关）
+  const tokenLimit = outputTokenLimit();
+  if(tokenLimit !== null) genCfg.maxOutputTokens = tokenLimit;
+  // Auto leaves thinking controls to the server, independently of UI visibility.
   const thinkG = thinkMode();
-  const wantThinkG = thinkG === "auto" ? !!state.general.showThinking : thinkG === "on";
-  genCfg.thinkingConfig = wantThinkG ? { includeThoughts: true } : { thinkingBudget: 0 };
+  if(thinkG !== "auto"){
+    genCfg.thinkingConfig = thinkG === "on" ? { includeThoughts: true } : { thinkingBudget: 0 };
+  }
   const body = {
     contents: mergeAdjacentRoles(contents, (a,b)=>{ a.parts = [...(a.parts||[]), ...(b.parts||[])]; }),
     generationConfig: genCfg
@@ -66,13 +68,16 @@ async function callGemini({cfg, model, chat, signal, onContent, onReasoning, onT
   const sysG = effectiveSystemPrompt(chat);
   if(sysG) body.systemInstruction = {parts:[{text:sysG}]};
   const headers = {"Content-Type":"application/json"};
+  if(cfg.headers){
+    Object.assign(headers, parseCustomHeaders(cfg.headers));
+  }
   if(rawCall){
     rawCall.request.url = url.replace(/key=[^&]+/, "key=" + maskApiKey(cfg.key));
     rawCall.request.method = "POST";
-    rawCall.request.headers = headers;
+    rawCall.request.headers = Object.assign({}, headers);
     rawCall.request.body = sanitizeBodyForRecord(body);
   }
-  const r = await fetch(url,{method:"POST",headers,body:JSON.stringify(body),signal});
+  const r = await connectionFetch(cfg,url,{method:"POST",headers,body:JSON.stringify(body),signal},rawCall);
   if(rawCall){
     rawCall.response.status = r.status;
     rawCall.response.statusText = r.statusText || (r.status===200?"OK":"");
@@ -90,8 +95,10 @@ async function callGemini({cfg, model, chat, signal, onContent, onReasoning, onT
     const parts = cand?.content?.parts;
     if(!parts) return;
     for(const p of parts){
-      if(p.thought) onReasoning(p.thought);
-      if(p.text) onContent(p.text);
+      if(p.text){
+        if(p.thought) onReasoning(p.text);
+        else onContent(p.text);
+      }
       if(p.functionCall){
         toolCallsAcc.push({
           id: `call_${Date.now()}_${toolCallsAcc.length}`,

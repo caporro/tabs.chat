@@ -1,0 +1,3182 @@
+{
+  "version": 2,
+  "lockSha256": "615a0ca2d2e3ebb1564a062ec0a369be696bbb72d2b3ef26841a9277cefd677e",
+  "generator": {
+    "esbuild": "0.28.2"
+  },
+  "vendors": {
+    "marked": {
+      "version": "18.1.2"
+    },
+    "dompurify": {
+      "version": "3.4.17"
+    },
+    "highlight.js": {
+      "version": "11.12.0"
+    },
+    "katex": {
+      "version": "0.19.1"
+    },
+    "mammoth": {
+      "version": "1.13.0"
+    },
+    "pdfjs-dist": {
+      "version": "6.4.299"
+    },
+    "mermaid": {
+      "version": "12.2.0"
+    },
+    "brotli": {
+      "version": "2.1.0"
+    }
+  },
+  "packages": [
+    {
+      "name": "@braintree/sanitize-url",
+      "version": "7.1.2",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/braintree/sanitize-url.git"
+      },
+      "archive": "https://registry.npmjs.org/@braintree/sanitize-url/-/sanitize-url-7.1.2.tgz",
+      "integrity": "sha512-jigsZK+sMF/cuiB7sERuo9V7N9jx+dhmHHnQyDSVdpZwVutaBu7WvNYqMDLSgFgfB30n452TP3vjDAvFC973mA==",
+      "licenseFiles": [
+        "licenses/_braintree_sanitize-url@7.1.2/LICENSE"
+      ]
+    },
+    {
+      "name": "@chevrotain/cst-dts-gen",
+      "version": "13.2.0",
+      "license": "Apache-2.0",
+      "distributionLicense": "Apache-2.0",
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/Chevrotain/chevrotain.git"
+      },
+      "archive": "https://registry.npmjs.org/@chevrotain/cst-dts-gen/-/cst-dts-gen-13.2.0.tgz",
+      "integrity": "sha512-bA9dvWlhAUcHkNwU+8w9yiUxJPlj/Lm3VqS7MD+NbIR/7LmpNLuK/AWNFdCo/T3SK5ND0/UHf3IJvl/Jn/i6yg==",
+      "licenseFiles": [
+        "licenses/_chevrotain_cst-dts-gen@13.2.0/LICENSE.txt"
+      ]
+    },
+    {
+      "name": "@chevrotain/gast",
+      "version": "13.2.0",
+      "license": "Apache-2.0",
+      "distributionLicense": "Apache-2.0",
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/Chevrotain/chevrotain.git"
+      },
+      "archive": "https://registry.npmjs.org/@chevrotain/gast/-/gast-13.2.0.tgz",
+      "integrity": "sha512-bCARdAsG+eEbOveSXcOAC7pVxA04I1ionzeMOwIYf5NX7SaS7zgn4Dgug2BSqoL+iyKeMNSorQjsFSHJHsCNwg==",
+      "licenseFiles": [
+        "licenses/_chevrotain_gast@13.2.0/LICENSE.txt"
+      ]
+    },
+    {
+      "name": "@chevrotain/regexp-to-ast",
+      "version": "13.2.0",
+      "license": "Apache-2.0",
+      "distributionLicense": "Apache-2.0",
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/Chevrotain/chevrotain.git"
+      },
+      "archive": "https://registry.npmjs.org/@chevrotain/regexp-to-ast/-/regexp-to-ast-13.2.0.tgz",
+      "integrity": "sha512-kxpUkLtiaK09ph+dib+Yvm+3sWSnuwlo25gqfKRgTPNmF6H7uW4gVkMjaRdtnN783S9sM6vUNWh9CsxYX4QwKw==",
+      "licenseFiles": [
+        "licenses/_chevrotain_regexp-to-ast@13.2.0/LICENSE.txt"
+      ]
+    },
+    {
+      "name": "@chevrotain/utils",
+      "version": "13.2.0",
+      "license": "Apache-2.0",
+      "distributionLicense": "Apache-2.0",
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/Chevrotain/chevrotain.git"
+      },
+      "archive": "https://registry.npmjs.org/@chevrotain/utils/-/utils-13.2.0.tgz",
+      "integrity": "sha512-SzKYY68rseOrb9KILVzPsl6SjkQtdWw01SRGB5aCVI5kFcHltQsOYV3JB0Ffst72DgkvHCyDQ0NLwxtmCCf97Q==",
+      "licenseFiles": [
+        "licenses/_chevrotain_utils@13.2.0/LICENSE.txt"
+      ]
+    },
+    {
+      "name": "@iconify/utils",
+      "version": "3.1.7",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/iconify/iconify.git",
+        "directory": "packages/utils"
+      },
+      "archive": "https://registry.npmjs.org/@iconify/utils/-/utils-3.1.7.tgz",
+      "integrity": "sha512-JZHlwdID+dy+lTgbYC8NEC4zeugqeYsc6jewvzb4c58kHauJn+X7rNwQjxz5p2qSjqaEeQoLkCIQ9v/H4PK0/w==",
+      "licenseFiles": [
+        "licenses/_iconify_utils@3.1.7/license.txt"
+      ]
+    },
+    {
+      "name": "@mermaid-js/parser",
+      "version": "2.0.1",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/mermaid-js/mermaid.git",
+        "directory": "packages/parser"
+      },
+      "archive": "https://registry.npmjs.org/@mermaid-js/parser/-/parser-2.0.1.tgz",
+      "integrity": "sha512-j37dj/h6p6pots1L7pLPPNuABEEu9WP4OYg9pW1g+nYG331j0+3canE9OagtYdytYvdSAMG+2fKU5cxep6LgjA==",
+      "licenseFiles": [
+        "licenses/_mermaid-js_parser@2.0.1/LICENSE"
+      ]
+    },
+    {
+      "name": "@upsetjs/venn.js",
+      "version": "2.0.0",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/upsetjs/venn.js.git"
+      },
+      "archive": "https://registry.npmjs.org/@upsetjs/venn.js/-/venn.js-2.0.0.tgz",
+      "integrity": "sha512-WbBhLrooyePuQ1VZxrJjtLvTc4NVfpOyKx0sKqioq9bX1C1m7Jgykkn8gLrtwumBioXIqam8DLxp88Adbue6Hw==",
+      "licenseFiles": [
+        "licenses/_upsetjs_venn.js@2.0.0/LICENSE"
+      ]
+    },
+    {
+      "name": "@xmldom/xmldom",
+      "version": "0.8.15",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/xmldom/xmldom.git"
+      },
+      "archive": "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.8.15.tgz",
+      "integrity": "sha512-/5NV/vDALVFDXgLmfsy9TRCBlKwO2LNBFzpzvb9iIj+jR+eSc6DLYYvVOdivT/jm7MtU6TebYuRmzEOI7w40UA==",
+      "licenseFiles": [
+        "licenses/_xmldom_xmldom@0.8.15/LICENSE"
+      ]
+    },
+    {
+      "name": "base64-js",
+      "version": "1.5.1",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/beatgammit/base64-js.git"
+      },
+      "archive": "https://registry.npmjs.org/base64-js/-/base64-js-1.5.1.tgz",
+      "integrity": "sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==",
+      "licenseFiles": [
+        "licenses/base64-js@1.5.1/LICENSE"
+      ]
+    },
+    {
+      "name": "brotli",
+      "version": "2.1.0",
+      "license": "(MIT AND Apache-2.0)",
+      "distributionLicense": "(MIT AND Apache-2.0)",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/devongovett/brotli.js.git"
+      },
+      "archive": "https://registry.npmjs.org/brotli/-/brotli-2.1.0.tgz",
+      "integrity": "sha512-4KAtOr4Z3jaIQlXy9AeuaVz1vPWTyZ6eiQYu4SsSz6VcUsV6Epz6kA3Vf7eTGTaspaqlnQLBqvkozKP5WyQMZQ==",
+      "licenseFiles": [
+        "licenses/brotli@2.1.0/NOTICE",
+        "licenses/brotli@2.1.0/LICENSE-APACHE-2.0"
+      ]
+    },
+    {
+      "name": "chevrotain",
+      "version": "13.2.0",
+      "license": "Apache-2.0",
+      "distributionLicense": "Apache-2.0",
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/Chevrotain/chevrotain.git"
+      },
+      "archive": "https://registry.npmjs.org/chevrotain/-/chevrotain-13.2.0.tgz",
+      "integrity": "sha512-GTouk5YzgBxlTPCaDn5q0q2EJKkrYmnPF+HmF8v0Qo4r3iyPG7HJivkN1wthCXZcm3sIcZFpGTRovLPNdJNRCA==",
+      "licenseFiles": [
+        "licenses/chevrotain@13.2.0/LICENSE.txt"
+      ]
+    },
+    {
+      "name": "cose-base",
+      "version": "1.0.3",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/iVis-at-Bilkent/cose-base.git"
+      },
+      "archive": "https://registry.npmjs.org/cose-base/-/cose-base-1.0.3.tgz",
+      "integrity": "sha512-s9whTXInMSgAp/NVXVNuVxVKzGH2qck3aQlVHxDCdAEPgtMKwc4Wq6/QKhgdEdgbLSi9rBTAcPoRa6JpiG4ksg==",
+      "licenseFiles": [
+        "licenses/cose-base@1.0.3/LICENSE"
+      ]
+    },
+    {
+      "name": "cose-base",
+      "version": "2.2.0",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/iVis-at-Bilkent/cose-base.git"
+      },
+      "archive": "https://registry.npmjs.org/cose-base/-/cose-base-2.2.0.tgz",
+      "integrity": "sha512-AzlgcsCbUMymkADOJtQm3wO9S3ltPfYOFD5033keQn9NJzIbtnZj+UdBJe7DYml/8TdbtHJW3j58SOnKhWY/5g==",
+      "licenseFiles": [
+        "licenses/cose-base@2.2.0/LICENSE"
+      ]
+    },
+    {
+      "name": "cytoscape-cose-bilkent",
+      "version": "4.1.0",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/cytoscape/cytoscape.js-cose-bilkent.git"
+      },
+      "archive": "https://registry.npmjs.org/cytoscape-cose-bilkent/-/cytoscape-cose-bilkent-4.1.0.tgz",
+      "integrity": "sha512-wgQlVIUJF13Quxiv5e1gstZ08rnZj2XaLHGoFMYXz7SkNfCDOOteKBE6SYRfA9WxxI/iBc3ajfDoc6hb/MRAHQ==",
+      "licenseFiles": [
+        "licenses/cytoscape-cose-bilkent@4.1.0/LICENSE"
+      ]
+    },
+    {
+      "name": "cytoscape-fcose",
+      "version": "2.2.0",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/iVis-at-Bilkent/cytoscape.js-fcose.git"
+      },
+      "archive": "https://registry.npmjs.org/cytoscape-fcose/-/cytoscape-fcose-2.2.0.tgz",
+      "integrity": "sha512-ki1/VuRIHFCzxWNrsshHYPs6L7TvLu3DL+TyIGEsRcvVERmxokbf5Gdk7mFxZnTdiGtnA4cfSmjZJMviqSuZrQ==",
+      "licenseFiles": [
+        "licenses/cytoscape-fcose@2.2.0/LICENSE"
+      ]
+    },
+    {
+      "name": "cytoscape",
+      "version": "3.34.4",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/cytoscape/cytoscape.js.git"
+      },
+      "archive": "https://registry.npmjs.org/cytoscape/-/cytoscape-3.34.4.tgz",
+      "integrity": "sha512-msY99tMY8iWTg+sIPGfSqDcPNOt4xcj+v/K/7qUFaCUxxlqnMkUYLBjRUzn9W5CU/R2hrmtJa5+UtovrEM2ctg==",
+      "licenseFiles": [
+        "licenses/cytoscape@3.34.4/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-array",
+      "version": "2.12.1",
+      "license": "BSD-3-Clause",
+      "distributionLicense": "BSD-3-Clause",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-array.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-array/-/d3-array-2.12.1.tgz",
+      "integrity": "sha512-B0ErZK/66mHtEsR1TkPEEkwdy+WDesimkM5gpZr5Dsg54BiTA5RXtYW5qTLIAcekaS9xfZrzBLF/OAkB3Qn1YQ==",
+      "licenseFiles": [
+        "licenses/d3-array@2.12.1/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-array",
+      "version": "3.2.4",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-array.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-array/-/d3-array-3.2.4.tgz",
+      "integrity": "sha512-tdQAmyA18i4J7wprpYq8ClcxZy3SC31QMeByyCFyRt7BVHdREQZ5lpzoe5mFEYZUWe+oq8HBvk9JjpibyEV4Jg==",
+      "licenseFiles": [
+        "licenses/d3-array@3.2.4/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-axis",
+      "version": "3.0.0",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-axis.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-axis/-/d3-axis-3.0.0.tgz",
+      "integrity": "sha512-IH5tgjV4jE/GhHkRV0HiVYPDtvfjHQlQfJHs0usq7M30XcSBvOotpmH1IgkcXsO/5gEQZD43B//fc7SRT5S+xw==",
+      "licenseFiles": [
+        "licenses/d3-axis@3.0.0/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-brush",
+      "version": "3.0.0",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-brush.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-brush/-/d3-brush-3.0.0.tgz",
+      "integrity": "sha512-ALnjWlVYkXsVIGlOsuWH1+3udkYFI48Ljihfnh8FZPF2QS9o+PzGLBslO0PjzVoHLZ2KCVgAM8NVkXPJB2aNnQ==",
+      "licenseFiles": [
+        "licenses/d3-brush@3.0.0/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-chord",
+      "version": "3.0.1",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-chord.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-chord/-/d3-chord-3.0.1.tgz",
+      "integrity": "sha512-VE5S6TNa+j8msksl7HwjxMHDM2yNK3XCkusIlpX5kwauBfXuyLAtNg9jCp/iHH61tgI4sb6R/EIMWCqEIdjT/g==",
+      "licenseFiles": [
+        "licenses/d3-chord@3.0.1/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-color",
+      "version": "3.1.0",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-color.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-color/-/d3-color-3.1.0.tgz",
+      "integrity": "sha512-zg/chbXyeBtMQ1LbD/WSoW2DpC3I0mpmPdW+ynRTj/x2DAWYrIY7qeZIHidozwV24m4iavr15lNwIwLxRmOxhA==",
+      "licenseFiles": [
+        "licenses/d3-color@3.1.0/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-contour",
+      "version": "4.0.2",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-contour.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-contour/-/d3-contour-4.0.2.tgz",
+      "integrity": "sha512-4EzFTRIikzs47RGmdxbeUvLWtGedDUNkTcmzoeyg4sP/dvCexO47AaQL7VKy/gul85TOxw+IBgA8US2xwbToNA==",
+      "licenseFiles": [
+        "licenses/d3-contour@4.0.2/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-delaunay",
+      "version": "6.0.4",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-delaunay.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-delaunay/-/d3-delaunay-6.0.4.tgz",
+      "integrity": "sha512-mdjtIZ1XLAM8bm/hx3WwjfHt6Sggek7qH043O8KEjDXN40xi3vx/6pYSVTwLjEgiXQTbvaouWKynLBiUZ6SK6A==",
+      "licenseFiles": [
+        "licenses/d3-delaunay@6.0.4/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-dispatch",
+      "version": "3.0.1",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-dispatch.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-dispatch/-/d3-dispatch-3.0.1.tgz",
+      "integrity": "sha512-rzUyPU/S7rwUflMyLc1ETDeBj0NRuHKKAcvukozwhshr6g6c5d8zh4c2gQjY2bZ0dXeGLWc1PF174P2tVvKhfg==",
+      "licenseFiles": [
+        "licenses/d3-dispatch@3.0.1/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-drag",
+      "version": "3.0.0",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-drag.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-drag/-/d3-drag-3.0.0.tgz",
+      "integrity": "sha512-pWbUJLdETVA8lQNJecMxoXfH6x+mO2UQo8rSmZ+QqxcbyA3hfeprFgIT//HW2nlHChWeIIMwS2Fq+gEARkhTkg==",
+      "licenseFiles": [
+        "licenses/d3-drag@3.0.0/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-dsv",
+      "version": "3.0.1",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-dsv.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-dsv/-/d3-dsv-3.0.1.tgz",
+      "integrity": "sha512-UG6OvdI5afDIFP9w4G0mNq50dSOsXHJaRE8arAS5o9ApWnIElp8GZw1Dun8vP8OyHOZ/QJUKUJwxiiCCnUwm+Q==",
+      "licenseFiles": [
+        "licenses/d3-dsv@3.0.1/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-ease",
+      "version": "3.0.1",
+      "license": "BSD-3-Clause",
+      "distributionLicense": "BSD-3-Clause",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-ease.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-ease/-/d3-ease-3.0.1.tgz",
+      "integrity": "sha512-wR/XK3D3XcLIZwpbvQwQ5fK+8Ykds1ip7A2Txe0yxncXSdq1L9skcG7blcedkOX+ZcgxGAmLX1FrRGbADwzi0w==",
+      "licenseFiles": [
+        "licenses/d3-ease@3.0.1/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-fetch",
+      "version": "3.0.1",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-fetch.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-fetch/-/d3-fetch-3.0.1.tgz",
+      "integrity": "sha512-kpkQIM20n3oLVBKGg6oHrUchHM3xODkTzjMoj7aWQFq5QEM+R6E4WkzT5+tojDY7yjez8KgCBRoj4aEr99Fdqw==",
+      "licenseFiles": [
+        "licenses/d3-fetch@3.0.1/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-force",
+      "version": "3.0.0",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-force.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-force/-/d3-force-3.0.0.tgz",
+      "integrity": "sha512-zxV/SsA+U4yte8051P4ECydjD/S+qeYtnaIyAs9tgHCqfguma/aAQDjo85A9Z6EKhBirHRJHXIgJUlffT4wdLg==",
+      "licenseFiles": [
+        "licenses/d3-force@3.0.0/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-format",
+      "version": "3.1.2",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-format.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-format/-/d3-format-3.1.2.tgz",
+      "integrity": "sha512-AJDdYOdnyRDV5b6ArilzCPPwc1ejkHcoyFarqlPqT7zRYjhavcT3uSrqcMvsgh2CgoPbK3RCwyHaVyxYcP2Arg==",
+      "licenseFiles": [
+        "licenses/d3-format@3.1.2/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-geo",
+      "version": "3.1.1",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-geo.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-geo/-/d3-geo-3.1.1.tgz",
+      "integrity": "sha512-637ln3gXKXOwhalDzinUgY83KzNWZRKbYubaG+fGVuc/dxO64RRljtCTnf5ecMyE1RIdtqpkVcq0IbtU2S8j2Q==",
+      "licenseFiles": [
+        "licenses/d3-geo@3.1.1/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-hierarchy",
+      "version": "3.1.2",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-hierarchy.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-hierarchy/-/d3-hierarchy-3.1.2.tgz",
+      "integrity": "sha512-FX/9frcub54beBdugHjDCdikxThEqjnR93Qt7PvQTOHxyiNCAlvMrHhclk3cD5VeAaq9fxmfRp+CnWw9rEMBuA==",
+      "licenseFiles": [
+        "licenses/d3-hierarchy@3.1.2/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-interpolate",
+      "version": "3.0.1",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-interpolate.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-interpolate/-/d3-interpolate-3.0.1.tgz",
+      "integrity": "sha512-3bYs1rOD33uo8aqJfKP3JWPAibgw8Zm2+L9vBKEHJ2Rg+viTR7o5Mmv5mZcieN+FRYaAOWX5SJATX6k1PWz72g==",
+      "licenseFiles": [
+        "licenses/d3-interpolate@3.0.1/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-path",
+      "version": "1.0.9",
+      "license": "BSD-3-Clause",
+      "distributionLicense": "BSD-3-Clause",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-path.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-path/-/d3-path-1.0.9.tgz",
+      "integrity": "sha512-VLaYcn81dtHVTjEHd8B+pbe9yHWpXKZUC87PzoFmsFrJqgFwDe/qxfp5MlfsfM1V5E/iVt0MmEbWQ7FVIXh/bg==",
+      "licenseFiles": [
+        "licenses/d3-path@1.0.9/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-path",
+      "version": "3.1.0",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-path.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-path/-/d3-path-3.1.0.tgz",
+      "integrity": "sha512-p3KP5HCf/bvjBSSKuXid6Zqijx7wIfNW+J/maPs+iwR35at5JCbLUT0LzF1cnjbCHWhqzQTIN2Jpe8pRebIEFQ==",
+      "licenseFiles": [
+        "licenses/d3-path@3.1.0/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-polygon",
+      "version": "3.0.1",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-polygon.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-polygon/-/d3-polygon-3.0.1.tgz",
+      "integrity": "sha512-3vbA7vXYwfe1SYhED++fPUQlWSYTTGmFmQiany/gdbiWgU/iEyQzyymwL9SkJjFFuCS4902BSzewVGsHHmHtXg==",
+      "licenseFiles": [
+        "licenses/d3-polygon@3.0.1/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-quadtree",
+      "version": "3.0.1",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-quadtree.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-quadtree/-/d3-quadtree-3.0.1.tgz",
+      "integrity": "sha512-04xDrxQTDTCFwP5H6hRhsRcb9xxv2RzkcsygFzmkSIOJy3PeRJP7sNk3VRIbKXcog561P9oU0/rVH6vDROAgUw==",
+      "licenseFiles": [
+        "licenses/d3-quadtree@3.0.1/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-random",
+      "version": "3.0.1",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-random.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-random/-/d3-random-3.0.1.tgz",
+      "integrity": "sha512-FXMe9GfxTxqd5D6jFsQ+DJ8BJS4E/fT5mqqdjovykEB2oFbTMDVdg1MGFxfQW+FBOGoB++k8swBrgwSHT1cUXQ==",
+      "licenseFiles": [
+        "licenses/d3-random@3.0.1/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-sankey",
+      "version": "0.12.3",
+      "license": "BSD-3-Clause",
+      "distributionLicense": "BSD-3-Clause",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-sankey.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-sankey/-/d3-sankey-0.12.3.tgz",
+      "integrity": "sha512-nQhsBRmM19Ax5xEIPLMY9ZmJ/cDvd1BG3UVvt5h3WRxKg5zGRbvnteTyWAbzeSvlh3tW7ZEmq4VwR5mB3tutmQ==",
+      "licenseFiles": [
+        "licenses/d3-sankey@0.12.3/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-scale-chromatic",
+      "version": "3.1.0",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-scale-chromatic.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-scale-chromatic/-/d3-scale-chromatic-3.1.0.tgz",
+      "integrity": "sha512-A3s5PWiZ9YCXFye1o246KoscMWqf8BsD9eRiJ3He7C9OBaxKhAd5TFCdEx/7VbKtxxTsu//1mMJFrEt572cEyQ==",
+      "licenseFiles": [
+        "licenses/d3-scale-chromatic@3.1.0/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-scale",
+      "version": "4.0.2",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-scale.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-scale/-/d3-scale-4.0.2.tgz",
+      "integrity": "sha512-GZW464g1SH7ag3Y7hXjf8RoUuAFIqklOAq3MRl4OaWabTFJY9PN/E1YklhXLh+OQ3fM9yS2nOkCoS+WLZ6kvxQ==",
+      "licenseFiles": [
+        "licenses/d3-scale@4.0.2/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-selection",
+      "version": "3.0.0",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-selection.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-selection/-/d3-selection-3.0.0.tgz",
+      "integrity": "sha512-fmTRWbNMmsmWq6xJV8D19U/gw/bwrHfNXxrIN+HfZgnzqTHp9jOmKMhsTUjXOJnZOdZY9Q28y4yebKzqDKlxlQ==",
+      "licenseFiles": [
+        "licenses/d3-selection@3.0.0/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-shape",
+      "version": "1.3.7",
+      "license": "BSD-3-Clause",
+      "distributionLicense": "BSD-3-Clause",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-shape.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-shape/-/d3-shape-1.3.7.tgz",
+      "integrity": "sha512-EUkvKjqPFUAZyOlhY5gzCxCeI0Aep04LwIRpsZ/mLFelJiUfnK56jo5JMDSE7yyP2kLSb6LtF+S5chMk7uqPqw==",
+      "licenseFiles": [
+        "licenses/d3-shape@1.3.7/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-shape",
+      "version": "3.2.0",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-shape.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-shape/-/d3-shape-3.2.0.tgz",
+      "integrity": "sha512-SaLBuwGm3MOViRq2ABk3eLoxwZELpH6zhl3FbAoJ7Vm1gofKx6El1Ib5z23NUEhF9AsGl7y+dzLe5Cw2AArGTA==",
+      "licenseFiles": [
+        "licenses/d3-shape@3.2.0/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-time-format",
+      "version": "4.1.0",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-time-format.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-time-format/-/d3-time-format-4.1.0.tgz",
+      "integrity": "sha512-dJxPBlzC7NugB2PDLwo9Q8JiTR3M3e4/XANkreKSUxF8vvXKqm1Yfq4Q5dl8budlunRVlUUaDUgFt7eA8D6NLg==",
+      "licenseFiles": [
+        "licenses/d3-time-format@4.1.0/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-time",
+      "version": "3.1.0",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-time.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-time/-/d3-time-3.1.0.tgz",
+      "integrity": "sha512-VqKjzBLejbSMT4IgbmVgDjpkYrNWUYJnbCGo874u7MMKIWsILRX+OpX/gTk8MqjpT1A/c6HY2dCA77ZN0lkQ2Q==",
+      "licenseFiles": [
+        "licenses/d3-time@3.1.0/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-timer",
+      "version": "3.0.1",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-timer.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-timer/-/d3-timer-3.0.1.tgz",
+      "integrity": "sha512-ndfJ/JxxMd3nw31uyKoY2naivF+r29V+Lc0svZxe1JvvIRmi8hUsrMvdOwgS1o6uBHmiz91geQ0ylPP0aj1VUA==",
+      "licenseFiles": [
+        "licenses/d3-timer@3.0.1/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-transition",
+      "version": "3.0.1",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-transition.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-transition/-/d3-transition-3.0.1.tgz",
+      "integrity": "sha512-ApKvfjsSR6tg06xrL434C0WydLr7JewBB3V+/39RMHsaXTOG0zmt/OAXeng5M5LBm0ojmxJrpomQVZ1aPvBL4w==",
+      "licenseFiles": [
+        "licenses/d3-transition@3.0.1/LICENSE"
+      ]
+    },
+    {
+      "name": "d3-zoom",
+      "version": "3.0.0",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3-zoom.git"
+      },
+      "archive": "https://registry.npmjs.org/d3-zoom/-/d3-zoom-3.0.0.tgz",
+      "integrity": "sha512-b8AmV3kfQaqWAuacbPuNbL6vahnOJflOhexLzMMNLga62+/nh0JzvJ0aO/5a5MVgUFGS7Hu1P9P03o3fJkDCyw==",
+      "licenseFiles": [
+        "licenses/d3-zoom@3.0.0/LICENSE"
+      ]
+    },
+    {
+      "name": "d3",
+      "version": "7.9.0",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/d3/d3.git"
+      },
+      "archive": "https://registry.npmjs.org/d3/-/d3-7.9.0.tgz",
+      "integrity": "sha512-e1U46jVP+w7Iut8Jt8ri1YsPOvFpg46k+K8TpCb0P+zjCkjkPnV7WzfDJzMHy1LnA+wj5pLT1wjO901gLXeEhA==",
+      "licenseFiles": [
+        "licenses/d3@7.9.0/LICENSE"
+      ]
+    },
+    {
+      "name": "dagre-d3-es",
+      "version": "7.0.14",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tbo47/dagre-es.git"
+      },
+      "archive": "https://registry.npmjs.org/dagre-d3-es/-/dagre-d3-es-7.0.14.tgz",
+      "integrity": "sha512-P4rFMVq9ESWqmOgK+dlXvOtLwYg0i7u0HBGJER0LZDJT2VHIPAMZ/riPxqJceWMStH5+E61QxFra9kIS3AqdMg==",
+      "licenseFiles": [
+        "licenses/dagre-d3-es@7.0.14/LICENSE.md"
+      ]
+    },
+    {
+      "name": "dayjs",
+      "version": "1.11.23",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/iamkun/dayjs.git"
+      },
+      "archive": "https://registry.npmjs.org/dayjs/-/dayjs-1.11.23.tgz",
+      "integrity": "sha512-QDTCU0M0MxR3hQfnlDJfwekQiaanm1ubOD231u73WBckQ/fsamwRLiE2GBz6D3a/xF1NgfiDLJjXBa1hYOYTtQ==",
+      "licenseFiles": [
+        "licenses/dayjs@1.11.23/LICENSE"
+      ]
+    },
+    {
+      "name": "delaunator",
+      "version": "5.1.0",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/mapbox/delaunator.git"
+      },
+      "archive": "https://registry.npmjs.org/delaunator/-/delaunator-5.1.0.tgz",
+      "integrity": "sha512-AGrQ4QSgssa1NGmWmLPqN5NY2KajF5MqxetNEO+o0n3ZwZZeTmt7bBnvzHWrmkZFxGgr4HdyFgelzgi06otLuQ==",
+      "licenseFiles": [
+        "licenses/delaunator@5.1.0/LICENSE"
+      ]
+    },
+    {
+      "name": "dingbat-to-unicode",
+      "version": "1.0.2",
+      "license": "BSD-2-Clause",
+      "distributionLicense": "BSD-2-Clause",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mwilliamson/dingbat-to-unicode.git"
+      },
+      "archive": "https://registry.npmjs.org/dingbat-to-unicode/-/dingbat-to-unicode-1.0.2.tgz",
+      "integrity": "sha512-R0bRerYzy/EZP6QzD3Hkl6JjUDA1Mnn+pd928w0nWjPzihnbAR6dcjGJGiRyznj5E4S1duEKzWrTqw02DPcdzg==",
+      "licenseFiles": [
+        "licenses/dingbat-to-unicode@1.0.2/LICENSE"
+      ]
+    },
+    {
+      "name": "dompurify",
+      "version": "3.4.17",
+      "license": "(MPL-2.0 OR Apache-2.0)",
+      "distributionLicense": "Apache-2.0",
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/cure53/DOMPurify.git"
+      },
+      "archive": "https://registry.npmjs.org/dompurify/-/dompurify-3.4.17.tgz",
+      "integrity": "sha512-B/pSlYVHQ58kqISD/yDjuJ1yfzI34m1gF4lAod2bwSRhiN4K5Cl3H8Af7hqB2PmTL911tdEudnnXn5FnhRoz0w==",
+      "licenseFiles": [
+        "licenses/dompurify@3.4.17/LICENSE",
+        "licenses/dompurify@3.4.17/LICENSE-MPL",
+        "licenses/dompurify@3.4.17/src/license_header"
+      ]
+    },
+    {
+      "name": "elkjs",
+      "version": "0.9.3",
+      "license": "EPL-2.0",
+      "distributionLicense": "EPL-2.0",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/kieler/elkjs.git"
+      },
+      "archive": "https://registry.npmjs.org/elkjs/-/elkjs-0.9.3.tgz",
+      "source": "https://github.com/kieler/elkjs/tree/a8304cf79fde75bc2ab1a89d28320f53f8637436",
+      "integrity": "sha512-f/ZeWvW/BCXbhGEf1Ujp29EASo/lk1FDnETgNKwJrsVvGZhUWCZyg3xLJjAsxfOmt8KjswHmI5EwCQcPMpOYhQ==",
+      "licenseFiles": [
+        "licenses/elkjs@0.9.3/LICENSE.md"
+      ]
+    },
+    {
+      "name": "es-toolkit",
+      "version": "1.53.0",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/toss/es-toolkit.git"
+      },
+      "archive": "https://registry.npmjs.org/es-toolkit/-/es-toolkit-1.53.0.tgz",
+      "integrity": "sha512-3+AYXp9fmJ/UhHBMYj2/U+RaUouMD90SzoItyDOB2Za7W6dB7fQApFGnZPl2MF6K8/Tv1koh1JyirSx/kju6Pw==",
+      "licenseFiles": [
+        "licenses/es-toolkit@1.53.0/LICENSE",
+        "licenses/es-toolkit@1.53.0/NOTICE"
+      ]
+    },
+    {
+      "name": "highlight.js",
+      "version": "11.12.0",
+      "license": "BSD-3-Clause",
+      "distributionLicense": "BSD-3-Clause",
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/highlightjs/highlight.js.git"
+      },
+      "archive": "https://registry.npmjs.org/highlight.js/-/highlight.js-11.12.0.tgz",
+      "integrity": "sha512-nbfWpyRMcMrPMmDwJB+dhX/eiaPKtc2RB+0QZskqJ3WjRA/FDS0e9hZrx8EC/lbEv8gXy98FcDbNa/dspAaJMg==",
+      "licenseFiles": [
+        "licenses/highlight.js@11.12.0/LICENSE"
+      ]
+    },
+    {
+      "name": "internmap",
+      "version": "1.0.1",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/mbostock/internmap.git"
+      },
+      "archive": "https://registry.npmjs.org/internmap/-/internmap-1.0.1.tgz",
+      "integrity": "sha512-lDB5YccMydFBtasVtxnZ3MRBHuaoE8GKsppq+EchKL2U4nK/DmEpPHNH8MZe5HkMtpSiTSOZwfN0tzYjO/lJEw==",
+      "licenseFiles": [
+        "licenses/internmap@1.0.1/LICENSE"
+      ]
+    },
+    {
+      "name": "internmap",
+      "version": "2.0.3",
+      "license": "ISC",
+      "distributionLicense": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/mbostock/internmap.git"
+      },
+      "archive": "https://registry.npmjs.org/internmap/-/internmap-2.0.3.tgz",
+      "integrity": "sha512-5Hh7Y1wQbvY5ooGgPbDaL5iYLAPzMTUrjMulskHLH6wnv/A+1q5rgEaiuqEjB+oxGXIVZs1FF+R/KPN3ZSQYYg==",
+      "licenseFiles": [
+        "licenses/internmap@2.0.3/LICENSE"
+      ]
+    },
+    {
+      "name": "jszip",
+      "version": "3.10.2",
+      "license": "(MIT OR GPL-3.0-or-later)",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/Stuk/jszip.git"
+      },
+      "archive": "https://registry.npmjs.org/jszip/-/jszip-3.10.2.tgz",
+      "integrity": "sha512-3l+rb15IOWtUhU0H5MFqES/T6Kh7abYwjosBey/vD6hDt8zoEffkSC5Ws5SGtgVw3gBx2NEbhTeSW1+kWkpyTQ==",
+      "licenseFiles": [
+        "licenses/jszip@3.10.2/LICENSE.markdown"
+      ]
+    },
+    {
+      "name": "katex",
+      "version": "0.18.10",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/KaTeX/KaTeX.git"
+      },
+      "archive": "https://registry.npmjs.org/katex/-/katex-0.18.10.tgz",
+      "integrity": "sha512-/B6p9eY9DX7aHBfpkHdpirDTZ5QH9xTwL9y837PWuzuv41O5jFdqNQwVQEQsimY0/iVNkwBY4+4hMfhQ7d4Dbw==",
+      "licenseFiles": [
+        "licenses/katex@0.18.10/LICENSE"
+      ]
+    },
+    {
+      "name": "katex",
+      "version": "0.19.1",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/KaTeX/KaTeX.git"
+      },
+      "archive": "https://registry.npmjs.org/katex/-/katex-0.19.1.tgz",
+      "integrity": "sha512-jG8uKntjSEcm2EpQOh0XturpPuuC9r3Sq5HLHdsFdWZT27E672SF19QEi+of0/YeOy15lDgRhKvr5614uRrEfA==",
+      "licenseFiles": [
+        "licenses/katex@0.19.1/LICENSE"
+      ]
+    },
+    {
+      "name": "khroma",
+      "version": "2.1.0",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": "github:fabiospampinato/khroma",
+      "archive": "https://registry.npmjs.org/khroma/-/khroma-2.1.0.tgz",
+      "integrity": "sha512-Ls993zuzfayK269Svk9hzpeGUKob/sIgZzyHYdjQoAdQetRKpOLj+k/QQQ/6Qi0Yz65mlROrfd+Ev+1+7dz9Kw==",
+      "licenseFiles": [
+        "licenses/khroma@2.1.0/license"
+      ]
+    },
+    {
+      "name": "layout-base",
+      "version": "1.0.2",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/iVis-at-Bilkent/layout-base.git"
+      },
+      "archive": "https://registry.npmjs.org/layout-base/-/layout-base-1.0.2.tgz",
+      "integrity": "sha512-8h2oVEZNktL4BH2JCOI90iD1yXwL6iNW7KcCKT2QZgQJR2vbqDsldCTPRU9NifTCqHZci57XvQQ15YTu+sTYPg==",
+      "licenseFiles": [
+        "licenses/layout-base@1.0.2/LICENSE"
+      ]
+    },
+    {
+      "name": "layout-base",
+      "version": "2.0.1",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/iVis-at-Bilkent/layout-base.git"
+      },
+      "archive": "https://registry.npmjs.org/layout-base/-/layout-base-2.0.1.tgz",
+      "integrity": "sha512-dp3s92+uNI1hWIpPGH3jK2kxE2lMjdXdr+DH8ynZHpd6PUlH6x6cbuXnoMmiNumznqaNO31xu9e79F0uuZ0JFg==",
+      "licenseFiles": [
+        "licenses/layout-base@2.0.1/LICENSE"
+      ]
+    },
+    {
+      "name": "lodash-es",
+      "version": "4.18.1",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": "lodash/lodash",
+      "archive": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.18.1.tgz",
+      "integrity": "sha512-J8xewKD/Gk22OZbhpOVSwcs60zhd95ESDwezOFuA3/099925PdHJ7OFHNTGtajL3AlZkykD32HykiMo+BIBI8A==",
+      "licenseFiles": [
+        "licenses/lodash-es@4.18.1/LICENSE"
+      ]
+    },
+    {
+      "name": "lop",
+      "version": "0.4.2",
+      "license": "BSD-2-Clause",
+      "distributionLicense": "BSD-2-Clause",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/mwilliamson/lop.git"
+      },
+      "archive": "https://registry.npmjs.org/lop/-/lop-0.4.2.tgz",
+      "integrity": "sha512-RefILVDQ4DKoRZsJ4Pj22TxE3omDO47yFpkIBoDKzkqPRISs5U1cnAdg/5583YPkWPaLIYHOKRMQSvjFsO26cw==",
+      "licenseFiles": [
+        "licenses/lop@0.4.2/LICENSE"
+      ]
+    },
+    {
+      "name": "mammoth",
+      "version": "1.13.0",
+      "license": "BSD-2-Clause",
+      "distributionLicense": "BSD-2-Clause",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/mwilliamson/mammoth.js.git"
+      },
+      "archive": "https://registry.npmjs.org/mammoth/-/mammoth-1.13.0.tgz",
+      "integrity": "sha512-2cawcYFcP7ISfXbBcL9lmVgTNWo88v/52ND1gnywHtVT/pX0//puPnf0iMPV9ZgmuvNOE+zkIhDgZ9M2c2dDDg==",
+      "licenseFiles": [
+        "licenses/mammoth@1.13.0/LICENSE"
+      ]
+    },
+    {
+      "name": "marked",
+      "version": "16.4.2",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/markedjs/marked.git"
+      },
+      "archive": "https://registry.npmjs.org/marked/-/marked-16.4.2.tgz",
+      "integrity": "sha512-TI3V8YYWvkVf3KJe1dRkpnjs68JUPyEa5vjKrp1XEEJUAOaQc+Qj+L1qWbPd0SJuAdQkFU0h73sXXqwDYxsiDA==",
+      "licenseFiles": [
+        "licenses/marked@16.4.2/LICENSE.md"
+      ]
+    },
+    {
+      "name": "marked",
+      "version": "18.1.2",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/markedjs/marked.git"
+      },
+      "archive": "https://registry.npmjs.org/marked/-/marked-18.1.2.tgz",
+      "integrity": "sha512-DfOnvLAQ6WYeWxWO1u4RyFOeqyHup6dks5PPqnoFiooU7ipRvidO/2j8plhAHIiZg574E9ZlzSjUiPMLAzFkgg==",
+      "licenseFiles": [
+        "licenses/marked@18.1.2/LICENSE"
+      ]
+    },
+    {
+      "name": "mermaid",
+      "version": "12.2.0",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/mermaid-js/mermaid"
+      },
+      "archive": "https://registry.npmjs.org/mermaid/-/mermaid-12.2.0.tgz",
+      "integrity": "sha512-w7nr/SFrLO7BaVTs3dQTvYSV6nYSBj0Yy9DjBhsIJtAcHqRzXSq4Pg32ujHZ/AdWsAMNEvvhbm5dt9E2tOiHzw==",
+      "licenseFiles": [
+        "licenses/mermaid@12.2.0/LICENSE"
+      ]
+    },
+    {
+      "name": "option",
+      "version": "0.2.4",
+      "license": "BSD-2-Clause",
+      "distributionLicense": "BSD-2-Clause",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/mwilliamson/node-options.git"
+      },
+      "archive": "https://registry.npmjs.org/option/-/option-0.2.4.tgz",
+      "integrity": "sha512-pkEqbDyl8ou5cpq+VsnQbe/WlEy5qS7xPzMS1U55OCG9KPvwFD46zDbxQIj3egJSFc3D+XhYOPUzz49zQAVy7A==",
+      "licenseFiles": [
+        "licenses/option@0.2.4/LICENSE"
+      ]
+    },
+    {
+      "name": "pdfjs-dist",
+      "version": "6.4.299",
+      "license": "Apache-2.0",
+      "distributionLicense": "Apache-2.0",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mozilla/pdf.js.git"
+      },
+      "archive": "https://registry.npmjs.org/pdfjs-dist/-/pdfjs-dist-6.4.299.tgz",
+      "integrity": "sha512-AVl138zALtfaAPvADulE0PZThbYzCBS79nL4pOSL/6Sm/4AH5A21BD9VHt97OlCuzJuCpmeZtAtkinisF4Vb1g==",
+      "licenseFiles": [
+        "licenses/pdfjs-dist@6.4.299/cmaps/LICENSE",
+        "licenses/pdfjs-dist@6.4.299/iccs/LICENSE",
+        "licenses/pdfjs-dist@6.4.299/LICENSE",
+        "licenses/pdfjs-dist@6.4.299/standard_fonts/LICENSE_FOXIT",
+        "licenses/pdfjs-dist@6.4.299/standard_fonts/LICENSE_LIBERATION",
+        "licenses/pdfjs-dist@6.4.299/wasm/LICENSE_JBIG2",
+        "licenses/pdfjs-dist@6.4.299/wasm/LICENSE_OPENJPEG",
+        "licenses/pdfjs-dist@6.4.299/wasm/LICENSE_PDFJS_JBIG2",
+        "licenses/pdfjs-dist@6.4.299/wasm/LICENSE_PDFJS_OPENJPEG",
+        "licenses/pdfjs-dist@6.4.299/wasm/LICENSE_PDFJS_QCMS",
+        "licenses/pdfjs-dist@6.4.299/wasm/LICENSE_QCMS"
+      ]
+    },
+    {
+      "name": "robust-predicates",
+      "version": "3.0.3",
+      "license": "Unlicense",
+      "distributionLicense": "Unlicense",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/mourner/robust-predicates.git"
+      },
+      "archive": "https://registry.npmjs.org/robust-predicates/-/robust-predicates-3.0.3.tgz",
+      "integrity": "sha512-NS3levdsRIUOmiJ8FZWCP7LG3QpJyrs/TE0Zpf1yvZu8cAJJ6QMW92H1c7kWpdIHo8RvmLxN/o2JXTKHp74lUA==",
+      "licenseFiles": [
+        "licenses/robust-predicates@3.0.3/LICENSE"
+      ]
+    },
+    {
+      "name": "roughjs",
+      "version": "4.6.6",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pshihn/rough.git"
+      },
+      "archive": "https://registry.npmjs.org/roughjs/-/roughjs-4.6.6.tgz",
+      "integrity": "sha512-ZUz/69+SYpFN/g/lUlo2FXcIjRkSu3nDarreVdGGndHEBJ6cXPdKguS8JGxwj5HA5xIbVKSmLgr5b3AWxtRfvQ==",
+      "licenseFiles": [
+        "licenses/roughjs@4.6.6/LICENSE"
+      ]
+    },
+    {
+      "name": "stylis",
+      "version": "4.4.0",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": "https://github.com/thysultan/stylis.js",
+      "archive": "https://registry.npmjs.org/stylis/-/stylis-4.4.0.tgz",
+      "integrity": "sha512-5Z9ZpRzfuH6l/UAvCPAPUo3665Nk2wLaZU3x+TLHKVzIz33+sbJqbtrYoC3KD4/uVOr2Zp+L0LySezP9OHV9yA==",
+      "licenseFiles": [
+        "licenses/stylis@4.4.0/LICENSE"
+      ]
+    },
+    {
+      "name": "ts-dedent",
+      "version": "2.3.0",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/tamino-martinius/node-ts-dedent.git"
+      },
+      "archive": "https://registry.npmjs.org/ts-dedent/-/ts-dedent-2.3.0.tgz",
+      "integrity": "sha512-JfJeIHke7y2egdGGgRAvpCwYFUsHlM2gPcrVOxFkznt/4uzQ7HFmvE63iFHVLBJNDuyDOQgijDK/tXH/f6Msjg==",
+      "licenseFiles": [
+        "licenses/ts-dedent@2.3.0/LICENSE"
+      ]
+    },
+    {
+      "name": "underscore",
+      "version": "1.13.8",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/jashkenas/underscore.git"
+      },
+      "archive": "https://registry.npmjs.org/underscore/-/underscore-1.13.8.tgz",
+      "integrity": "sha512-DXtD3ZtEQzc7M8m4cXotyHR+FAS18C64asBYY5vqZexfYryNNnDc02W4hKg3rdQuqOYas1jkseX0+nZXjTXnvQ==",
+      "licenseFiles": [
+        "licenses/underscore@1.13.8/LICENSE"
+      ]
+    },
+    {
+      "name": "uuid",
+      "version": "14.0.3",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/uuidjs/uuid.git"
+      },
+      "archive": "https://registry.npmjs.org/uuid/-/uuid-14.0.3.tgz",
+      "integrity": "sha512-Sc5u1VVln93y1Xnz4R+CunOZc7R9LUcTmhj7Rc7Eg3HVcf7rVn2FOoa812fe0W8p3jD7xeoGSYbfqCGGH2B6xw==",
+      "licenseFiles": [
+        "licenses/uuid@14.0.3/LICENSE.md"
+      ]
+    },
+    {
+      "name": "xmlbuilder",
+      "version": "10.1.1",
+      "license": "MIT",
+      "distributionLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/oozcitak/xmlbuilder-js.git"
+      },
+      "archive": "https://registry.npmjs.org/xmlbuilder/-/xmlbuilder-10.1.1.tgz",
+      "integrity": "sha512-OyzrcFLL/nb6fMGHbiRDuPup9ljBycsdCypwuyg5AAHvyWzGfChJpCXMG88AGTIMFhGZ9RccFN1e6lhg3hkwKg==",
+      "licenseFiles": [
+        "licenses/xmlbuilder@10.1.1/LICENSE"
+      ]
+    }
+  ],
+  "artifacts": {
+    "marked.min.js": [
+      "marked@18.1.2"
+    ],
+    "purify.min.js": [
+      "dompurify@3.4.17"
+    ],
+    "highlight.min.js": [
+      "highlight.js@11.12.0"
+    ],
+    "github-dark.min.css": [
+      "highlight.js@11.12.0"
+    ],
+    "katex.min.js": [
+      "katex@0.19.1"
+    ],
+    "auto-render.min.js": [
+      "katex@0.19.1"
+    ],
+    "katex.min.css": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_AMS-Regular.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_Caligraphic-Bold.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_Caligraphic-Regular.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_Fraktur-Bold.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_Fraktur-Regular.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_Main-Bold.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_Main-BoldItalic.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_Main-Italic.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_Main-Regular.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_Math-BoldItalic.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_Math-Italic.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_SansSerif-Bold.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_SansSerif-Italic.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_SansSerif-Regular.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_Script-Regular.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_Size1-Regular.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_Size2-Regular.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_Size3-Regular.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_Size4-Regular.woff2": [
+      "katex@0.19.1"
+    ],
+    "fonts/KaTeX_Typewriter-Regular.woff2": [
+      "katex@0.19.1"
+    ],
+    "mammoth.browser.min.js": [
+      "@xmldom/xmldom@0.8.15",
+      "base64-js@1.5.1",
+      "dingbat-to-unicode@1.0.2",
+      "jszip@3.10.2",
+      "lop@0.4.2",
+      "mammoth@1.13.0",
+      "option@0.2.4",
+      "underscore@1.13.8",
+      "xmlbuilder@10.1.1"
+    ],
+    "mermaid.esm.min.mjs": [
+      "@braintree/sanitize-url@7.1.2",
+      "@chevrotain/cst-dts-gen@13.2.0",
+      "@chevrotain/gast@13.2.0",
+      "@chevrotain/regexp-to-ast@13.2.0",
+      "@chevrotain/utils@13.2.0",
+      "@iconify/utils@3.1.7",
+      "@mermaid-js/parser@2.0.1",
+      "@upsetjs/venn.js@2.0.0",
+      "chevrotain@13.2.0",
+      "cose-base@1.0.3",
+      "cose-base@2.2.0",
+      "cytoscape-cose-bilkent@4.1.0",
+      "cytoscape-fcose@2.2.0",
+      "cytoscape@3.34.4",
+      "d3-array@2.12.1",
+      "d3-array@3.2.4",
+      "d3-axis@3.0.0",
+      "d3-brush@3.0.0",
+      "d3-chord@3.0.1",
+      "d3-color@3.1.0",
+      "d3-contour@4.0.2",
+      "d3-delaunay@6.0.4",
+      "d3-dispatch@3.0.1",
+      "d3-drag@3.0.0",
+      "d3-dsv@3.0.1",
+      "d3-ease@3.0.1",
+      "d3-fetch@3.0.1",
+      "d3-force@3.0.0",
+      "d3-format@3.1.2",
+      "d3-geo@3.1.1",
+      "d3-hierarchy@3.1.2",
+      "d3-interpolate@3.0.1",
+      "d3-path@1.0.9",
+      "d3-path@3.1.0",
+      "d3-polygon@3.0.1",
+      "d3-quadtree@3.0.1",
+      "d3-random@3.0.1",
+      "d3-sankey@0.12.3",
+      "d3-scale-chromatic@3.1.0",
+      "d3-scale@4.0.2",
+      "d3-selection@3.0.0",
+      "d3-shape@1.3.7",
+      "d3-shape@3.2.0",
+      "d3-time-format@4.1.0",
+      "d3-time@3.1.0",
+      "d3-timer@3.0.1",
+      "d3-transition@3.0.1",
+      "d3-zoom@3.0.0",
+      "d3@7.9.0",
+      "dagre-d3-es@7.0.14",
+      "dayjs@1.11.23",
+      "delaunator@5.1.0",
+      "dompurify@3.4.17",
+      "elkjs@0.9.3",
+      "es-toolkit@1.53.0",
+      "internmap@1.0.1",
+      "internmap@2.0.3",
+      "katex@0.18.10",
+      "khroma@2.1.0",
+      "layout-base@1.0.2",
+      "layout-base@2.0.1",
+      "lodash-es@4.18.1",
+      "marked@16.4.2",
+      "mermaid@12.2.0",
+      "robust-predicates@3.0.3",
+      "roughjs@4.6.6",
+      "stylis@4.4.0",
+      "ts-dedent@2.3.0",
+      "uuid@14.0.3"
+    ],
+    "brotli-decoder.min.js": [
+      "base64-js@1.5.1",
+      "brotli@2.1.0"
+    ],
+    "pdf.min.mjs": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf.worker.min.mjs": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/78-EUC-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/78-EUC-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/78-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/78-RKSJ-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/78-RKSJ-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/78-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/78ms-RKSJ-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/78ms-RKSJ-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/83pv-RKSJ-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/90ms-RKSJ-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/90ms-RKSJ-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/90msp-RKSJ-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/90msp-RKSJ-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/90pv-RKSJ-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/90pv-RKSJ-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Add-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Add-RKSJ-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Add-RKSJ-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Add-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-CNS1-0.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-CNS1-1.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-CNS1-2.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-CNS1-3.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-CNS1-4.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-CNS1-5.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-CNS1-6.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-CNS1-UCS2.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-GB1-0.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-GB1-1.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-GB1-2.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-GB1-3.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-GB1-4.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-GB1-5.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-GB1-UCS2.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-Japan1-0.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-Japan1-1.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-Japan1-2.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-Japan1-3.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-Japan1-4.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-Japan1-5.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-Japan1-6.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-Japan1-UCS2.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-Korea1-0.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-Korea1-1.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-Korea1-2.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Adobe-Korea1-UCS2.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/B5-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/B5-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/B5pc-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/B5pc-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/CNS-EUC-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/CNS-EUC-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/CNS1-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/CNS1-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/CNS2-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/CNS2-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/ETen-B5-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/ETen-B5-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/ETenms-B5-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/ETenms-B5-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/ETHK-B5-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/ETHK-B5-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/EUC-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/EUC-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Ext-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Ext-RKSJ-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Ext-RKSJ-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Ext-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GB-EUC-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GB-EUC-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GB-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GB-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GBK-EUC-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GBK-EUC-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GBK2K-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GBK2K-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GBKp-EUC-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GBKp-EUC-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GBpc-EUC-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GBpc-EUC-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GBT-EUC-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GBT-EUC-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GBT-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GBT-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GBTpc-EUC-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/GBTpc-EUC-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Hankaku.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Hiragana.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/HKdla-B5-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/HKdla-B5-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/HKdlb-B5-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/HKdlb-B5-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/HKgccs-B5-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/HKgccs-B5-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/HKm314-B5-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/HKm314-B5-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/HKm471-B5-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/HKm471-B5-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/HKscs-B5-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/HKscs-B5-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Katakana.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/KSC-EUC-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/KSC-EUC-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/KSC-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/KSC-Johab-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/KSC-Johab-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/KSC-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/KSCms-UHC-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/KSCms-UHC-HW-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/KSCms-UHC-HW-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/KSCms-UHC-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/KSCpc-EUC-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/KSCpc-EUC-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/LICENSE": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/NWP-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/NWP-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/RKSJ-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/RKSJ-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/Roman.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniCNS-UCS2-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniCNS-UCS2-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniCNS-UTF16-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniCNS-UTF16-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniCNS-UTF32-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniCNS-UTF32-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniCNS-UTF8-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniCNS-UTF8-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniGB-UCS2-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniGB-UCS2-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniGB-UTF16-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniGB-UTF16-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniGB-UTF32-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniGB-UTF32-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniGB-UTF8-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniGB-UTF8-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJIS-UCS2-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJIS-UCS2-HW-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJIS-UCS2-HW-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJIS-UCS2-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJIS-UTF16-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJIS-UTF16-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJIS-UTF32-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJIS-UTF32-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJIS-UTF8-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJIS-UTF8-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJIS2004-UTF16-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJIS2004-UTF16-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJIS2004-UTF32-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJIS2004-UTF32-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJIS2004-UTF8-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJIS2004-UTF8-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJISPro-UCS2-HW-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJISPro-UCS2-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJISPro-UTF8-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJISX0213-UTF32-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJISX0213-UTF32-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJISX02132004-UTF32-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniJISX02132004-UTF32-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniKS-UCS2-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniKS-UCS2-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniKS-UTF16-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniKS-UTF16-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniKS-UTF32-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniKS-UTF32-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniKS-UTF8-H.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/UniKS-UTF8-V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/V.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/cmaps/WP-Symbol.bcmap": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/standard_fonts/FoxitDingbats.pfb": [
+      "pdfjs-dist@6.4.299"
+    ],
+    "pdf/standard_fonts/FoxitSymbol.pfb": [
+      "pdfjs-dist@6.4.299"
+    ]
+  },
+  "files": {
+    "auto-render.min.js": {
+      "bytes": 3486,
+      "sha256": "e5372d199bcdae8b4de71d0f7ceba72a4ba12774a27c60a6f1f77d03b3228ee4"
+    },
+    "brotli-decoder.min.js": {
+      "bytes": 90903,
+      "sha256": "2d1ca14ce22fc66ea6185108a6392e0d3575240f4c6ef8163d5000f26d8eab8d"
+    },
+    "fonts/KaTeX_AMS-Regular.woff2": {
+      "bytes": 28076,
+      "sha256": "0cdd387c9590a1a9f9794560022dbb59654a7d86f187aa0c81495ad42d3a7308"
+    },
+    "fonts/KaTeX_Caligraphic-Bold.woff2": {
+      "bytes": 6912,
+      "sha256": "de7701e42cf1f4cf0b766c03fb27977207eee2f4fd5d76fa82188406da43ea4c"
+    },
+    "fonts/KaTeX_Caligraphic-Regular.woff2": {
+      "bytes": 6908,
+      "sha256": "5d53e70ad607c2352162dec9e0923fb54ecdafaccbf604cd8dcf7d00facb989b"
+    },
+    "fonts/KaTeX_Fraktur-Bold.woff2": {
+      "bytes": 11348,
+      "sha256": "74444efd593c005e3f4573b44524704c0af0a937fe911cca9e94068d0d140d3f"
+    },
+    "fonts/KaTeX_Fraktur-Regular.woff2": {
+      "bytes": 11316,
+      "sha256": "51814d270d06ff0255dba0799994fa4d8c84d11f09951d47595f4abb1f3602dc"
+    },
+    "fonts/KaTeX_Main-Bold.woff2": {
+      "bytes": 25324,
+      "sha256": "0f60d1b897938ec918c8ce073092411baf9438f6739465693ff18b0f9d20b021"
+    },
+    "fonts/KaTeX_Main-BoldItalic.woff2": {
+      "bytes": 16780,
+      "sha256": "99cd42a3c072d918f2f44984a807cf7aa16e13545fd0875fc07c6c65f99e715b"
+    },
+    "fonts/KaTeX_Main-Italic.woff2": {
+      "bytes": 16988,
+      "sha256": "97479ca6cce906abc961ecac96faa5f9ca2e61b8e7670d475826bcdee9a7c267"
+    },
+    "fonts/KaTeX_Main-Regular.woff2": {
+      "bytes": 26272,
+      "sha256": "c2342cd8b869e01752a9321dc17213fc40d4d04c79688c1d43f2cf316abd7866"
+    },
+    "fonts/KaTeX_Math-BoldItalic.woff2": {
+      "bytes": 16400,
+      "sha256": "dc47344dbb6cb5b655c8460d561f4df5f501b90c804ad3c6cec65fe322351ab1"
+    },
+    "fonts/KaTeX_Math-Italic.woff2": {
+      "bytes": 16440,
+      "sha256": "7af58c5ec8f132a2ddde9027c6d7814decce4d3b822a11192a42a20e2e973264"
+    },
+    "fonts/KaTeX_SansSerif-Bold.woff2": {
+      "bytes": 12216,
+      "sha256": "e99ae51144bf1232efcc1bfe5add36262c6866b0faab24fa75740e1b98577a62"
+    },
+    "fonts/KaTeX_SansSerif-Italic.woff2": {
+      "bytes": 12028,
+      "sha256": "00b26ac825e2095056396e0553b8ac26d3f8ad158c3826e28b4c45b385c4714a"
+    },
+    "fonts/KaTeX_SansSerif-Regular.woff2": {
+      "bytes": 10344,
+      "sha256": "68e8c73ef42afd3ccec58bf0fba302cce448938e7fc020a5e31f8a952eee1342"
+    },
+    "fonts/KaTeX_Script-Regular.woff2": {
+      "bytes": 9644,
+      "sha256": "036d4e95149b69ff9bcc0cd55771efeb25ffa3947293e69acd78d5ac328c684b"
+    },
+    "fonts/KaTeX_Size1-Regular.woff2": {
+      "bytes": 5468,
+      "sha256": "6b47c40166b6dbe21a5dfca7718413f2147fd2399be1ba605d8ad39cedf25dfe"
+    },
+    "fonts/KaTeX_Size2-Regular.woff2": {
+      "bytes": 5208,
+      "sha256": "d04c54219f9eaec6d4d4fd42dfb28785975a4794d6b2fc71e566b9cd6db842dd"
+    },
+    "fonts/KaTeX_Size3-Regular.woff2": {
+      "bytes": 3624,
+      "sha256": "73d591271b1604960cb10bb90fee021670af7297017e0e98480b332d11f51995"
+    },
+    "fonts/KaTeX_Size4-Regular.woff2": {
+      "bytes": 4928,
+      "sha256": "a4af7d414440a1c1790825cfb700cf9cf43b0f2c4b04f0ebc523011ad9853ec0"
+    },
+    "fonts/KaTeX_Typewriter-Regular.woff2": {
+      "bytes": 13568,
+      "sha256": "71d517d67827787cfabdf186914cc3358eda539e37931941f2b2fd4a21f68c0b"
+    },
+    "github-dark.min.css": {
+      "bytes": 1315,
+      "sha256": "9f208d022102b1d0c7aebfecd8e42ca7997d5de636649d2b31ea63093d809019"
+    },
+    "highlight.min.js": {
+      "bytes": 163658,
+      "sha256": "324068e8c1f5029a757e00ae9909764e191f6ad7829f9a42f93ee3dd2937a467"
+    },
+    "katex.min.css": {
+      "bytes": 22659,
+      "sha256": "1a18155222e88777a8ad26099cca6bddb1a5173c3f8e6aecb7904002114c14e1"
+    },
+    "katex.min.js": {
+      "bytes": 273081,
+      "sha256": "fa140498b8cfc8302cbe5e7cb1bdbc1f952bc38b3fa258ede09e73edbf9a74bc"
+    },
+    "licenses/_braintree_sanitize-url@7.1.2/LICENSE": {
+      "bytes": 1066,
+      "sha256": "0984740e0c3d725c8044dec7edcefe1dbce180ef5a7bc710c251e19607000158"
+    },
+    "licenses/_chevrotain_cst-dts-gen@13.2.0/LICENSE.txt": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "licenses/_chevrotain_gast@13.2.0/LICENSE.txt": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "licenses/_chevrotain_regexp-to-ast@13.2.0/LICENSE.txt": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "licenses/_chevrotain_utils@13.2.0/LICENSE.txt": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "licenses/_iconify_utils@3.1.7/license.txt": {
+      "bytes": 1083,
+      "sha256": "a86793ac023162ce98b91899601c15f6712f44943163c4f92a0a4bf89152b3bf"
+    },
+    "licenses/_mermaid-js_parser@2.0.1/LICENSE": {
+      "bytes": 1077,
+      "sha256": "d374061c40bfb6f99c5033290caefda97a9b3e7e477e5ee02f487143ef2177e8"
+    },
+    "licenses/_upsetjs_venn.js@2.0.0/LICENSE": {
+      "bytes": 1106,
+      "sha256": "6a3508febf2cfccfee96597394543a6154a4bb0b1f91f28404be42c09e9fcb54"
+    },
+    "licenses/_xmldom_xmldom@0.8.15/LICENSE": {
+      "bytes": 1298,
+      "sha256": "4da724fc305d81606b245b324d4d2586916b9d248b23d82183df753ace0fdf71"
+    },
+    "licenses/base64-js@1.5.1/LICENSE": {
+      "bytes": 1081,
+      "sha256": "5b37224c080cdcc97c871ada971c224e9926370fe74f11b539aa1cf9f3b1aca1"
+    },
+    "licenses/brotli@2.1.0/LICENSE-APACHE-2.0": {
+      "bytes": 10174,
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+    },
+    "licenses/brotli@2.1.0/NOTICE": {
+      "bytes": 1892,
+      "sha256": "9d4888c336ef11758aae9145aaad4680459f4b2628161934e56f6ba9d92f3ce9"
+    },
+    "licenses/chevrotain@13.2.0/LICENSE.txt": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "licenses/cose-base@1.0.3/LICENSE": {
+      "bytes": 1081,
+      "sha256": "5fb3cf4a14c3c5af6e473a192df8bca10c77754e3a0c6492c79fb92a76a5478a"
+    },
+    "licenses/cose-base@2.2.0/LICENSE": {
+      "bytes": 1081,
+      "sha256": "5fb3cf4a14c3c5af6e473a192df8bca10c77754e3a0c6492c79fb92a76a5478a"
+    },
+    "licenses/cytoscape-cose-bilkent@4.1.0/LICENSE": {
+      "bytes": 1084,
+      "sha256": "440fc58a56a12814e417d2b341da89b050da052dc75bdb235607d37ec5fe74ef"
+    },
+    "licenses/cytoscape-fcose@2.2.0/LICENSE": {
+      "bytes": 1079,
+      "sha256": "2837634f403949215760fcdd2fa1ed0c64875d02099ecc8318c704b852f1421d"
+    },
+    "licenses/cytoscape@3.34.4/LICENSE": {
+      "bytes": 1082,
+      "sha256": "eb319c6e6f233607f71e8e2f450391751883cfc0eeb3ca7ef574c13d1d9c2203"
+    },
+    "licenses/d3-array@2.12.1/LICENSE": {
+      "bytes": 1475,
+      "sha256": "0747bebeb06b10954913149be9b9a8bdf6fad3e6fdcbd9f9524e7a94c13d2cea"
+    },
+    "licenses/d3-array@3.2.4/LICENSE": {
+      "bytes": 731,
+      "sha256": "3e6849627f74ff73c257a3ae1efb574015d94fc1035c05ec3c15805165efcbc4"
+    },
+    "licenses/d3-axis@3.0.0/LICENSE": {
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    "licenses/d3-brush@3.0.0/LICENSE": {
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    "licenses/d3-chord@3.0.1/LICENSE": {
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    "licenses/d3-color@3.1.0/LICENSE": {
+      "bytes": 731,
+      "sha256": "faa682e3e430941f958d26180458f5934a62f58dac4d70ccdd15608c15d0f884"
+    },
+    "licenses/d3-contour@4.0.2/LICENSE": {
+      "bytes": 731,
+      "sha256": "e51cba0e4fa1d8c078e15319868f2b90188f413f9ce9dac1043b62db32901e93"
+    },
+    "licenses/d3-delaunay@6.0.4/LICENSE": {
+      "bytes": 757,
+      "sha256": "582c3022bd01942336095f92b58a90b1be624dc547d987555c6c956512dd24c1"
+    },
+    "licenses/d3-dispatch@3.0.1/LICENSE": {
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    "licenses/d3-drag@3.0.0/LICENSE": {
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    "licenses/d3-dsv@3.0.1/LICENSE": {
+      "bytes": 731,
+      "sha256": "7842a82012622e5a37bfe4f6c1b67cd3bae6350716b5bf87f36cea0bdc1319dc"
+    },
+    "licenses/d3-ease@3.0.1/LICENSE": {
+      "bytes": 1504,
+      "sha256": "b989d9085148d21ff64a75e14462aefa06b2589a55553b07b1460c70081c7d08"
+    },
+    "licenses/d3-fetch@3.0.1/LICENSE": {
+      "bytes": 731,
+      "sha256": "ffdc17dc9040006bddeb891c95bfbb492e86d6bc64a4a4233666febab1be35e0"
+    },
+    "licenses/d3-force@3.0.0/LICENSE": {
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    "licenses/d3-format@3.1.2/LICENSE": {
+      "bytes": 731,
+      "sha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3"
+    },
+    "licenses/d3-geo@3.1.1/LICENSE": {
+      "bytes": 1857,
+      "sha256": "3e3edc1224eec9c39cd26491a21304a62883c1e5b6a65c5283ccc7a6cc94baee"
+    },
+    "licenses/d3-hierarchy@3.1.2/LICENSE": {
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    "licenses/d3-interpolate@3.0.1/LICENSE": {
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    "licenses/d3-path@1.0.9/LICENSE": {
+      "bytes": 1475,
+      "sha256": "b8265327ab678f554800e71188b1cc6b1ff57522e292d2b1c0be66f27cf328b6"
+    },
+    "licenses/d3-path@3.1.0/LICENSE": {
+      "bytes": 731,
+      "sha256": "a09b0d6d76e768fca2085fad05743ee81ddd11946bcda160a3cf5e1081a479aa"
+    },
+    "licenses/d3-polygon@3.0.1/LICENSE": {
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    "licenses/d3-quadtree@3.0.1/LICENSE": {
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    "licenses/d3-random@3.0.1/LICENSE": {
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    "licenses/d3-sankey@0.12.3/LICENSE": {
+      "bytes": 1471,
+      "sha256": "2bf785e778d67a4f5266cffcd4f2cc5bb98cde73791666e7efeb8002ba32dfa5"
+    },
+    "licenses/d3-scale-chromatic@3.1.0/LICENSE": {
+      "bytes": 1423,
+      "sha256": "0986d93944902cca9af86824b6a641b4b7c2d10602fc510c433a8bcd443919fe"
+    },
+    "licenses/d3-scale@4.0.2/LICENSE": {
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    "licenses/d3-selection@3.0.0/LICENSE": {
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    "licenses/d3-shape@1.3.7/LICENSE": {
+      "bytes": 1475,
+      "sha256": "7eea8533ea92bd8c32a901e89ecb0305890905bb12711449565ddff96891146d"
+    },
+    "licenses/d3-shape@3.2.0/LICENSE": {
+      "bytes": 731,
+      "sha256": "faa682e3e430941f958d26180458f5934a62f58dac4d70ccdd15608c15d0f884"
+    },
+    "licenses/d3-time-format@4.1.0/LICENSE": {
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    "licenses/d3-time@3.1.0/LICENSE": {
+      "bytes": 731,
+      "sha256": "faa682e3e430941f958d26180458f5934a62f58dac4d70ccdd15608c15d0f884"
+    },
+    "licenses/d3-timer@3.0.1/LICENSE": {
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    "licenses/d3-transition@3.0.1/LICENSE": {
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    "licenses/d3-zoom@3.0.0/LICENSE": {
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    "licenses/d3@7.9.0/LICENSE": {
+      "bytes": 731,
+      "sha256": "3e6849627f74ff73c257a3ae1efb574015d94fc1035c05ec3c15805165efcbc4"
+    },
+    "licenses/dagre-d3-es@7.0.14/LICENSE.md": {
+      "bytes": 1328,
+      "sha256": "d01eb84ccce437dbf5fd40853bceea0f287930920acea066597a4a25ead63858"
+    },
+    "licenses/dayjs@1.11.23/LICENSE": {
+      "bytes": 1072,
+      "sha256": "5faab7526d055651be3aab769d58897be6bd91f3d39d137f25f12dba1b31d5dc"
+    },
+    "licenses/delaunator@5.1.0/LICENSE": {
+      "bytes": 738,
+      "sha256": "0b348fff56384b43dbb37593906904e56d0f9deb51eae590d4dc6d427fbf1808"
+    },
+    "licenses/dingbat-to-unicode@1.0.2/LICENSE": {
+      "bytes": 1304,
+      "sha256": "1013cef4b629a3c7eaf737c110fb5bebbf3abbc16e154d769468d71c3653fa37"
+    },
+    "licenses/dompurify@3.4.17/LICENSE": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "licenses/dompurify@3.4.17/LICENSE-MPL": {
+      "bytes": 16726,
+      "sha256": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85"
+    },
+    "licenses/dompurify@3.4.17/src/license_header": {
+      "bytes": 192,
+      "sha256": "5803fa925ae1703b9c752921c95a321570e6cabf06fcf2de895ddaf1687cebef"
+    },
+    "licenses/elkjs@0.9.3/LICENSE.md": {
+      "bytes": 14480,
+      "sha256": "89591d4578fb1ebd91501312a3d25f021bd865a2e436641c1cf7b1bc7e3c1617"
+    },
+    "licenses/es-toolkit@1.53.0/LICENSE": {
+      "bytes": 1077,
+      "sha256": "51f3674294d988d89dbebd31273baaeb3c697a15482d9699b14d1fded2e132a7"
+    },
+    "licenses/es-toolkit@1.53.0/NOTICE": {
+      "bytes": 1698,
+      "sha256": "11ee5e3bce9b0a4dde7f73811caf98978e710228d891c3111ad8ef8d7d2a916f"
+    },
+    "licenses/highlight.js@11.12.0/LICENSE": {
+      "bytes": 1514,
+      "sha256": "6c081431591d9df696c82dc598fe1423765b8a299b200ed00b281afd0f64c490"
+    },
+    "licenses/internmap@1.0.1/LICENSE": {
+      "bytes": 726,
+      "sha256": "9ea8903938dab5f12c4572d60725069bec2d1b0dc3bcc210b09bae946a5ebb1f"
+    },
+    "licenses/internmap@2.0.3/LICENSE": {
+      "bytes": 726,
+      "sha256": "9ea8903938dab5f12c4572d60725069bec2d1b0dc3bcc210b09bae946a5ebb1f"
+    },
+    "licenses/jszip@3.10.2/LICENSE.markdown": {
+      "bytes": 33753,
+      "sha256": "566c953c6090b1218ca6217dd7359d45dde46581968586dc607d59a78af6a9c4"
+    },
+    "licenses/katex@0.18.10/LICENSE": {
+      "bytes": 1107,
+      "sha256": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3"
+    },
+    "licenses/katex@0.19.1/LICENSE": {
+      "bytes": 1107,
+      "sha256": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3"
+    },
+    "licenses/khroma@2.1.0/license": {
+      "bytes": 1105,
+      "sha256": "66b333b0f66759a0b710459e03f7029abe17f4358114a128d2c972e642961b49"
+    },
+    "licenses/layout-base@1.0.2/LICENSE": {
+      "bytes": 1069,
+      "sha256": "eabb762d8a95109a39c9be3247325529a5239a7aca327d909c3ccdc41f3a06bf"
+    },
+    "licenses/layout-base@2.0.1/LICENSE": {
+      "bytes": 1069,
+      "sha256": "eabb762d8a95109a39c9be3247325529a5239a7aca327d909c3ccdc41f3a06bf"
+    },
+    "licenses/lodash-es@4.18.1/LICENSE": {
+      "bytes": 1952,
+      "sha256": "f71e8ed126b46346494aad5486874cd8f0aafe95092ed67d2e3cb6110f939abc"
+    },
+    "licenses/lop@0.4.2/LICENSE": {
+      "bytes": 1307,
+      "sha256": "6663bbd049205d38a496ccacb412a151980b444627d38de218b3b809aef330f1"
+    },
+    "licenses/mammoth@1.13.0/LICENSE": {
+      "bytes": 1307,
+      "sha256": "6663bbd049205d38a496ccacb412a151980b444627d38de218b3b809aef330f1"
+    },
+    "licenses/marked@16.4.2/LICENSE.md": {
+      "bytes": 2942,
+      "sha256": "8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c"
+    },
+    "licenses/marked@18.1.2/LICENSE": {
+      "bytes": 2942,
+      "sha256": "8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c"
+    },
+    "licenses/mermaid@12.2.0/LICENSE": {
+      "bytes": 1089,
+      "sha256": "ec9fb67dcb25eccc416ed56e1aab819222c805a2a4bfe4cb19e7556bf2ffde80"
+    },
+    "licenses/option@0.2.4/LICENSE": {
+      "bytes": 1307,
+      "sha256": "6663bbd049205d38a496ccacb412a151980b444627d38de218b3b809aef330f1"
+    },
+    "licenses/pdfjs-dist@6.4.299/cmaps/LICENSE": {
+      "bytes": 2080,
+      "sha256": "aa92ab5a472974865a96fd4a4e9c13bb41bf6fe1b309cb6b8da48bc9e19839a2"
+    },
+    "licenses/pdfjs-dist@6.4.299/iccs/LICENSE": {
+      "bytes": 6553,
+      "sha256": "286e4fd7b447330b2c88e23890e3cd0a9d38cb398d4a59cb247f578ccbda3213"
+    },
+    "licenses/pdfjs-dist@6.4.299/LICENSE": {
+      "bytes": 10174,
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+    },
+    "licenses/pdfjs-dist@6.4.299/standard_fonts/LICENSE_FOXIT": {
+      "bytes": 1553,
+      "sha256": "b578cdd2345840ada550bd12519533812320d5f1d21cf4c1c7e1b1b0a31c98b7"
+    },
+    "licenses/pdfjs-dist@6.4.299/standard_fonts/LICENSE_LIBERATION": {
+      "bytes": 22154,
+      "sha256": "d2c4d5b3e115a519cb58eb691aa64538397e2611f9ebe801392cf9667997e7dc"
+    },
+    "licenses/pdfjs-dist@6.4.299/wasm/LICENSE_JBIG2": {
+      "bytes": 12862,
+      "sha256": "9e66b7f1b934a28b37f3bc4dac97915de1674271e79a0a88182a18ed9731b4d1"
+    },
+    "licenses/pdfjs-dist@6.4.299/wasm/LICENSE_OPENJPEG": {
+      "bytes": 2112,
+      "sha256": "a6af136f3e15038a666b61f376612a07d9a4e48cb7c01adbf3e33b3f14ab49b6"
+    },
+    "licenses/pdfjs-dist@6.4.299/wasm/LICENSE_PDFJS_JBIG2": {
+      "bytes": 555,
+      "sha256": "aad3cce09842e00e9e11ad5e8fef8cc02fbc3a3768fe2f007443b9cee37aaee5"
+    },
+    "licenses/pdfjs-dist@6.4.299/wasm/LICENSE_PDFJS_OPENJPEG": {
+      "bytes": 1285,
+      "sha256": "717fc62da03292dbb4dd0c8280bd4ce7bb8550dcf31d772bc93455fb50313425"
+    },
+    "licenses/pdfjs-dist@6.4.299/wasm/LICENSE_PDFJS_QCMS": {
+      "bytes": 1036,
+      "sha256": "508a77d2e7b51d98adeed32648ad124b7b30241a8e70b2e72c99f92d8e5874d1"
+    },
+    "licenses/pdfjs-dist@6.4.299/wasm/LICENSE_QCMS": {
+      "bytes": 1121,
+      "sha256": "36d847ae882f6574ebc72f56a4f354e4f104fde4a584373496482e97d52d31bc"
+    },
+    "licenses/robust-predicates@3.0.3/LICENSE": {
+      "bytes": 1210,
+      "sha256": "88d9b4eb60579c191ec391ca04c16130572d7eedc4a86daa58bf28c6e14c9bcd"
+    },
+    "licenses/roughjs@4.6.6/LICENSE": {
+      "bytes": 1068,
+      "sha256": "dca9a392272606ac748ac0976a2a1133f14eef841c27beaa51a844d53c56a09d"
+    },
+    "licenses/stylis@4.4.0/LICENSE": {
+      "bytes": 1078,
+      "sha256": "88c579c6ee44b41137a21321190d177982e5b17d4fa1b83a4a2e3ea325a8fc9a"
+    },
+    "licenses/ts-dedent@2.3.0/LICENSE": {
+      "bytes": 1073,
+      "sha256": "eff13095d9d762c3bd9dda74370c81e2130c28f2691bc455603abf973bac25b9"
+    },
+    "licenses/underscore@1.13.8/LICENSE": {
+      "bytes": 1139,
+      "sha256": "92905fb54f5d168a27e6d5dc7c2197020add11842be4c70689d084bae3bfe37a"
+    },
+    "licenses/uuid@14.0.3/LICENSE.md": {
+      "bytes": 1109,
+      "sha256": "beaa6b04fb82e41dd2ad679e19e27953afb5999b1abbb455b6564e78ebfeb332"
+    },
+    "licenses/xmlbuilder@10.1.1/LICENSE": {
+      "bytes": 1080,
+      "sha256": "8ad16994acb18814fcd2ff6d0b559906b842047b995baf33fd0c55e4d24cbac8"
+    },
+    "mammoth.browser.min.js": {
+      "bytes": 315321,
+      "sha256": "8d89d54c3fc197884f684be59a013bf5b2b7b0d1dd5e02bf6953bbed0226468b"
+    },
+    "marked.min.js": {
+      "bytes": 49207,
+      "sha256": "9eb730d2362ae1a8c6201698f17009e16671be6946d3d06503ddc0575283db7c"
+    },
+    "mermaid.esm.min.mjs": {
+      "bytes": 5244903,
+      "sha256": "e77d3e79fc93d8e3b45acc6052090e1a09b4347db5b23f7c603e32e6a343f62d"
+    },
+    "pdf/cmaps/78-EUC-H.bcmap": {
+      "bytes": 2404,
+      "sha256": "d92a261336dc18b8c03a46eb4d462382d33f4338fa195d303256b2031434c874"
+    },
+    "pdf/cmaps/78-EUC-V.bcmap": {
+      "bytes": 173,
+      "sha256": "61670bebc4e4827b67230c054fd0d820d6e30c3584d02e386804e62bbedc032a"
+    },
+    "pdf/cmaps/78-H.bcmap": {
+      "bytes": 2379,
+      "sha256": "ece6415b853d61e1b2560165151407d35cf16e6556932b85a13ea75276b77402"
+    },
+    "pdf/cmaps/78-RKSJ-H.bcmap": {
+      "bytes": 2398,
+      "sha256": "696b1f973c97623496703809eaaa5f9b40696c77540057413f4b826a08edfa7b"
+    },
+    "pdf/cmaps/78-RKSJ-V.bcmap": {
+      "bytes": 173,
+      "sha256": "53cb6d560ab377da48cf65d6dcacb0bdb31f13fab7066c580de38c12a73a7ff9"
+    },
+    "pdf/cmaps/78-V.bcmap": {
+      "bytes": 169,
+      "sha256": "289000f02fd34872b6975503217f33abae6bee676e7d28f640473a67c8db1712"
+    },
+    "pdf/cmaps/78ms-RKSJ-H.bcmap": {
+      "bytes": 2651,
+      "sha256": "a2442595218f5f8bd8e1b42188e368587d876cfe0cc4cd87196f077c878f72e2"
+    },
+    "pdf/cmaps/78ms-RKSJ-V.bcmap": {
+      "bytes": 290,
+      "sha256": "f8ddceba96bfd9d3740bd1789ee30d1f47c78371520a8084f71f7df58f19be0b"
+    },
+    "pdf/cmaps/83pv-RKSJ-H.bcmap": {
+      "bytes": 905,
+      "sha256": "44040051ec818fe09b9703472bea72efd2759d5eeb5ff0d77c718d6bb5e6d1df"
+    },
+    "pdf/cmaps/90ms-RKSJ-H.bcmap": {
+      "bytes": 721,
+      "sha256": "c13e043e85ff715b75bb03801e8fd0fb8f3a75e4a48496faa6baaf92b5b48ba1"
+    },
+    "pdf/cmaps/90ms-RKSJ-V.bcmap": {
+      "bytes": 290,
+      "sha256": "499bb916ce1adbe4289b6e5811f4dc20eb238cdc2ffad20cf26ae56716885bab"
+    },
+    "pdf/cmaps/90msp-RKSJ-H.bcmap": {
+      "bytes": 715,
+      "sha256": "7b8b3b8bbf821702e9a4df9f3596ce292380c8c1b0925dedadbb4e4b2d80498b"
+    },
+    "pdf/cmaps/90msp-RKSJ-V.bcmap": {
+      "bytes": 291,
+      "sha256": "6296c2b5c07dca8128e96d5296d621a3268803d4fa0e5812a21e52fe2802aacb"
+    },
+    "pdf/cmaps/90pv-RKSJ-H.bcmap": {
+      "bytes": 982,
+      "sha256": "fb5103f03d3a34547e18d316e52b6d9b26e485c662999222f84d2ba54c2e4fa8"
+    },
+    "pdf/cmaps/90pv-RKSJ-V.bcmap": {
+      "bytes": 260,
+      "sha256": "7bcb5ad2ba55b9662ce379e16c2d9cc2b82d621a579807353741172e4af615c2"
+    },
+    "pdf/cmaps/Add-H.bcmap": {
+      "bytes": 2419,
+      "sha256": "a2ffab28b990998181bcca9b0e914bb2207820f100ae31d5c469444892e5ad8e"
+    },
+    "pdf/cmaps/Add-RKSJ-H.bcmap": {
+      "bytes": 2413,
+      "sha256": "b29f4b52e2465d0485856d5e69f1ba69927deb2848d8fd328c8035583b35bb7e"
+    },
+    "pdf/cmaps/Add-RKSJ-V.bcmap": {
+      "bytes": 287,
+      "sha256": "2aa2232c283a3f5d0997c2834a36cead0b79ce2657944cfeed08140c293460ff"
+    },
+    "pdf/cmaps/Add-V.bcmap": {
+      "bytes": 282,
+      "sha256": "25125d3b1be64e86b2df5b3344170b45a42bcaa0b46e43a34314ef73c166e542"
+    },
+    "pdf/cmaps/Adobe-CNS1-0.bcmap": {
+      "bytes": 317,
+      "sha256": "8c65be9d51a9f269a547dc12460707aaf4031ab67ebe8a2900f4b4cc6b3e450e"
+    },
+    "pdf/cmaps/Adobe-CNS1-1.bcmap": {
+      "bytes": 371,
+      "sha256": "73152bc1a59cc594b414ac6068be48e5512b96ae85920c40e32a99269fdb0c04"
+    },
+    "pdf/cmaps/Adobe-CNS1-2.bcmap": {
+      "bytes": 376,
+      "sha256": "a1b8d353bdef9584c820464e8f1c9e2013d64ebf433cba0aa831dddf515818c2"
+    },
+    "pdf/cmaps/Adobe-CNS1-3.bcmap": {
+      "bytes": 401,
+      "sha256": "2ffc0c75c79fafde506163d3c08c390d183251009f3fbf6ae50d1167d14b9570"
+    },
+    "pdf/cmaps/Adobe-CNS1-4.bcmap": {
+      "bytes": 405,
+      "sha256": "98a1f470c878c6b9691a4d7aef776af8ac9b55f5587c9fafa00547f3bf655716"
+    },
+    "pdf/cmaps/Adobe-CNS1-5.bcmap": {
+      "bytes": 406,
+      "sha256": "ddd6e29955eb8cb545f2ebd09c628c3bbda5023256eda1b728f743c75fb77829"
+    },
+    "pdf/cmaps/Adobe-CNS1-6.bcmap": {
+      "bytes": 406,
+      "sha256": "317bb2db71e0e5b7b0c47b75de1da915c2e22f65f0c0861507f9ca7ba238f8a2"
+    },
+    "pdf/cmaps/Adobe-CNS1-UCS2.bcmap": {
+      "bytes": 41193,
+      "sha256": "e665837f2197c6bd08cd8955ad4d6932cee2398e2e328b25b00e6bfb3bd72af9"
+    },
+    "pdf/cmaps/Adobe-GB1-0.bcmap": {
+      "bytes": 217,
+      "sha256": "8b81cce8a11d510e505704953cfa4e4ab080c1a0cab991145a3512ee433946b9"
+    },
+    "pdf/cmaps/Adobe-GB1-1.bcmap": {
+      "bytes": 250,
+      "sha256": "0426983081788ec7202703e71f1efa4b860f75b936994236010b39d89251a81e"
+    },
+    "pdf/cmaps/Adobe-GB1-2.bcmap": {
+      "bytes": 465,
+      "sha256": "e67b37a83b160ab3831306a71a605893b24454ee81ac9b6123bf2d3984d268d5"
+    },
+    "pdf/cmaps/Adobe-GB1-3.bcmap": {
+      "bytes": 470,
+      "sha256": "aa299afc3e12a28726147305f191be28c7498078c8b182ece7886ac79cd99078"
+    },
+    "pdf/cmaps/Adobe-GB1-4.bcmap": {
+      "bytes": 601,
+      "sha256": "8fbd7d74c2ddb1350c1cecce54a73fde3f5453093d4bed445283ec0033d2097f"
+    },
+    "pdf/cmaps/Adobe-GB1-5.bcmap": {
+      "bytes": 625,
+      "sha256": "c22cb2fcff24112fa31dab2111bdc51957006576d31aad5a25e67793ac01428c"
+    },
+    "pdf/cmaps/Adobe-GB1-UCS2.bcmap": {
+      "bytes": 33974,
+      "sha256": "20507620260c0c935c35afc1e70e5888aa7125d5ec7ffc03cef1959feb2c1641"
+    },
+    "pdf/cmaps/Adobe-Japan1-0.bcmap": {
+      "bytes": 225,
+      "sha256": "464f08905236f5703b1f5cf8358767c8b18e6bcc808840d081f1de2c7ab38134"
+    },
+    "pdf/cmaps/Adobe-Japan1-1.bcmap": {
+      "bytes": 226,
+      "sha256": "4c823848722187d1ffe75ae3f5f9126ccd2d7895a05fad14c919fb119e037008"
+    },
+    "pdf/cmaps/Adobe-Japan1-2.bcmap": {
+      "bytes": 233,
+      "sha256": "7810fb808e367e70429e90a9478fe6a3fdc3e214f25c7582ce9c2da6a242315c"
+    },
+    "pdf/cmaps/Adobe-Japan1-3.bcmap": {
+      "bytes": 242,
+      "sha256": "84deb1828711ad3d390c9899c38abce1bf619d65ff7bf1a326ec95acc45f08f8"
+    },
+    "pdf/cmaps/Adobe-Japan1-4.bcmap": {
+      "bytes": 337,
+      "sha256": "3f8a4f974919c2b8bae5d10175ffa2673be140481e00840542c85d48ef184067"
+    },
+    "pdf/cmaps/Adobe-Japan1-5.bcmap": {
+      "bytes": 430,
+      "sha256": "1d3ce4ff28d977f8cf37a912ae4ec811f4175c3167b1ec0b2567feec3e79e1db"
+    },
+    "pdf/cmaps/Adobe-Japan1-6.bcmap": {
+      "bytes": 485,
+      "sha256": "5609797b9401b30be72ef9645da62a87829f058c3be4b5c623383119f584b1d9"
+    },
+    "pdf/cmaps/Adobe-Japan1-UCS2.bcmap": {
+      "bytes": 40951,
+      "sha256": "66c5d0dc4964f4093e77b194023f3a0f689324028ec8330e1e1d0570bcba7c2f"
+    },
+    "pdf/cmaps/Adobe-Korea1-0.bcmap": {
+      "bytes": 241,
+      "sha256": "dfb8c3874f0e5a8c3acf597d2c12d2b63e90bc5e4f0fce990ec4c56077d80b32"
+    },
+    "pdf/cmaps/Adobe-Korea1-1.bcmap": {
+      "bytes": 386,
+      "sha256": "62f277b7b1c441c007797ae707d5c37258d029ce4661a2b911e2e1ee35e6adc1"
+    },
+    "pdf/cmaps/Adobe-Korea1-2.bcmap": {
+      "bytes": 391,
+      "sha256": "1d77068af462f96d7ad28ad7e7d43eef6423c685b479d7dc25ff5df38db0380d"
+    },
+    "pdf/cmaps/Adobe-Korea1-UCS2.bcmap": {
+      "bytes": 23293,
+      "sha256": "857b723088be97255053562bfa41bd1075a7f7910d3bab59a0645c8bbc7060ff"
+    },
+    "pdf/cmaps/B5-H.bcmap": {
+      "bytes": 1086,
+      "sha256": "718ad0ffbef4c34f8f3f31292c462e519cd567a5511fc8b346c60010d64f4ef9"
+    },
+    "pdf/cmaps/B5-V.bcmap": {
+      "bytes": 142,
+      "sha256": "b5c37383517477620ced927b6b4ffd4f4cc6230d8051b5b46a21d6768e07f7d8"
+    },
+    "pdf/cmaps/B5pc-H.bcmap": {
+      "bytes": 1099,
+      "sha256": "bab6028aead1d6149400e904ab10cfd319082d826473ed4c582c8eeed920f17e"
+    },
+    "pdf/cmaps/B5pc-V.bcmap": {
+      "bytes": 144,
+      "sha256": "41543142b9767f3b76133899fc8453282b01ad3c653acaeea42d78c5a7d08c63"
+    },
+    "pdf/cmaps/CNS-EUC-H.bcmap": {
+      "bytes": 1780,
+      "sha256": "e8f89cd61e6486b948205da46499d659ed0aed949b7095fd3c8e95ffe2b0e7a9"
+    },
+    "pdf/cmaps/CNS-EUC-V.bcmap": {
+      "bytes": 1920,
+      "sha256": "cae422bec2ac6dbe86bf921cec942bacd2d0b733ffcca5f91b3ba14e917025a0"
+    },
+    "pdf/cmaps/CNS1-H.bcmap": {
+      "bytes": 706,
+      "sha256": "e8487971ab20cd16f3de3e8ac56ec994b72b658ad113f2818239dfd5108f501a"
+    },
+    "pdf/cmaps/CNS1-V.bcmap": {
+      "bytes": 143,
+      "sha256": "42df8076aaa7574505e7304af83a3323ec032c4177d64b1309db8c043d594a8a"
+    },
+    "pdf/cmaps/CNS2-H.bcmap": {
+      "bytes": 504,
+      "sha256": "bc6024d274d440f0625c69e25f37036ef6cb6689432ceaa160d3432a2a716ca7"
+    },
+    "pdf/cmaps/CNS2-V.bcmap": {
+      "bytes": 93,
+      "sha256": "2e4f70a8afd23a121030fc2e5b5f3816e903b11e7ba8b8c09654b31c80399c38"
+    },
+    "pdf/cmaps/ETen-B5-H.bcmap": {
+      "bytes": 1125,
+      "sha256": "87ee6b3f5bfda5fe26fa35431264c7d73070d10dbbf398a75185d63ae322c18d"
+    },
+    "pdf/cmaps/ETen-B5-V.bcmap": {
+      "bytes": 158,
+      "sha256": "47dc0d2c21e3bde317947aec1675ceabc1d5460a60bf9c24334b8c407a17172c"
+    },
+    "pdf/cmaps/ETenms-B5-H.bcmap": {
+      "bytes": 101,
+      "sha256": "d5f5a73da4173b7da9a3a20e16f26f9cd5d12deb1553409919e0cec6fd37fdee"
+    },
+    "pdf/cmaps/ETenms-B5-V.bcmap": {
+      "bytes": 172,
+      "sha256": "18252fca90f472f479af1bddd60d6ab51c8e1b55dcf6845951426504934543e0"
+    },
+    "pdf/cmaps/ETHK-B5-H.bcmap": {
+      "bytes": 4426,
+      "sha256": "d2f10fa519336bc4efcc7b6deb9604b75429946b40d82e311cb3a97a1994c89a"
+    },
+    "pdf/cmaps/ETHK-B5-V.bcmap": {
+      "bytes": 158,
+      "sha256": "1fea3fd0d9f0f679f80505800851ef2e4131d81127e18c006938ffa2f4c8b247"
+    },
+    "pdf/cmaps/EUC-H.bcmap": {
+      "bytes": 578,
+      "sha256": "f9939cd57fccdc65c5d9f4c205fd497ebdbd283643308da5663801a8c1d9c595"
+    },
+    "pdf/cmaps/EUC-V.bcmap": {
+      "bytes": 170,
+      "sha256": "1283a50a706507c4436da83ede9ad7a4440be25378f2e96f6c81a430081426a3"
+    },
+    "pdf/cmaps/Ext-H.bcmap": {
+      "bytes": 2536,
+      "sha256": "4000ed4e61a1c668ef453bbd0603cfa383defa793abd46a57ed870d7f527350b"
+    },
+    "pdf/cmaps/Ext-RKSJ-H.bcmap": {
+      "bytes": 2542,
+      "sha256": "e0d2f0df337660e73813238dd4a725f11f0621b90f3273857db253d0e7694caa"
+    },
+    "pdf/cmaps/Ext-RKSJ-V.bcmap": {
+      "bytes": 218,
+      "sha256": "f617a22b6d67febb187990952006c91a9f5a4db21155d268c656252d0c21985d"
+    },
+    "pdf/cmaps/Ext-V.bcmap": {
+      "bytes": 215,
+      "sha256": "c2087fb845a9e3acea0c2922cd40e6af67e11957bec74dcd597f1285edd490ce"
+    },
+    "pdf/cmaps/GB-EUC-H.bcmap": {
+      "bytes": 549,
+      "sha256": "928bad06fd84a48f5ba7150d7716609119fb660f2aaa73eccad81ddab9b9d203"
+    },
+    "pdf/cmaps/GB-EUC-V.bcmap": {
+      "bytes": 179,
+      "sha256": "a9ad88ac2479da529b16dc48abc5952332e27bc355335f91df5729a587533324"
+    },
+    "pdf/cmaps/GB-H.bcmap": {
+      "bytes": 528,
+      "sha256": "1018c777a8910b5bb46d7d54a4aee9d51ca5cff8addb2b41c969d9101cb3fd1c"
+    },
+    "pdf/cmaps/GB-V.bcmap": {
+      "bytes": 175,
+      "sha256": "0b96789143c0bbf9f1641ae7165b3456dccd14dabffcbb0bd654d5bf6f94f863"
+    },
+    "pdf/cmaps/GBK-EUC-H.bcmap": {
+      "bytes": 14692,
+      "sha256": "2103fed28650ede096a2281104a1a8a4304dae0db414342c636867522307123b"
+    },
+    "pdf/cmaps/GBK-EUC-V.bcmap": {
+      "bytes": 180,
+      "sha256": "a7fd35dd14d9dbdb955f34e6c0630618b6620dfd09d4283b2f65a65ce77fcaea"
+    },
+    "pdf/cmaps/GBK2K-H.bcmap": {
+      "bytes": 19662,
+      "sha256": "3d919ae72af16c5cc6846ec87a4326a9f125e493c59d3628429d35c2c95fe8c4"
+    },
+    "pdf/cmaps/GBK2K-V.bcmap": {
+      "bytes": 219,
+      "sha256": "b927fdfd595c07ce9158bf2ec13f4641b2e83b01c70989dadfabd6ed7c6ac2dc"
+    },
+    "pdf/cmaps/GBKp-EUC-H.bcmap": {
+      "bytes": 14686,
+      "sha256": "d15ebd8e81fb4fe8a244f1b1e877922e03500ac69eddf5001093e502430451d2"
+    },
+    "pdf/cmaps/GBKp-EUC-V.bcmap": {
+      "bytes": 181,
+      "sha256": "fdc736d46e642625dccc8ad8c59f2c69fc7db7a13f2e799c6c6b779e707bb97a"
+    },
+    "pdf/cmaps/GBpc-EUC-H.bcmap": {
+      "bytes": 557,
+      "sha256": "3c4a4eb82f05abe51f6650985c630e180438bfdd491318f5d20d2ec29236e1c3"
+    },
+    "pdf/cmaps/GBpc-EUC-V.bcmap": {
+      "bytes": 181,
+      "sha256": "215bdfa2842705624b4cf4cd29b8e3c720f1e192365e0305c11030a424c84d7c"
+    },
+    "pdf/cmaps/GBT-EUC-H.bcmap": {
+      "bytes": 7290,
+      "sha256": "dc5f44e48a39f3367ae28665027d8ab1d8cedb5a9dcc5068a900acd6709f60f9"
+    },
+    "pdf/cmaps/GBT-EUC-V.bcmap": {
+      "bytes": 180,
+      "sha256": "a1ad24e63653b8aa388c18fa5e498f007564e43dde699a9f91ccb4645c999be8"
+    },
+    "pdf/cmaps/GBT-H.bcmap": {
+      "bytes": 7269,
+      "sha256": "8afda745a505763f3ff54c8126eeb48ef376ea9ed07d9f42ff9a22c5c547ec57"
+    },
+    "pdf/cmaps/GBT-V.bcmap": {
+      "bytes": 176,
+      "sha256": "cdc2ec5c3c7c7033290c9a8894878202f08674eb9b1ae7d36218430326768771"
+    },
+    "pdf/cmaps/GBTpc-EUC-H.bcmap": {
+      "bytes": 7298,
+      "sha256": "7b23e2f7bfdb6c918f567b7324bf858f398bd8cd5f268d74ece19a3c91bf4f32"
+    },
+    "pdf/cmaps/GBTpc-EUC-V.bcmap": {
+      "bytes": 182,
+      "sha256": "d7a1b13ead9ab511cf2cd01de6ce8b02aa8e8767e84895337d7a3b67f039f93b"
+    },
+    "pdf/cmaps/H.bcmap": {
+      "bytes": 553,
+      "sha256": "a0233e21047ec00b852125b243cbcf30abee511155b6d8159c24f944384bc9ee"
+    },
+    "pdf/cmaps/Hankaku.bcmap": {
+      "bytes": 132,
+      "sha256": "b454701f7aecd7856769016dfd04ca64280a060f2c67a2466d50b4395d24974e"
+    },
+    "pdf/cmaps/Hiragana.bcmap": {
+      "bytes": 124,
+      "sha256": "2ed669394756dd9458651cd9995ab29ab691ecb7686659003306cdf22767a414"
+    },
+    "pdf/cmaps/HKdla-B5-H.bcmap": {
+      "bytes": 2654,
+      "sha256": "5242bce18fb13ab4cc59b146a03eba36e4ce42667eeff09e10981a9d2aa4996b"
+    },
+    "pdf/cmaps/HKdla-B5-V.bcmap": {
+      "bytes": 148,
+      "sha256": "2e0537f786c0791d41a925f72bad2d4e7268aa6cbf15a1400a722672cec38e2c"
+    },
+    "pdf/cmaps/HKdlb-B5-H.bcmap": {
+      "bytes": 2414,
+      "sha256": "fdc8159984bf5dbe475c0d5dfcb621ecee4dea07c38c668bd77f4c679e23b9b3"
+    },
+    "pdf/cmaps/HKdlb-B5-V.bcmap": {
+      "bytes": 148,
+      "sha256": "b249eb9dcb915ab45057c5d4d7aa55ef88d0efbb092af6bae0b2d4705d139abf"
+    },
+    "pdf/cmaps/HKgccs-B5-H.bcmap": {
+      "bytes": 2292,
+      "sha256": "ab64c7fc5e9b2e97750cc4f269b0da14fd8649e49151b7598c8df86599bac591"
+    },
+    "pdf/cmaps/HKgccs-B5-V.bcmap": {
+      "bytes": 149,
+      "sha256": "02ebdf7cdffb5395fb21091cd58a013a18ae5388922822f9dc6292ef16b98956"
+    },
+    "pdf/cmaps/HKm314-B5-H.bcmap": {
+      "bytes": 1772,
+      "sha256": "bfd8bbde6b36a9da4c1c902c74121a30d9807a7079a00eeea218be6adc223cef"
+    },
+    "pdf/cmaps/HKm314-B5-V.bcmap": {
+      "bytes": 149,
+      "sha256": "2a64a815cfb6fdd480674a868762e3d161fda17543b20c9209978559f0667164"
+    },
+    "pdf/cmaps/HKm471-B5-H.bcmap": {
+      "bytes": 2171,
+      "sha256": "49d7c037758826b5b6c0fa329c35bbf25d3943197754e72ecd30c6fb04d745e6"
+    },
+    "pdf/cmaps/HKm471-B5-V.bcmap": {
+      "bytes": 149,
+      "sha256": "be24c109e78aa4fe3c1f27d30aab3ed0741e783fa1b6b6c2719741072b54b132"
+    },
+    "pdf/cmaps/HKscs-B5-H.bcmap": {
+      "bytes": 4437,
+      "sha256": "08599378f41d96b40537adef6e6edcc4a787bc63f5accf47c026df4905a13914"
+    },
+    "pdf/cmaps/HKscs-B5-V.bcmap": {
+      "bytes": 159,
+      "sha256": "d073542b7dad1c4cbf01c1af5f0cd13218d1281a491956e310c55702fc8705c4"
+    },
+    "pdf/cmaps/Katakana.bcmap": {
+      "bytes": 100,
+      "sha256": "3b6ca6642fbf8822da00d5e58a8aa275216d5c32dbf2bd73e934197fc9fc5c53"
+    },
+    "pdf/cmaps/KSC-EUC-H.bcmap": {
+      "bytes": 1848,
+      "sha256": "6784e16dbc5861c036c23d3e55f0d4ba0975a3e464da0ee8e49bcfff0be070c4"
+    },
+    "pdf/cmaps/KSC-EUC-V.bcmap": {
+      "bytes": 164,
+      "sha256": "fdb36bad85e9924823d49db374067988e024cf80fc894711f2c9178951cbbe95"
+    },
+    "pdf/cmaps/KSC-H.bcmap": {
+      "bytes": 1831,
+      "sha256": "c1f6d61f1d3304fd539a65ae72624fa567ecc3853bf52e283958a7a2515b3eee"
+    },
+    "pdf/cmaps/KSC-Johab-H.bcmap": {
+      "bytes": 16791,
+      "sha256": "939993d213f68db763bf156217c217ae23af082b91a0eacecf3d11eb4ff8ef8c"
+    },
+    "pdf/cmaps/KSC-Johab-V.bcmap": {
+      "bytes": 166,
+      "sha256": "5d61967aac0e666def721e8b8d0fed8f95a879a14f2e76ce516c3d11c621e519"
+    },
+    "pdf/cmaps/KSC-V.bcmap": {
+      "bytes": 160,
+      "sha256": "d7da5afd9f1fe74816d79c9325f0139a4efb6438664ebfdf9a7aa92f3034360f"
+    },
+    "pdf/cmaps/KSCms-UHC-H.bcmap": {
+      "bytes": 2787,
+      "sha256": "5b70d8f6a4fa9e2283dc649f0ff95d906d56efbee50a20e8d2faec3a8fed078e"
+    },
+    "pdf/cmaps/KSCms-UHC-HW-H.bcmap": {
+      "bytes": 2789,
+      "sha256": "a5e6ba22aceb02fdedee11bfb9ed138463d89e85b87810b9f075b469d936f8ec"
+    },
+    "pdf/cmaps/KSCms-UHC-HW-V.bcmap": {
+      "bytes": 169,
+      "sha256": "890332a6a26880d463a12f2a6ff048bf9cf7e45077cfb1ca8815b89baa7bf411"
+    },
+    "pdf/cmaps/KSCms-UHC-V.bcmap": {
+      "bytes": 166,
+      "sha256": "1631b531c9a40c8cbe24c2317dba107362e49fa6e18af620414d627c111d570c"
+    },
+    "pdf/cmaps/KSCpc-EUC-H.bcmap": {
+      "bytes": 2024,
+      "sha256": "709480682c55cedbb0124b9960d78e28febeee0df2e34607d61aac6601647ec7"
+    },
+    "pdf/cmaps/KSCpc-EUC-V.bcmap": {
+      "bytes": 166,
+      "sha256": "031707887d6fc2378a36cdb6775334fd7a236c3f95048d8436abf43fe26fc49d"
+    },
+    "pdf/cmaps/LICENSE": {
+      "bytes": 2080,
+      "sha256": "aa92ab5a472974865a96fd4a4e9c13bb41bf6fe1b309cb6b8da48bc9e19839a2"
+    },
+    "pdf/cmaps/NWP-H.bcmap": {
+      "bytes": 2765,
+      "sha256": "286c6c9e335da330928a01edc3c97a3a623f1f7f3c42762b0a7dc2f651b1a78f"
+    },
+    "pdf/cmaps/NWP-V.bcmap": {
+      "bytes": 252,
+      "sha256": "3a75fb7b59adfb172710758c425d8ac6c93fd5360a64dd4afd5dd04e60ab4b4d"
+    },
+    "pdf/cmaps/RKSJ-H.bcmap": {
+      "bytes": 534,
+      "sha256": "a70de61a22a898f693f02cc011c3e3cff2e10aaa7cddb4661e456a21ae859f78"
+    },
+    "pdf/cmaps/RKSJ-V.bcmap": {
+      "bytes": 170,
+      "sha256": "68c1a64506471a524ea5cfc3b3a9f8f70031989a6bd95427b1351f33ccf50b06"
+    },
+    "pdf/cmaps/Roman.bcmap": {
+      "bytes": 96,
+      "sha256": "1c6b3ef9d9e5cb1aa329142ce9414b90f9b6d7f9182a2a9e927378dab8f0d43f"
+    },
+    "pdf/cmaps/UniCNS-UCS2-H.bcmap": {
+      "bytes": 48280,
+      "sha256": "779428116752f34e2490a1941d24e4634c71e3c22d053b811d2090ae2fb3c704"
+    },
+    "pdf/cmaps/UniCNS-UCS2-V.bcmap": {
+      "bytes": 156,
+      "sha256": "1e5cc184b850ea44abc2df8ae5674279df668e8edf5e2a1a2ea2bd77adbd280f"
+    },
+    "pdf/cmaps/UniCNS-UTF16-H.bcmap": {
+      "bytes": 50419,
+      "sha256": "32ff139b3c7b91d6ad25f994701f3ce7b242906022c418fd73e6493fc228bfe5"
+    },
+    "pdf/cmaps/UniCNS-UTF16-V.bcmap": {
+      "bytes": 156,
+      "sha256": "278eb1e68d1a236c60ef59472cf0176ee0d45f364285e76ca12419a08d46fb9a"
+    },
+    "pdf/cmaps/UniCNS-UTF32-H.bcmap": {
+      "bytes": 52679,
+      "sha256": "bf26eb67fe19ee5ba915799e80ca72408400aa8342fdf6a244a4f44de8f97336"
+    },
+    "pdf/cmaps/UniCNS-UTF32-V.bcmap": {
+      "bytes": 160,
+      "sha256": "f7da3caf83ceb1cb37936fa10700d9ba6e9c3f72c5bc9724e3ac79bff0c0179e"
+    },
+    "pdf/cmaps/UniCNS-UTF8-H.bcmap": {
+      "bytes": 53629,
+      "sha256": "2f2a742bcd1a84a148a4a518b9eed51a8f9c6ca5ed3bc5e2e41fff97de5dc2d8"
+    },
+    "pdf/cmaps/UniCNS-UTF8-V.bcmap": {
+      "bytes": 157,
+      "sha256": "b7c3f10780a8c62dd1c8ff6c30dc1e4e23b6cdc87c3a96fcd514cc98ffd3af9d"
+    },
+    "pdf/cmaps/UniGB-UCS2-H.bcmap": {
+      "bytes": 43366,
+      "sha256": "9201569b402e81ad8860650bd86350c4fa28e5dd5971f05fcacaf40f51de18ed"
+    },
+    "pdf/cmaps/UniGB-UCS2-V.bcmap": {
+      "bytes": 193,
+      "sha256": "f10282335e4d64203bc2a653a3a47d745ec76c8ae04549f4d50180c1899be216"
+    },
+    "pdf/cmaps/UniGB-UTF16-H.bcmap": {
+      "bytes": 44086,
+      "sha256": "386fd39581245c034da016a92d23f3df1117d169f996100050b264fc09a84e35"
+    },
+    "pdf/cmaps/UniGB-UTF16-V.bcmap": {
+      "bytes": 178,
+      "sha256": "0473cfbba612b92dd9918f0ff8aee9112897c48e0ffdc0eb82da3144ed8ea84a"
+    },
+    "pdf/cmaps/UniGB-UTF32-H.bcmap": {
+      "bytes": 45738,
+      "sha256": "f48a145dc4e3ed1dca1dde7111716a72306a2a4191ab05c6bae3a5c3a961cd2f"
+    },
+    "pdf/cmaps/UniGB-UTF32-V.bcmap": {
+      "bytes": 182,
+      "sha256": "106acc49b7118bdef944e32107b4f348238f3929a0a15d3b7aab7b9101535993"
+    },
+    "pdf/cmaps/UniGB-UTF8-H.bcmap": {
+      "bytes": 46837,
+      "sha256": "f217b439c80ee5fa1bc2cf6d1defcc319f8d84483d166a00ee199e05a68588df"
+    },
+    "pdf/cmaps/UniGB-UTF8-V.bcmap": {
+      "bytes": 181,
+      "sha256": "a64df947632878eacc532fa193c735c92a383b7d66e6f8374ac193af7c64fc63"
+    },
+    "pdf/cmaps/UniJIS-UCS2-H.bcmap": {
+      "bytes": 25439,
+      "sha256": "ad2352f40870880fbf7f8ee5abadff743fbd025fbf9830b8ada472d1c5e4da0b"
+    },
+    "pdf/cmaps/UniJIS-UCS2-HW-H.bcmap": {
+      "bytes": 119,
+      "sha256": "16e87edca954177c0881c874859d6783220925d821b5cdfb8755b61ebd93f9ce"
+    },
+    "pdf/cmaps/UniJIS-UCS2-HW-V.bcmap": {
+      "bytes": 680,
+      "sha256": "1973457e2c0192819947e56068625b34fb9a72ecc8a476ce6d7eaae5f73e2e5c"
+    },
+    "pdf/cmaps/UniJIS-UCS2-V.bcmap": {
+      "bytes": 664,
+      "sha256": "42a133d8e2ce9dd6d2288018e01592d2bf2435b326d39b94ea0b6e6a44ac33d3"
+    },
+    "pdf/cmaps/UniJIS-UTF16-H.bcmap": {
+      "bytes": 39443,
+      "sha256": "f6a89c5688978548c83fcee990e205bc63c74274d5c69b49032a3bd4c49a05ee"
+    },
+    "pdf/cmaps/UniJIS-UTF16-V.bcmap": {
+      "bytes": 643,
+      "sha256": "c67126fc7c73850855186bb0d6482ac0a365057e0b58778c4ab9f234683fef53"
+    },
+    "pdf/cmaps/UniJIS-UTF32-H.bcmap": {
+      "bytes": 40539,
+      "sha256": "96195950ce0fe24443d8eb426fa6b88534ec421d7bef9046f0b2362809cfba73"
+    },
+    "pdf/cmaps/UniJIS-UTF32-V.bcmap": {
+      "bytes": 677,
+      "sha256": "ed4dafda402bdd19c4d5d8bf2ab41473c0f86f384552b4c7b963d6627daedeb1"
+    },
+    "pdf/cmaps/UniJIS-UTF8-H.bcmap": {
+      "bytes": 41695,
+      "sha256": "798fb0bf06ab0788d1f6a91c2db7de581612eef03c628f10e8f7ecd8f70ab448"
+    },
+    "pdf/cmaps/UniJIS-UTF8-V.bcmap": {
+      "bytes": 678,
+      "sha256": "1021611424f913b2df0bfdbe94bd327c04e224ec89d8e821c6501ea3d21f4265"
+    },
+    "pdf/cmaps/UniJIS2004-UTF16-H.bcmap": {
+      "bytes": 39534,
+      "sha256": "710a32d7cb43fd6bd9dbf30da5971f8c941590f74441e208d852c2be0e74cc97"
+    },
+    "pdf/cmaps/UniJIS2004-UTF16-V.bcmap": {
+      "bytes": 647,
+      "sha256": "3b149aff5c5707b57fb3215d1775852c8b1f413ec0f679ea628f25cf87fe098d"
+    },
+    "pdf/cmaps/UniJIS2004-UTF32-H.bcmap": {
+      "bytes": 40630,
+      "sha256": "8d2658e18741af7937d586a57c89729a6fec0d86121197c1f8518aa58b29cdfb"
+    },
+    "pdf/cmaps/UniJIS2004-UTF32-V.bcmap": {
+      "bytes": 681,
+      "sha256": "6dd475782f2897648a683c48b2fa015a15b8f06856760bddc8a17a63f418bacb"
+    },
+    "pdf/cmaps/UniJIS2004-UTF8-H.bcmap": {
+      "bytes": 41779,
+      "sha256": "691c614ce432b3e62486efb54e5c84c6da5afe9b51b21253bde4758feb484183"
+    },
+    "pdf/cmaps/UniJIS2004-UTF8-V.bcmap": {
+      "bytes": 682,
+      "sha256": "40a8c7ea2d46711c5f78fc9a878a7db68b1543ba5cd60ecf14f519a2deb829b7"
+    },
+    "pdf/cmaps/UniJISPro-UCS2-HW-V.bcmap": {
+      "bytes": 705,
+      "sha256": "6826f94d789d7bf1960668c1c5819c34c9585c1b23152fbc19ee81c7df08524b"
+    },
+    "pdf/cmaps/UniJISPro-UCS2-V.bcmap": {
+      "bytes": 689,
+      "sha256": "493de9fd1a08f7946065d8ab58f0c3c9fe489f5a0f109f2d05a3169b4bd5789f"
+    },
+    "pdf/cmaps/UniJISPro-UTF8-V.bcmap": {
+      "bytes": 726,
+      "sha256": "6181d382cf736c5e09492e8be9f26f31fa25b7462253f23ab16646af432cad81"
+    },
+    "pdf/cmaps/UniJISX0213-UTF32-H.bcmap": {
+      "bytes": 40517,
+      "sha256": "692044e1fb33445668632bc9fe7386805c624864be1ddeb29d65bb0c99fc630c"
+    },
+    "pdf/cmaps/UniJISX0213-UTF32-V.bcmap": {
+      "bytes": 684,
+      "sha256": "dd54e16ca7bffb3a886242549b2bf7d78a277087f7c60d2636f118c21a5b0646"
+    },
+    "pdf/cmaps/UniJISX02132004-UTF32-H.bcmap": {
+      "bytes": 40608,
+      "sha256": "f80ea5a989be30ccda5a8804baef6d3b4b044d2b339bf8b31c671b2466171cf6"
+    },
+    "pdf/cmaps/UniJISX02132004-UTF32-V.bcmap": {
+      "bytes": 688,
+      "sha256": "94c22bd99e771c5fbe0dd8dc39850570d4db0075074aca13e272813edd7cc57f"
+    },
+    "pdf/cmaps/UniKS-UCS2-H.bcmap": {
+      "bytes": 25783,
+      "sha256": "a1081396ab4adb6f4a5b6c15f896963c244c1c9bcb65ce5616d06096a1b9811c"
+    },
+    "pdf/cmaps/UniKS-UCS2-V.bcmap": {
+      "bytes": 178,
+      "sha256": "6cab547431958fbdc1d401d06ebd4dd61a73f5509a10f974df32bcbca11a2e43"
+    },
+    "pdf/cmaps/UniKS-UTF16-H.bcmap": {
+      "bytes": 26327,
+      "sha256": "42d35b396286499dfae1737a07adb3a64500df37b426580bfb1d3ea872938519"
+    },
+    "pdf/cmaps/UniKS-UTF16-V.bcmap": {
+      "bytes": 164,
+      "sha256": "5bdb7390c80dcc136cb47d41dc7460082560969c17322ee739fe3020fb642410"
+    },
+    "pdf/cmaps/UniKS-UTF32-H.bcmap": {
+      "bytes": 26451,
+      "sha256": "3a01ec51ed1b828101351e337ffb8250abe11880032e5210f881170fed2588de"
+    },
+    "pdf/cmaps/UniKS-UTF32-V.bcmap": {
+      "bytes": 168,
+      "sha256": "dfda895eceaed081af030dbbb962b49629eea817fc3c02bae15db93d0c68acd7"
+    },
+    "pdf/cmaps/UniKS-UTF8-H.bcmap": {
+      "bytes": 27790,
+      "sha256": "3fac9c65145f72d7d42157a3b9c5ed6904632184e6a0888f2b828699afd2002f"
+    },
+    "pdf/cmaps/UniKS-UTF8-V.bcmap": {
+      "bytes": 169,
+      "sha256": "9ecc6cf30dd354b9778ddba163b6cc7302b087ce9f39d1ba73472d2b75ed13ca"
+    },
+    "pdf/cmaps/V.bcmap": {
+      "bytes": 166,
+      "sha256": "b9ad1c0c09ff14bca52f9a28a9767eb857ad0e8946e64ba14c7387a7eb69866a"
+    },
+    "pdf/cmaps/WP-Symbol.bcmap": {
+      "bytes": 179,
+      "sha256": "543923bead225732aba30976690ee89095a19628277b5863efecc2c728d5d7bf"
+    },
+    "pdf/standard_fonts/FoxitDingbats.pfb": {
+      "bytes": 29513,
+      "sha256": "845c752392b6c914fb989c75a08b7792b88f542d2499042ef2889f8c814a16ed"
+    },
+    "pdf/standard_fonts/FoxitSymbol.pfb": {
+      "bytes": 16729,
+      "sha256": "47967d055530e7357088a08403115425643ec2cdfd6201ba8af0fbd7116c1539"
+    },
+    "pdf.min.mjs": {
+      "bytes": 458904,
+      "sha256": "57456c8e0c81e46be31174b499ef77f2b9f5ee46d04412ba627320a36755d4c2"
+    },
+    "pdf.worker.min.mjs": {
+      "bytes": 1264342,
+      "sha256": "9536359f1b8367850d485731ca1d5e45c159a7b7a0912325e539937aa21ceb18"
+    },
+    "purify.min.js": {
+      "bytes": 29828,
+      "sha256": "cd37898f9782adf54820c413191b5691803f0f137c799d6edcfd38523b4c2c31"
+    },
+    "THIRD_PARTY_NOTICES.txt": {
+      "bytes": 312300,
+      "sha256": "0a1863009f4a5125f9a19c5560650ebda8cd626ab953685389714b3f05b15bd5"
+    }
+  }
+}

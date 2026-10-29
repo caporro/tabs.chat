@@ -117,19 +117,11 @@ function getAllModels(){
   }
   return list;
 }
-function syncSelectedModelName(modelId){
-  if(!modelId) return;
-  const models = getAllModels();
-  const found = models.find(m => m.id === modelId) || models.find(m => m.model === modelId);
-  const name = found ? (found.nick || found.model) : (modelId.includes("::") ? modelId.split("::")[1] : modelId);
-  state.general.aiName = name;
-  const aiInput = document.getElementById("cfg_ai_name");
-  if(aiInput) aiInput.value = name;
-}
-function populateModelSelect(){
+function populateModelSelect({ persist = true } = {}){
   const sel = document.getElementById("modelSelect");
   const models = getAllModels();
   sel.innerHTML = "";
+  sel.classList.toggle("single-model", models.length === 1);
   if(!models.length){
     const o = document.createElement("option"); o.textContent=t("model.select.empty"); o.value=""; sel.appendChild(o); return;
   }
@@ -142,8 +134,11 @@ function populateModelSelect(){
   const want = chat?.model || state.lastModel || models[0].id;
   if(models.find(m=>m.id===want)) sel.value = want;
   else sel.value = models[0].id;
-  if(chat){ chat.model = sel.value; saveState(); }
+  if(chat){
+    const changed = chat.model !== sel.value;
+    chat.model = sel.value;
+    if(changed && persist) saveState();
+  }
   state.lastModel = sel.value;
-  syncSelectedModelName(sel.value);
 }
 

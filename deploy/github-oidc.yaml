@@ -1,0 +1,55 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Least-privilege GitHub OIDC role for tabs.chat tagged releases.
+Parameters:
+  BucketName:
+    Type: String
+  DistributionId:
+    Type: String
+  OidcProviderArn:
+    Type: String
+  Repository:
+    Type: String
+    Default: caporro/tabs.chat
+Resources:
+  ReleaseRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: tabs-chat-github-deploy
+      MaxSessionDuration: 3600
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !Ref OidcProviderArn
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                token.actions.githubusercontent.com:aud: sts.amazonaws.com
+              StringLike:
+                token.actions.githubusercontent.com:sub: !Sub 'repo:${Repository}:ref:refs/tags/v*'
+      Policies:
+        - PolicyName: PublishStaticRelease
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:ListBucket
+                  - s3:GetBucketLocation
+                Resource: !Sub 'arn:${AWS::Partition}:s3:::${BucketName}'
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:DeleteObject
+                Resource: !Sub 'arn:${AWS::Partition}:s3:::${BucketName}/*'
+              - Effect: Allow
+                Action:
+                  - cloudfront:CreateInvalidation
+                  - cloudfront:GetInvalidation
+                  - cloudfront:GetDistribution
+                Resource: !Sub 'arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:distribution/${DistributionId}'
+Outputs:
+  RoleArn:
+    Value: !GetAtt ReleaseRole.Arn

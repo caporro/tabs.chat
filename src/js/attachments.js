@@ -7,10 +7,10 @@ function renderAttachStrip(){
     if(a.kind==="image"){
       const img = document.createElement("img"); img.src=a.dataUrl; chip.appendChild(img);
     }else{
-      const ico = document.createElement("span"); ico.textContent="📎"; chip.appendChild(ico);
+      const ico = document.createElement("span"); ico.textContent=a.source === "note" ? "@" : "📎"; chip.appendChild(ico);
     }
     const name = document.createElement("span"); name.className="name"; name.textContent=a.name||"file"; chip.appendChild(name);
-    const x = document.createElement("span"); x.className="x"; x.textContent="×"; x.addEventListener("click",()=>{ pendingAttachments.splice(i,1); renderAttachStrip(); });
+    const x = document.createElement("button"); x.type="button"; x.setAttribute("aria-label", `Remove ${a.name || "attachment"}`); x.className="x"; x.textContent="×"; x.addEventListener("click",()=>{ pendingAttachments.splice(i,1); renderAttachStrip(); });
     chip.appendChild(x);
     s.appendChild(chip);
   });
@@ -53,7 +53,20 @@ async function compressImage(file, preset){
 
 async function handleFiles(files){
   const preset = imagePreset();
+  const skipped = [];
+  const binary = [];
+  const notice = document.getElementById('attachmentNotice');
+  if(notice){ notice.textContent = ''; notice.classList.add('hide'); }
   for(const file of files){
+    const pdf = file.type === 'application/pdf' || /\.pdf$/i.test(file.name);
+    const docx = /\.docx$/i.test(file.name) || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    if((pdf && !appHasFeature('pdf')) || (docx && !appHasFeature('docx'))){ skipped.push(file.name); continue; }
+    if(APP_BUILD.edition === 'lite' && !file.type.startsWith('image/')){
+      const sample = new Uint8Array(await file.slice(0, 2048).arrayBuffer());
+      if(sample.includes(0) || /^(?:application\/(?:zip|gzip|x-7z-compressed|x-rar-compressed)|audio\/|video\/)/i.test(file.type)){
+        binary.push(file.name); continue;
+      }
+    }
     if(file.type.startsWith("image/")){
       let dataUrl;
       try{ dataUrl = await compressImage(file, preset); }
@@ -62,9 +75,9 @@ async function handleFiles(files){
     }else{
       let text = "";
       try{
-        if(file.type==="application/pdf" || /\.pdf$/i.test(file.name)){
+        if(pdf){
           text = await extractPdf(file);
-        }else if(/\.docx$/i.test(file.name)){
+        }else if(docx){
           const buf = await file.arrayBuffer();
           const r = await mammoth.extractRawText({arrayBuffer:buf}); text = r.value;
         }else{
@@ -75,6 +88,13 @@ async function handleFiles(files){
     }
   }
   renderAttachStrip();
+  if((skipped.length || binary.length) && notice){
+    const messages = [];
+    if(skipped.length) messages.push('PDF and Word (.docx) import is available in Normal. Skipped: ' + skipped.join(', '));
+    if(binary.length) messages.push('Attach images or text files in Lite. Skipped binary files: ' + binary.join(', '));
+    notice.textContent = messages.join(' ');
+    notice.classList.remove('hide');
+  }
 }
 function fileToDataUrl(file){
   return new Promise((res,rej)=>{
@@ -83,13 +103,22 @@ function fileToDataUrl(file){
 }
 async function extractPdf(file){
   const buf = await file.arrayBuffer();
-  const pdf = await window.__pdfjsLib.getDocument({data:buf}).promise;
-  let out = "";
-  for(let i=1;i<=pdf.numPages;i++){
-    const page = await pdf.getPage(i);
-    const c = await page.getTextContent();
-    out += c.items.map(x=>x.str).join(" ")+"\n\n";
+  const library = await loadPdfLibrary();
+  const task = library.getDocument({
+    data:buf, isEvalSupported:false, useWasm:false, useWorkerFetch:false, useSystemFonts:true, enableXfa:false,
+    BinaryDataFactory:LocalPdfBinaryDataFactory, cMapPacked:true
+  });
+  try{
+    const pdf = await task.promise;
+    let out = "";
+    for(let i=1;i<=pdf.numPages;i++){
+      const page = await pdf.getPage(i);
+      const c = await page.getTextContent();
+      out += c.items.map(x=>x.str).join(" ")+"\n\n";
+    }
+    return out;
+  }finally{
+    await task.destroy();
   }
-  return out;
 }
 

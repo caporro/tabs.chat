@@ -1,19 +1,38 @@
 /* ------------------------- Send / Streaming ------------------------- */
 async function sendMessage(){
+  closeNoteMentions();
+  if(typeof stopVoiceInput === "function") stopVoiceInput();
   const ta = document.getElementById("input");
   const text = ta.value.trim();
   if(!text && pendingAttachments.length===0) return;
-  let chat = currentChat();
-  if(!chat){ newChat(); chat = currentChat(); }
 
-  // Welcome chat without any configured LLM → reply with a canned onboarding tip
-  const welcomeMode = chat.isWelcome && !hasConfiguredLLM();
+  if(!hasConfiguredLLM()){
+    openSettings("providers");
+    flashStatus(t("onboarding.configureFirst"));
+    return;
+  }
 
   const sel = document.getElementById("modelSelect").value;
-  if(!welcomeMode){
-    if(!sel){ alert(t("alert.modelRequiredSend")); return; }
-    chat.model = sel; state.lastModel = sel;
+  if(!sel){
+    openSettings("providers");
+    flashStatus(t("alert.modelRequiredSend"));
+    return;
   }
+
+  let chat = currentChat();
+  if(!chat){ newChat(); chat = currentChat(); }
+  try {
+    captureRequestPromptContext(chat,sel);
+    effectiveSystemPrompt(chat);
+  } catch(error){
+    delete chat._promptContext;
+    flashStatus(error.message);
+    showToast(error.message,6000);
+    if(chat.promptMode === "override") openChatPromptModal();
+    else openSettings("instructions");
+    return;
+  }
+  chat.model = sel; state.lastModel = sel;
 
   const userMsg = {
     role:"user", content:text,
@@ -36,55 +55,15 @@ async function sendMessage(){
   chat.messages.push(aiMsg);
   saveState(); renderChatList(); renderMessages(); updateTopBar();
 
-  if(welcomeMode){
-    await sendWelcomeReply(chat, aiMsg);
-    return;
-  }
-  if(state.agent?.enabled && toolRegistry.hasTools()){
-    await runAgentLoop(chat, aiMsg, sel);
-  } else {
-    await streamResponse(chat, aiMsg, sel);
-  }
+  try {
+    if(state.toolSettings?.enabled && toolRegistry.hasTools()){
+      await runAgentLoop(chat, aiMsg, sel);
+    } else {
+      await streamResponse(chat, aiMsg, sel);
+    }
+  } finally { delete chat._promptContext; }
   // Scenario chats: auto-fold older context into long-term memory when it grows too large.
   maybeAutoCompress(chat);
-}
-
-/* Fake-streamed canned tip when chat.isWelcome and no LLM configured */
-async function sendWelcomeReply(chat, aiMsg){
-  setSending(true, t("status.connecting"));
-  // Small "thinking" delay so it feels like a response, not a teleport
-  await new Promise(r=>setTimeout(r, 350 + Math.random()*250));
-  setSending(true, t("status.generating"));
-  // Pick a random tip; avoid repeating the immediately previous one if possible
-  const pool = WELCOME_TIP_KEYS.slice();
-  const lastTipKey = [...chat.messages].reverse().find(m=>m.role==="assistant" && m._welcomeTipKey)?._welcomeTipKey;
-  const candidates = lastTipKey && pool.length>1 ? pool.filter(k=>k!==lastTipKey) : pool;
-  const tipKey = candidates[Math.floor(Math.random()*candidates.length)];
-  aiMsg._welcomeTipKey = tipKey;
-  const full = t(tipKey);
-  // Type out gradually for a small bit of polish
-  const chunkSize = Math.max(2, Math.ceil(full.length/40));
-  for(let i=0;i<full.length;i+=chunkSize){
-    aiMsg.content = full.slice(0, i+chunkSize);
-    const msgEl = document.querySelector(".messages .msg-wrap .msg:last-child");
-    if(msgEl){
-      const contentEl = msgEl.querySelector(".content");
-      contentEl.innerHTML = renderMarkdown(aiMsg.content)+'<span class="cursor-blink"></span>';
-      enhanceCodeBlocks(contentEl);
-    }
-    maybeAutoScroll();
-    await new Promise(r=>setTimeout(r, 12));
-  }
-  aiMsg.content = full;
-  const msgEl = document.querySelector(".messages .msg-wrap .msg:last-child");
-  if(msgEl){
-    const last = msgEl.querySelector(".content");
-    last.innerHTML = renderMarkdown(aiMsg.content);
-    enhanceCodeBlocks(last);
-    renderMathIn(last);
-  }
-  setSending(false);
-  saveState();
 }
 
 // 解析内联 <think>/<thinking> 标签的流式状态机

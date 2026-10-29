@@ -1,15 +1,19 @@
 /**
- * AChat Lightweight MCP Client (Browser-compatible)
+ * tabs.chat Lightweight MCP Client (Browser-compatible)
  * Implements JSON-RPC 2.0 communication over HTTP / SSE endpoints.
  */
 
 class McpClient {
   constructor(serverConfig) {
+    this.config = serverConfig;
+    this.connectionFingerprint = connectionAccessFingerprint(serverConfig);
     this.id = serverConfig.id;
     this.name = serverConfig.name || "MCP Server";
     this.url = (serverConfig.url || "").trim().replace(/\/+$/, "");
     this.apiKey = (serverConfig.apiKey || "").trim();
-    this.headers = serverConfig.headers || {};
+    this.headers = (typeof parseCustomHeaders === "function")
+      ? parseCustomHeaders(serverConfig.headers)
+      : (serverConfig.headers || {});
     this.requestId = 1;
   }
 
@@ -142,6 +146,9 @@ class McpClient {
    * Send a JSON-RPC 2.0 request via HTTP POST
    */
   async jsonRpc(method, params = {}, signal = null) {
+    if(connectionAccessFingerprint(this.config) !== this.connectionFingerprint){
+      throw new Error("MCP connection settings changed. Discover tools again before using this server.");
+    }
     if (!this.url) throw new Error(`MCP Server [${this.name}] has no endpoint URL configured.`);
     
     const reqId = this.requestId++;
@@ -152,7 +159,7 @@ class McpClient {
       params
     };
 
-    const res = await fetch(this.url, {
+    const res = await connectionFetch(this.config, this.url, {
       method: "POST",
       headers: this.getHeaders(),
       body: JSON.stringify(payload),
@@ -182,8 +189,8 @@ class McpClient {
       protocolVersion: "2024-11-05",
       capabilities: {},
       clientInfo: {
-        name: "AChat",
-        version: "1.0.0"
+        name: "tabs.chat",
+        version: getAppVersion()
       }
     }, signal);
   }

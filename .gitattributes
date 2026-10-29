@@ -1,0 +1,4 @@
+src/vendor/** linguist-vendored -whitespace
+THIRD_PARTY_NOTICES.txt -whitespace
+index.html linguist-generated
+dist/** linguist-generated

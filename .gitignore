@@ -29,3 +29,6 @@ yarn-error.log*
 .vscode/
 *.swp
 *.swo
+
+# Build outputs
+dist-hosted/
