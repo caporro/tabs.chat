@@ -151,6 +151,7 @@ try {
     if(message.method === "Page.javascriptDialogOpening") command("Page.handleJavaScriptDialog",{accept:true}).catch(()=>{});
   };
   await command("Runtime.enable");await command("Page.enable");
+  await command("Page.bringToFront");
   await command("Emulation.setDeviceMetricsOverride",{width:1280,height:1000,deviceScaleFactor:1,mobile:false});
   await ready();
   const connectionGroups = await evaluate(`Array.from(document.querySelectorAll('.onboarding-provider-section'),section=>Array.from(section.querySelectorAll('[data-onboarding-provider]'),button=>button.dataset.onboardingProvider))`);
@@ -293,11 +294,13 @@ try {
   await evaluate("applyTheme();");
   assert.equal(await evaluate("document.documentElement.dataset.theme"),"dark");
   await command("Emulation.setEmulatedMedia",{features:[{name:"prefers-color-scheme",value:"light"}]});
+  // Media-query change events are delivered during rendering on headless Linux.
+  await evaluate("new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve(true))))");
   for(let attempt=0;attempt<40;attempt++){
     if(await evaluate("document.documentElement.dataset.theme") === "light") break;
     await pause(50);
   }
-  assert.equal(await evaluate("document.documentElement.dataset.theme"),"light");
+  assert.equal(await evaluate("document.documentElement.dataset.theme"),"light",JSON.stringify(await evaluate("({preference:state.theme,dark:matchMedia('(prefers-color-scheme: dark)').matches,visibility:document.visibilityState})")));
   assert.equal(await evaluate("document.querySelector('#sidebarChatContent .logo').tagName"),"BUTTON");
   assert.equal(await evaluate("!!(document.getElementById('notepadBtn').compareDocumentPosition(document.querySelector('.sidebar-agent-wrap')) & Node.DOCUMENT_POSITION_FOLLOWING)"),true);
   console.log("✓ System appearance follows OS changes; notes navigation precedes agents");
