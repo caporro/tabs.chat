@@ -7,9 +7,10 @@ Parameters:
     Type: String
   OidcProviderArn:
     Type: String
-  Repository:
+  OidcSubjectPrefix:
     Type: String
-    Default: caporro/tabs.chat
+    Default: repo:caporro@24509741/tabs.chat@1437494563
+    Description: Exact sub_claim_prefix returned by the repository's GitHub OIDC settings API.
 Resources:
   ReleaseRole:
     Type: AWS::IAM::Role
@@ -27,7 +28,7 @@ Resources:
               StringEquals:
                 token.actions.githubusercontent.com:aud: sts.amazonaws.com
               StringLike:
-                token.actions.githubusercontent.com:sub: !Sub 'repo:${Repository}:ref:refs/tags/v*'
+                token.actions.githubusercontent.com:sub: !Sub '${OidcSubjectPrefix}:ref:refs/tags/v*'
       Policies:
         - PolicyName: PublishStaticRelease
           PolicyDocument:

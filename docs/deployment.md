@@ -71,7 +71,7 @@ The S3 bucket is retained if the stack is removed. Object versioning supports re
 
 Push an annotated `v<package.json version>` tag to release. Tags containing a prerelease suffix are marked as GitHub prereleases. The workflow publishes `tabs-chat.html`, `tabs-chat-lite.html` and `SHA256SUMS`, then uploads the already-tested hosted artifact and validates the website/redirect.
 
-AWS access uses the role in [github-oidc.yaml](../deploy/github-oidc.yaml), trusting only `repo:caporro/tabs.chat:ref:refs/tags/v*`. It can upload/delete objects only in this site's bucket and invalidate only this CloudFront distribution. No long-lived AWS keys are stored in GitHub. The account's existing GitHub OIDC provider is reused.
+AWS access uses the role in [github-oidc.yaml](../deploy/github-oidc.yaml), trusting only `repo:caporro@24509741/tabs.chat@1437494563:ref:refs/tags/v*`. The owner and repository IDs match this repository's [immutable OIDC subject](https://docs.github.com/en/actions/reference/security/oidc#immutable-subject-claims). Read `gh api repos/OWNER/REPO/actions/oidc/customization/sub --jq .sub_claim_prefix` before provisioning for another repository, and pass that exact prefix as `OidcSubjectPrefix`. The role can upload/delete objects only in this site's bucket and invalidate only this CloudFront distribution. No long-lived AWS keys are stored in GitHub. The account's existing GitHub OIDC provider is reused.
 
 Configure these repository Actions variables: `AWS_ROLE_ARN`, `AWS_ACCOUNT_ID`, `AWS_REGION`, `AWS_S3_BUCKET`, and `AWS_CLOUDFRONT_DISTRIBUTION_ID`. Provision infrastructure separately with the AWS CLI profile; the release role cannot edit infrastructure or IAM.
 
