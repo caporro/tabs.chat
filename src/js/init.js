@@ -1,4 +1,5 @@
 /* ------------------------- Init ------------------------- */
+let _systemThemeMediaQuery = null;
 function init(){
   applyTheme();
   applyI18n();
@@ -76,7 +77,9 @@ function init(){
   };
   const sumInput = document.getElementById("mem_summary");
   if(sumInput) sumInput.oninput = updateMemCharCount;
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { if(state.theme === "system") applyTheme(); });
+  // Retain the query for the lifetime of the document, including after browser GC.
+  _systemThemeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  _systemThemeMediaQuery.addEventListener("change", () => { if(state.theme === "system") applyTheme(); });
   initSidebarState();
   document.getElementById("reloadBtn").onclick = reloadApp;
   document.getElementById("settingsBtn").onclick = ()=>{

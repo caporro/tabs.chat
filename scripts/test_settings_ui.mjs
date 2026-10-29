@@ -293,6 +293,7 @@ try {
   await command("Emulation.setEmulatedMedia",{features:[{name:"prefers-color-scheme",value:"dark"}]});
   await evaluate("applyTheme();");
   assert.equal(await evaluate("document.documentElement.dataset.theme"),"dark");
+  await command("HeapProfiler.collectGarbage");
   await command("Emulation.setEmulatedMedia",{features:[{name:"prefers-color-scheme",value:"light"}]});
   // Media-query change events are delivered during rendering on headless Linux.
   await evaluate("new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve(true))))");
