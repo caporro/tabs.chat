@@ -15,6 +15,7 @@ const chromePath = process.env.CHROME_PATH || (process.platform === "darwin"
   : "google-chrome");
 const screenshots = process.env.UI_ARTIFACT_DIR;
 let chrome, ws, server;
+let chromeDiagnostics = "";
 let lastChatRequest = null;
 const chatRequests = [];
 const proxyRequests = [];
@@ -125,13 +126,15 @@ try {
   });
   await new Promise(resolve=>server.listen(0,"127.0.0.1",resolve));
   const origin=`http://127.0.0.1:${server.address().port}`;
-  chrome=spawn(chromePath,["--headless=new","--remote-debugging-port=0",`--user-data-dir=${path.join(scratch,"profile")}`,"--no-first-run","--no-default-browser-check","--disable-background-networking",origin],{stdio:"ignore"});
+  const sandboxFlags=process.env.CHROME_NO_SANDBOX === "1" ? ["--no-sandbox","--disable-dev-shm-usage"] : [];
+  chrome=spawn(chromePath,[...sandboxFlags,"--headless=new","--remote-debugging-port=0",`--user-data-dir=${path.join(scratch,"profile")}`,"--no-first-run","--no-default-browser-check","--disable-background-networking",origin],{stdio:["ignore","ignore","pipe"]});
+  chrome.stderr.on("data",chunk=>{chromeDiagnostics=(chromeDiagnostics+chunk).slice(-4000);});
   chrome.on("error",error=>console.error(error));
   let port;
   for(let i=0;i<100;i++){
     try{port=(await fs.readFile(path.join(scratch,"profile/DevToolsActivePort"),"utf8")).split("\n")[0];break;}catch{await pause(100);}
   }
-  assert.ok(port,"Chrome did not expose its debugging port; set CHROME_PATH if needed");
+  assert.ok(port,"Chrome did not expose its debugging port; set CHROME_PATH if needed\n"+chromeDiagnostics);
   let page;
   for(let i=0;i<50;i++){
     const pages=await(await fetch(`http://127.0.0.1:${port}/json/list`)).json();

@@ -331,6 +331,9 @@ function buildHosted() {
 
   // Inject App Version
   hostedHtml = hostedHtml.replace(/__APP_VERSION__/g, appVersion).replace(/__APP_EDITION__/g, 'normal');
+  if (!fs.existsSync(path.join(ROOT_DIR, 'manifest.webmanifest'))) {
+    hostedHtml = hostedHtml.replace(/<link\s+rel="manifest"[^>]*>/i, '');
+  }
 
   const distIndex = path.join(outDir, 'index.html');
   fs.writeFileSync(distIndex, hostedHtml, 'utf8');

@@ -15,6 +15,7 @@ const hosted = path.join(scratch, 'hosted'), portable = path.join(scratch, 'port
 const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
 const chromePath = process.env.CHROME_PATH || (process.platform === 'darwin' ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' : 'google-chrome');
 let server, chrome, ws, nextId = 0;
+let chromeDiagnostics = '';
 const pending = new Map(), exceptions = [], missing = [], external = [];
 let normalBackup;
 const mime = { '.html':'text/html', '.js':'application/javascript', '.mjs':'application/javascript', '.css':'text/css', '.png':'image/png', '.woff':'font/woff', '.woff2':'font/woff2', '.ttf':'font/ttf' };
@@ -101,10 +102,12 @@ try {
   });
   await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
   const origin = `http://127.0.0.1:${server.address().port}`;
-  chrome = spawn(chromePath,['--headless=new','--remote-debugging-port=0',`--user-data-dir=${path.join(scratch,'profile')}`,'--no-first-run','--no-default-browser-check','--disable-background-networking','about:blank'],{stdio:'ignore'});
+  const sandboxFlags=process.env.CHROME_NO_SANDBOX === '1' ? ['--no-sandbox','--disable-dev-shm-usage'] : [];
+  chrome = spawn(chromePath,[...sandboxFlags,'--headless=new','--remote-debugging-port=0',`--user-data-dir=${path.join(scratch,'profile')}`,'--no-first-run','--no-default-browser-check','--disable-background-networking','about:blank'],{stdio:['ignore','ignore','pipe']});
+  chrome.stderr.on('data',chunk=>{chromeDiagnostics=(chromeDiagnostics+chunk).slice(-4000);});
   let port;
   for(let i=0;i<100;i++){try{port=(await fs.readFile(path.join(scratch,'profile/DevToolsActivePort'),'utf8')).split('\n')[0];break;}catch{await pause(100);}}
-  assert.ok(port,'Chrome did not start');
+  assert.ok(port,'Chrome did not start\n'+chromeDiagnostics);
   const page=(await(await fetch(`http://127.0.0.1:${port}/json/list`)).json()).find(page=>page.type==='page');
   ws = new WebSocket(page.webSocketDebuggerUrl);
   await new Promise((resolve,reject)=>{ws.onopen=resolve;ws.onerror=reject;});
